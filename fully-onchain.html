@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MC7026 — Fully Onchain</title>
+<link rel="stylesheet" href="style.css?v=39">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <img class="brand-logo" src="src/others/logo.png" alt="MoonCat logo">
+    MC7026 CRYPTOARTIST
+  </a>
+  <span class="header-right">
+    <a class="header-link" href="about.html">About Me</a>
+    <a class="header-link" href="fully-onchain.html">Fully Onchain</a>
+    <a class="back-link" href="index.html">&larr; Index</a>
+  </span>
+</header>
+
+<main class="about-page">
+  <article class="about-content">
+    <h1 class="about-title">Fully Onchain</h1>
+
+    <p class="about-lede"><strong>100% stored fully onchain on Ethereum</strong> means the NFT's <strong>artwork, metadata, and data are stored directly on the Ethereum blockchain</strong>, not on IPFS, a server, or any external website.</p>
+
+    <p class="about-lede">As long as Ethereum exists, the NFT can be <strong>reconstructed directly from the blockchain itself.</strong></p>
+
+    <div class="about-links onchain-etherscan-link">
+      <a href="https://etherscan.io/tx/0x6db5687b2ba02309538a4e43bcdf94f0c31dfe93bdb057596ab9de7b32c57dee" target="_blank" rel="noopener">SEE IT ONCHAIN, EGGS #1 ON ETHERSCAN &rarr;</a>
+    </div>
+
+    <section class="about-section">
+      <h2>See it for yourself</h2>
+      <p>Take EGGS #1 as an example. The visual above and the code below are the same thing. There's no separate image file, no IPFS hash, no server to go down. This HTML, CSS and JavaScript, sitting on Ethereum, is the artwork.</p>
+      <div class="onchain-demo">
+        <div class="onchain-demo-visual">
+          <iframe id="onchainDemoFrame" src="src/eggs/eggs_mini_id1.html" width="470" height="360" scrolling="no" title="EGGS #1"></iframe>
+        </div>
+        <div class="onchain-demo-badges">
+          <span class="release-badge is-upcoming">Fully onchain</span>
+          <span class="release-badge is-upcoming">Ethereum</span>
+        </div>
+        <pre class="onchain-demo-code"><code id="onchainDemoCode">Loading…</code></pre>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer class="site-footer">Fully onchain — Ethereum — (C) MC7026</footer>
+
+<script src="sources.js?v=39"></script>
+<script>
+document.getElementById("onchainDemoCode").textContent = SOURCE_CODE["src/eggs/eggs_mini_id1.html"] || "Could not load source for this piece.";
+
+/* The artwork inside is a fixed 470x360 document, it doesn't reflow like a
+   responsive page. On narrow screens we shrink it with zoom (which resizes
+   the box for layout too, unlike transform) so it fits without cropping. */
+function scaleOnchainDemoFrame(){
+  const frame = document.getElementById("onchainDemoFrame");
+  const wrap = document.querySelector(".onchain-demo-visual");
+  const available = wrap.parentElement.clientWidth;
+  frame.style.zoom = Math.min(1, available / 470);
+}
+scaleOnchainDemoFrame();
+window.addEventListener("resize", scaleOnchainDemoFrame);
+</script>
+</body>
+</html>

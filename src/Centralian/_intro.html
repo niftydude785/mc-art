@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>INTRO</title>
+<style>
+  .intro-widget{
+    --cream:#efe6d2;
+    --cream-dark:#d8cbac;
+    --ink:#2a2420;
+    display:inline-block;
+    font-family:Consolas,'Courier New',monospace;
+  }
+
+  .intro-widget *{ box-sizing:border-box; }
+
+  .poster{
+    position:relative;
+    width:450px; height:340px;
+    background:radial-gradient(ellipse at 50% 38%, #f7efdc 0%, #ede2ca 55%, #d9caa9 100%);
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+
+  .poster::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,.035) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(90deg, rgba(0,0,0,.02) 0 1px, transparent 1px 4px);
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+
+  .frame-border{
+    position:absolute; inset:0;
+    border:6px solid var(--ink);
+    box-shadow:inset 0 0 0 3px var(--cream), inset 0 0 0 6px var(--ink);
+    pointer-events:none;
+  }
+
+  .release-toggle{ display:none; }
+
+  .intro-area{
+    position:absolute; inset:14px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+
+  .centralian-title{
+    font-family:Consolas,'Courier New',monospace;
+    font-weight:700; text-transform:uppercase;
+    font-size:34px; letter-spacing:3px; margin:0 0 10px;
+    background:linear-gradient(180deg, #00e0ff 0%, #39ff88 45%, #8b3dff 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(4px 4px 0 rgba(0,0,0,.25));
+  }
+
+  .statement{
+    font-size:15px; font-weight:900; color:#000;
+    text-align:center; line-height:1.5;
+    padding:0 16px;
+  }
+
+  .tape-zone{
+    position:relative; width:200px; height:76px;
+    margin-top:12px;
+  }
+
+  .reveal{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    font-size:15px; font-weight:900; letter-spacing:1px; color:#000;
+    text-align:center; line-height:1.4;
+    white-space:nowrap;
+    opacity:0; cursor:pointer;
+    transition:opacity .5s ease .3s;
+  }
+  #release-intro:checked ~ .intro-area .reveal{ opacity:1; }
+
+  .tape{
+    position:absolute; left:50%; top:50%; width:150px; height:40px;
+    transform:translate(-50%,-50%) rotate(-10deg);
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.22) 0 3px, rgba(0,0,0,.06) 3px 6px),
+      linear-gradient(180deg, #a8a8a8 0%, #8f8f8f 45%, #7a7a7a 100%);
+    box-shadow:0 4px 10px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.15);
+    cursor:pointer; z-index:2;
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .tape::after{
+    content:"";
+    position:absolute; top:6px; left:0; right:0; height:5px;
+    background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0));
+  }
+  #release-intro:checked ~ .intro-area .tape{
+    transform:translate(-50%,-140%) rotate(18deg);
+    opacity:0;
+    pointer-events:none;
+  }
+
+  .clickme{
+    margin-top:10px;
+    font-size:12px; font-weight:900; letter-spacing:3px; text-transform:uppercase;
+    color:#000;
+    cursor:pointer;
+    transition:opacity .3s;
+  }
+  #release-intro:checked ~ .intro-area .clickme{ opacity:0; pointer-events:none; }
+
+  .no-anim, .no-anim *{ transition:none !important; }
+
+  .corner-tag{
+    position:absolute; bottom:20px; right:26px;
+    font-size:15px; font-weight:900; letter-spacing:2px;
+    color:#000;
+    z-index:2; pointer-events:none;
+  }
+</style>
+</head>
+<body>
+
+  <div class="intro-widget">
+  <div class="poster">
+    <input type="checkbox" id="release-intro" class="release-toggle">
+    <div class="intro-area">
+      <h1 class="centralian-title">CENTRALIAN</h1>
+      <div class="statement">
+        A COMEDY COLLECTION OF 10 UNIQUE CRYPTOART EXPERIMENTS ON SELF-OVERCOMING AS A CRYPTO ARTIST.<br><br>
+        PEEL THE TAPE. SEE WHAT SURVIVES.
+      </div>
+      <div class="tape-zone">
+        <div class="reveal">FULLY ONCHAIN<br>CRYPTOART</div>
+        <label class="tape" for="release-intro"></label>
+      </div>
+      <label class="clickme" for="release-intro">CLICK ME</label>
+    </div>
+    <div class="frame-border"></div>
+    <div class="corner-tag">INTRO</div>
+  </div>
+  </div>
+
+  <script>
+    var releaseIntro = document.getElementById('release-intro');
+    var poster = document.querySelector('.intro-widget .poster');
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Enter') releaseIntro.checked = !releaseIntro.checked;
+    });
+
+    function resetInstant(){
+      poster.classList.add('no-anim');
+      releaseIntro.checked = false;
+      void poster.offsetWidth;
+      poster.classList.remove('no-anim');
+    }
+
+    document.querySelector('.reveal').addEventListener('click', resetInstant);
+  </script>
+</body>
+</html>

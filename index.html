@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MC7026 — Onchain Art</title>
+<link rel="stylesheet" href="style.css?v=39">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <img class="brand-logo" src="src/others/logo.png" alt="MoonCat logo">
+    MC7026 CRYPTOARTIST
+  </a>
+  <span class="header-right">
+    <a class="header-link" href="about.html">About Me</a>
+    <a class="header-link" href="fully-onchain.html">Fully Onchain</a>
+  </span>
+</header>
+
+<main class="project-list" id="project-list"></main>
+
+<footer class="site-footer">Fully onchain — Ethereum — (C) MC7026</footer>
+
+<script src="data.js?v=39"></script>
+<script>
+const list = document.getElementById("project-list");
+
+function splitTitle(title) {
+  const m = title.match(/^(.*?)\s*(\([^)]*\))$/);
+  return m ? { main: m[1], suffix: m[2] } : { main: title, suffix: "" };
+}
+
+sortedProjects().forEach((p, i) => {
+  const size = frameSizeOf(p);
+  const boxW = 320, boxH = 220;
+  const scale = boxW / size.w;
+  const { main, suffix } = splitTitle(p.title);
+
+  const row = document.createElement("a");
+  row.className = "project-row";
+  row.href = "project.html?p=" + p.slug;
+
+  row.innerHTML = `
+    <span class="row-index">${String(i + 1).padStart(2, "0")}</span>
+    <span class="row-main">
+      <span class="row-title-line">
+        <span class="row-title">${main}${suffix ? ` <span class="row-title-suffix">${suffix}</span>` : ""}</span>
+        <span class="release-badge${p.release.sortValue === Infinity ? " is-upcoming" : ""}">${p.release.label}</span>
+      </span>
+      <span class="row-meta">${p.meta.replace("ETHEREUM — ", "")}</span>
+    </span>
+    <span class="row-preview" style="height:${Math.round(size.h*scale)}px">
+      <span class="scaler" style="transform:scale(${scale})">
+        <iframe src="${p.folder}${p.cover.file}" width="${size.w}" height="${size.h}"
+                tabindex="-1" scrolling="no" title="${p.title} preview"></iframe>
+      </span>
+    </span>
+  `;
+  list.appendChild(row);
+});
+</script>
+</body>
+</html>

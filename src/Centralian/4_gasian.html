@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>GASIAN</title>
+<style>
+.gwid{--crm:#efe6d2;--crd:#d8cbac;--crk:#c2b391;--ink:#2a2420;--scr:#12241d;--phs:#5dffa0;--pmp:#c23b30;--pmd:#8f2a22;--mtl:#8a8a86;--mtd:#5b5b57;--jrc:#d9a53c;--jrd:#a97e22;}
+.gwid *{box-sizing:border-box;}
+.pstr{width:450px;height:340px;background:radial-gradient(ellipse at 50% 38%, #f7efdc 0%, #ede2ca 55%, #d9caa9 100%);box-shadow:0 10px 30px rgba(0, 0, 0, .45);}
+.pstr::before{content:"";inset:0;background-image:repeating-linear-gradient(0deg, rgba(0, 0, 0, .035) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(0, 0, 0, .02) 0 1px, transparent 1px 4px);mix-blend-mode:multiply;}
+.frbd{inset:0;border:6px solid var(--ink);box-shadow:inset 0 0 0 3px var(--crm), inset 0 0 0 6px var(--ink);}
+.aare{top:14px;left:14px;right:14px;bottom:110px;}
+.rtgl{display:none;}
+.fcrt{inset:0;}
+.flor{left:0;right:0;bottom:0;height:36px;background:#5f5b55;box-shadow:inset 0 3px 0 var(--ink);z-index:3;}
+.flor::before{content:"";left:0;right:0;top:14px;height:3px;background:repeating-linear-gradient(90deg, #e8c94a 0 16px, transparent 16px 32px);opacity:.8;}
+.oils{width:76px;height:22px;background:radial-gradient(ellipse at center, rgba(10, 8, 6, .55) 0%, rgba(10, 8, 6, .28) 55%, rgba(10, 8, 6, 0) 78%);z-index:4;}
+.oi1{left:20px;bottom:16px;width:44px;height:15px;transform:rotate(-6deg);}
+.oi2{left:290px;width:76px;height:22px;}
+.oi3{left:200px;bottom:20px;width:34px;height:11px;transform:rotate(10deg);}
+.oi4{left:350px;bottom:8px;width:52px;height:17px;transform:rotate(-8deg);}
+.oi5{left:60px;bottom:6px;width:30px;height:10px;transform:rotate(14deg);}
+.oi6{left:380px;bottom:18px;width:24px;height:9px;transform:rotate(-4deg);}
+.oi7{left:150px;bottom:7px;width:38px;height:13px;transform:rotate(5deg);}
+.jrcn{left:100px;bottom:36px;width:32px;height:38px;z-index:4;}
+.jrcn .jch{top:-6px;left:6px;width:16px;height:8px;border:3px solid var(--ink);border-bottom:none;border-radius:6px 6px 0 0;background:transparent;}
+.jrcn .jcc{top:0;right:4px;width:9px;height:8px;box-shadow:inset 0 0 0 1px var(--mtd);}
+.jrcn .jcb{left:0;right:0;bottom:0;height:32px;background:var(--jrc);box-shadow:inset 0 0 0 2px var(--jrd), inset 0 0 0 4px var(--ink);border-radius:2px;}
+.pcol{left:50%;bottom:36px;z-index:2;}
+.pvis{transition:transform 320ms cubic-bezier(.6, 0, .9, .35), opacity 260ms ease-in 60ms;}
+.cnpy{height:12px;margin:0 auto;background:var(--pmd);box-shadow:inset 0 0 0 2px var(--ink), 0 4px 0 rgba(0, 0, 0, .15);}
+.cntx{font-size:10px;font-weight:900;color:var(--crm);text-shadow:0 1px 2px rgba(0, 0, 0, .5);}
+.pbdy{width:108px;height:140px;margin:0 auto;background:var(--pmp);clip-path:polygon(0 8px, 8px 8px, 8px 0, 100px 0, 100px 8px, 108px 8px, 108px 132px, 100px 132px, 100px 140px, 8px 140px, 8px 132px, 0 132px);box-shadow:inset 0 0 0 3px var(--pmd), inset 0 0 0 6px var(--ink);}
+.scrn{top:12px;left:15px;width:78px;height:46px;background:var(--scr);box-shadow:inset 0 0 0 3px #0a1712, inset 0 0 14px rgba(93, 255, 160, .25);animation:gflk 4s ease-in-out infinite;}
+.scrn .glow{inset:0;background:radial-gradient(ellipse at 50% 40%, rgba(93, 255, 160, .18), transparent 70%);}
+.scrn .scln{inset:0;background:repeating-linear-gradient(0deg, rgba(0, 0, 0, .35) 0 1px, transparent 1px 3px);}
+.sctx{top:5px;left:6px;color:var(--phs);font-size:6.5px;line-height:1.8;text-shadow:0 0 4px rgba(93, 255, 160, .8);}
+.cwin{height:9px;width:22px;vertical-align:top;}
+.crol{animation:grol 4s steps(4) infinite;}
+.crol span{display:block;height:9px;line-height:9px;}
+.curs{animation:gbnk .6s steps(1) infinite;}
+@keyframes gbnk{50%{opacity:0;}}
+@keyframes gflk{0%, 100%{opacity:1;} 50%{opacity:.92;}}
+@keyframes grol{0%{transform:translateY(0);} 100%{transform:translateY(-36px);}}
+.plbl{top:64px;left:8px;right:8px;height:16px;background:var(--crm);box-shadow:inset 0 0 0 2px var(--ink);}
+.plbl span{font-size:8px;letter-spacing:1.5px;color:var(--pmd);}
+.pbtn{bottom:10px;left:18px;right:18px;gap:6px;}
+.pbtn span{width:14px;height:8px;background:var(--crd);box-shadow:inset 0 0 0 1px var(--ink);}
+.hsh{top:46px;left:129px;width:18px;height:4px;background:repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 7px);opacity:.7;}
+.hsv{top:46px;left:143px;width:4px;height:70px;background:repeating-linear-gradient(180deg, var(--ink) 0 4px, transparent 4px 7px);opacity:.7;}
+.nzl{top:112px;left:132px;width:20px;height:24px;clip-path:polygon(0 0, 100% 0, 100% 55%, 55% 55%, 55% 100%, 25% 100%, 25% 55%, 0 55%);box-shadow:inset 0 0 0 2px var(--mtd);}
+.smpf{left:75px;top:82px;width:60px;height:60px;margin-left:-30px;margin-top:-30px;opacity:0;z-index:5;}
+.sm1{width:70px;height:70px;margin-left:-35px;margin-top:-35px;background:#d8d4cc;}
+.sm2{width:52px;height:52px;margin-left:-16px;margin-top:-42px;background:#eae6dd;}
+.sm3{width:58px;height:58px;margin-left:-46px;margin-top:-18px;background:#c9c5bc;}
+.sm4{width:48px;height:48px;margin-left:-6px;margin-top:-8px;background:#f2efe6;}
+.sm5{width:62px;height:62px;margin-left:-28px;margin-top:8px;background:#bdb9b0;}
+@keyframes gpuf{0%{transform:scale(.3);opacity:.9;} 100%{transform:scale(1.8);opacity:0;}}
+#release-pump:checked ~ .aare .smpf{animation:gpuf 620ms ease-out forwards;}
+#release-pump:checked ~ .aare .sm2{animation-delay:60ms;}
+#release-pump:checked ~ .aare .sm3{animation-delay:90ms;}
+#release-pump:checked ~ .aare .sm4{animation-delay:30ms;}
+#release-pump:checked ~ .aare .sm5{animation-delay:110ms;}
+
+.tape{left:75px;top:82px;height:38px;transform:translate(-50%, -50%) rotate(-16deg);background:repeating-linear-gradient(45deg, rgba(255, 255, 255, .22) 0 3px, rgba(0, 0, 0, .06) 3px 6px), linear-gradient(180deg, #a8a8a8 0%, #8f8f8f 45%, #7a7a7a 100%);box-shadow:0 4px 10px rgba(0, 0, 0, .35), inset 0 0 0 1px rgba(0, 0, 0, .15);z-index:4;transition:opacity .4s;}
+.tape::after{content:"";top:6px;left:0;right:0;height:5px;background:linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .55), rgba(255, 255, 255, 0));}
+#release-pump:checked ~ .aare .tape{opacity:0;pointer-events:none;}
+#release-pump:checked ~ .aare .pvis{transform:scale(0) rotate(6deg);opacity:0;}
+.emk{left:116px;bottom:80px;font-size:13px;letter-spacing:2px;color:var(--ink);text-align:center;line-height:1.3;opacity:0;z-index:5;transition:opacity .5s ease 1s;}
+#release-pump:checked ~ .aare .emk{opacity:.6;}
+.noan, .noan *{transition:none !important;}
+.wmar{left:0;right:0;height:96px;}
+.wmrk{text-transform:uppercase;font-size:34px;letter-spacing:3px;margin:0;transform:translateY(-12px);background:linear-gradient(180deg, #ffb300 0%, #ff4500 55%, #c23b30 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(4px 4px 0 rgba(0, 0, 0, .25));}
+.gwid,.cwin,.curs{display:inline-block;}
+.gwid,.wmrk{font-family:Consolas, 'Courier New', monospace;}
+.pstr,.pvis,.cnpy,.pbdy{position:relative;}
+.pstr,.aare,.pbdy,.scrn,.cwin{overflow:hidden;}
+.pstr::before,.frbd,.aare,.fcrt,.flor,.flor::before,.oils,.jrcn,.jrcn .jch,.jrcn .jcc,.jrcn .jcb,.pcol,.scrn,.scrn .glow,.scrn .scln,.sctx,.plbl,.pbtn,.hsh,.hsv,.nzl,.smpf,.tape,.tape::after,.emk,.wmar{position:absolute;}
+.pstr::before,.frbd,.smpf{pointer-events:none;}
+.oils,.oi2,.wmar{bottom:14px;}
+.oils,.smpf{border-radius:50%;}
+.jrcn .jcc,.nzl{background:var(--mtl);}
+.pcol,.emk{transform:translateX(-50%);}
+.pcol,.pvis,.cnpy,.tape{width:150px;}
+.cnpy,.crol,.plbl,.pbtn,.wmar{display:flex;}
+.cnpy,.plbl,.wmar{align-items:center;}
+.cnpy,.plbl,.pbtn,.wmar{justify-content:center;}
+.cntx,.sctx{letter-spacing:.5px;}
+.cntx,.sctx{white-space:nowrap;}
+.sctx,.plbl span,.emk,.wmrk{font-weight:700;}
+.crol,.wmar{flex-direction:column;}
+.tape,.emk,.wmrk{cursor:pointer;}
+.ctag{position:absolute;bottom:20px;right:26px;font-size:15px;font-weight:900;letter-spacing:2px;color:#000;z-index:2;pointer-events:none;}
+</style>
+</head>
+<body>
+<div class="gwid"><div class="pstr"><input type="checkbox" id="release-pump" class="rtgl"><div class="aare"><div class="fcrt"><div class="jrcn"><div class="jch"></div><div class="jcc"></div><div class="jcb"></div></div><div class="pcol"><div class="pvis"><div class="cnpy"><span class="cntx">NODES INDUSTRY</span></div><div class="pbdy"><div class="scrn"><div class="glow"></div><div class="scln"></div><div class="sctx"> ETH GAS FEE<br> GWEI <span class="cwin"><span class="crol"><span>041</span><span>187</span><span>249</span><span>312</span></span></span><br> &gt;<span class="curs">_</span></div></div><div class="plbl"><span>ETH&middot;GAS</span></div><div class="pbtn"><span></span><span></span><span></span></div></div><div class="hsh"></div><div class="hsv"></div><div class="nzl"></div></div><div class="smpf sm1"></div><div class="smpf sm2"></div><div class="smpf sm3"></div><div class="smpf sm4"></div><div class="smpf sm5"></div><label class="tape" for="release-pump"></label></div><div class="oils oi1"></div><div class="oils oi2"></div><div class="oils oi3"></div><div class="oils oi4"></div><div class="oils oi5"></div><div class="oils oi6"></div><div class="oils oi7"></div><div class="flor"></div><div class="emk">MORE ART<br>LESS GAS</div></div></div><div class="wmar"><h1 class="wmrk">GASIAN</h1></div><div class="frbd"></div><div class="ctag">CENTRALIAN 4/10</div></div></div>
+<script>
+var releasePump = document.getElementById('release-pump');
+var poster = document.querySelector('.gwid .pstr');
+document.addEventListener('keydown', function(e){
+if(e.key === 'Enter') toggleRelease();
+});
+function resetInstant(){
+poster.classList.add('noan');
+releasePump.checked = false;
+void poster.offsetWidth;
+poster.classList.remove('noan');
+}
+function toggleRelease(){
+if(releasePump.checked) resetInstant();
+else releasePump.checked = true;
+}
+document.querySelector('.emk').addEventListener('click', resetInstant);
+document.querySelector('.wmrk').addEventListener('click', toggleRelease);
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<div style="width:470px;text-align:left;font-family:'Courier New', Courier, monospace;background:#fff">
+<b style="color:#111;font-size:14px">SUPER CYD BROS / WORLD 3-3 / THE FINAL BOSS</b><br>
+
+<div id="wrap" style="width:470px;height:240px;overflow:hidden;position:relative;display:inline-block;vertical-align:top">
+  <canvas id="c" width="3840" height="240"
+    style="position:absolute;left:0;top:0;display:block"></canvas>
+</div>
+
+<script>
+
+function rle(s){return s.replace(/(\d+)([A-Za-z])/g,function(_,n,c){return c.repeat(+n)});}
+
+var Dcyd = rle(
+ '43Od5Oc9OcOef3OHfOb2OHeOHecHd2O2ef11Od14Od18Obc6O2f4Oef18Oc5Oceb3OdefOef5OedOHeHefO2d2O2fO2fcfefOGc8OdcOGeH5Oe2OPH2O2cd2Oc3Oc2Of2Ofd3O2f2Odb2O2f4OHcf14Oc2OdeOb3Oc5Oc2OHcf5O4efd3ef3e5fe6f5Ofbe3Ofd7Ofe3Ofcde3OcO2f4Of2O6HfbdHf5Hf2ec10HfbH2f2Hbe6H2e5Hf2ec4H3efIfeHdHf2ef5ed5efd2Hdf3ecHd5Hc2Hfce2H2cf5Hcedc2H2c6H2bcH2f6H2fG11Hfb2Hf2Hf7Hf6H2fG3Hfcf2e2f2efce2f7ede2G2HfdcHfef2eG5HecHc7Hd3Hf2Hcfb2dbdHcd4H2f3Hf9HG3e2H2e3Hb26HeHe2fefHe3fec4ef2e3f4ef5HGe10Hce7Hc2Hd3ec2ef3edf48H7eH4fHe2fHdf2ec3f2e2bfHfH2ef20H2G6Hed3ebfefec2edefH3fHcfd2H2bH10Gb2GfPG27He4HbfHfcf4eGef4HedHd2f28Hedeca2fef4ed2fH2dG2H2f2Hcf8HGc18H2G5HGcf5GeHf4He3fe4Hed11Gfc4Gc5Ge4H3Ge4G3Hed3ed2efec2ed2fGefdGcfe2GceFH4Ib2Ie7IGSGN4GceGfe5HdId5I3H2IfI2dec2IHIcdf11If3IGfHcIGHdId3H2Gdf2IeGeI3eGfcbe2G2cfde2G2IH3Ic3IcfI2HbdHb4Hf2HbdH5I3f3I12H2I4HIec7IdH2Ic8Idf5IdcHbd8H2IHf2H2feHf5e5cdcf2eI14H3e9f2e7Hd5He2f2Hf2H2fG2IHI2ed9fdHIf2e6Idfedfd5IHIH3I4HI12HIfdc2fI2fIcfeI13H3e10f3e5H4I2H2e10f2IH3e8fd3f2Ife4I3e3fced5I3HIe3f2H2f2G4f2H2f14H2e8H6e7fe2f5e3H3IG2e10fd3fH2e13f5I2HcHdefHd3H7Ie8H4f4H3f4e6Hea5e6H6e2f2ef2e5f5e2H3I3e3f2e3fe5fHed5f2d3f2b5f3ef2efe2c2e2H4I3e3fH2df6H3fe4f9ea16e3f2ef2e6f6e3I3e3f2e3fe5fHed5f2d3f2b6f2ef2efe2c4e3IHe5fH2d2fefefe3fe6f7ea2e'
+);
+
+var ccyd = document.getElementById("c");
+var xcyd = ccyd.getContext("2d");
+
+var Wcyd = 128;   
+var Scyd = 15;    
+
+var colors = {
+  A:"#FF0000", B:"#FF6600", C:"#FF9900", D:"#FFCC00",
+  E:"#FFFF00", F:"#CCFF00", G:"#99FF00", H:"#66FF00",
+  I:"#00FF00", J:"#00FF66", K:"#00FF99", L:"#00FFCC",
+  M:"#00FFFF", N:"#00CCFF", O:"#0099FF", P:"#0066FF",
+  Q:"#0000FF", R:"#6600FF", S:"#9900FF", T:"#CC00FF",
+  U:"#FF00FF", V:"#FF00CC", W:"#FF0099", X:"#FF0066",
+  Y:"#FFFFFF", Z:"#DDDDDD", a:"#BBBBBB", b:"#888888",
+  c:"#555555", d:"#222222", e:"#8B4513", f:"#000000"
+};
+
+Dcyd.split('').forEach(function(v, i) {
+  xcyd.fillStyle = colors[v] || "#ffffff";
+  var col = (i % Wcyd) * Scyd;
+  var row = Math.floor(i / Wcyd) * Scyd;
+  xcyd.fillRect(col, row, Scyd, Scyd);
+  xcyd.fillRect(Wcyd * Scyd + col, row, Scyd, Scyd);  
+});
+
+var offsetcyd = 0;
+var tileWcyd = Wcyd * Scyd;
+var lastTscyd = null;
+
+function scroll(ts) {
+  if (lastTscyd === null) lastTscyd = ts;
+  offsetcyd = (offsetcyd + 60 * (ts - lastTscyd) / 1000) % tileWcyd;
+  lastTscyd = ts;
+  ccyd.style.left = '-' + Math.floor(offsetcyd) + 'px';
+  requestAnimationFrame(scroll);
+}
+
+requestAnimationFrame(scroll);
+</script>
+</div>

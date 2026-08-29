@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>ORDINIAN</title>
+<style>
+.owid,.wmrk{font-family:Consolas,'Courier New',monospace;}
+.owid{--crm:#efe6d2;--crmd:#d8cbac;--crmk:#c2b391;--ink:#2a2420;--scr:#12241d;--phos:#5dffa0;display:inline-block;}
+.owid *{box-sizing:border-box;}
+.pstr,.rig,.mntr,.kbd,.masm,.mous{position:relative;}
+.pstr{width:450px;height:340px;background:radial-gradient(ellipse at 50% 38%, #f7efdc 0%, #ede2ca 55%, #d9caa9 100%);overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.45);}
+.pstr::before,.frbd,.arar,.flsh,.rigg,.vnts,.scrn,.scrn .glow,.scrn .scnl,.sctx,.bdg,.keys,.mwrp,.mous::before,.mous::after,.cord,.tape,.tape::after,.wmar{position:absolute;}
+.pstr::before{content:"";inset:0;background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.035) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(0,0,0,.02) 0 1px, transparent 1px 4px);mix-blend-mode:multiply;pointer-events:none;}
+.frbd{inset:0;border:6px solid var(--ink);box-shadow:inset 0 0 0 3px var(--crm), inset 0 0 0 6px var(--ink);pointer-events:none;}
+.arar{top:14px;left:14px;right:14px;bottom:110px;margin-left:27px;}
+.flsh,.bdg,.kbd,.mous::before,.mous::after{transform:translateX(-50%);}
+.flsh{left:50%;bottom:14px;width:190px;height:22px;background:radial-gradient(ellipse at center, rgba(30,25,20,.45) 0%, rgba(30,25,20,0) 72%);}
+.rigg,.vnts,.keys,.krow,.wmar{display:flex;}
+.rigg{left:50%;top:50%;transform:translate(-50%,-50%);align-items:flex-start;gap:6px;}
+.rig{width:196px;}
+.mntr,.kbd,.mous{background:var(--crmd);}
+.mntr,.kbd,.mous{box-shadow:inset 0 0 0 4px var(--crmk), inset 0 0 0 8px var(--ink);}
+.mntr{width:196px;height:150px;clip-path:polygon(0 10px,10px 10px,10px 0,186px 0,186px 10px,196px 10px,196px 140px,186px 140px,186px 150px,10px 150px,10px 140px,0 140px);}
+.vnts,.keys,.wmar{flex-direction:column;}
+.vnts{top:8px;left:16px;width:60px;gap:3px;}
+.vnts span{display:block;height:2px;background:var(--ink);opacity:.35;}
+.scrn{top:24px;left:23px;width:150px;height:88px;background:var(--scr);box-shadow:inset 0 0 0 4px #0a1712, inset 0 0 18px rgba(93,255,160,.25);overflow:hidden;animation:flk 4s ease-in-out infinite;}
+.scrn .glow{inset:0;background:radial-gradient(ellipse at 50% 40%, rgba(93,255,160,.18), transparent 70%);}
+.scrn .scnl{inset:0;background:repeating-linear-gradient(0deg, rgba(0,0,0,.35) 0 1px, transparent 1px 3px);}
+.sctx,.bdg{letter-spacing:1px;}
+.sctx{top:12px;left:12px;color:var(--phos);font-size:8px;font-weight:700;line-height:1.9;text-shadow:0 0 4px rgba(93,255,160,.8);white-space:nowrap;}
+.curs, .bkal{display:inline-block;animation:blk .6s steps(1) infinite;}
+@keyframes blk{ 50%{ opacity:0; } }
+@keyframes flk{ 0%,100%{ opacity:1; } 50%{ opacity:.92; } }
+.sctx.alrt{display:none;color:#ff4433;text-shadow:0 0 6px rgba(255,68,51,.85);}
+.rtgl{display:none;}
+#release-screen:checked ~ .arar .tpsc{ opacity:0; pointer-events:none; }
+#release-screen:checked ~ .arar .sctx.norm{ display:none; }
+#release-screen:checked ~ .arar .sctx.alrt{ display:block; }
+#release-screen:checked ~ .arar .scrn{ cursor:pointer; }
+#release-mouse:checked ~ .arar .tpms{ opacity:0; pointer-events:none; }
+.bdg{left:50%;bottom:8px;font-size:7px;color:var(--ink);opacity:.55;}
+.kbd{width:216px;left:50%;margin-top:-4px;height:46px;clip-path:polygon(0 0,216px 0,210px 46px,6px 46px);}
+.keys{top:6px;left:12px;right:12px;gap:3px;}
+.krow{gap:3px;}
+.krow span,.mous::after{box-shadow:inset 0 0 0 1px var(--ink);}
+.krow span{height:7px;flex:1 1 0;background:var(--crm);opacity:.8;}
+.krow span.wide{flex:3 1 0;}
+.masm{width:110px;height:192px;}
+.mwrp{left:60px;top:134px;z-index:2;}
+.mous{width:50px;height:70px;clip-path:polygon(0 14px,14px 14px,14px 0,36px 0,36px 14px,50px 14px,50px 60px,36px 60px,36px 70px,14px 70px,14px 60px,0 60px);}
+.mous::before{content:"";top:16px;left:50%;width:2px;height:20px;background:var(--ink);opacity:.4;}
+.mous::after{content:"";top:22px;left:50%;width:8px;height:10px;background:var(--crmk);}
+.cord{opacity:.6;z-index:1;}
+.crdh{left:0;top:90px;width:85px;height:4px;background:repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 7px);}
+.crdv{left:83px;top:90px;width:4px;height:48px;background:repeating-linear-gradient(180deg, var(--ink) 0 4px, transparent 4px 7px);}
+.tape{left:50%;top:50%;width:300px;height:58px;transform:translate(-50%,-50%) rotate(-25deg);background:repeating-linear-gradient(45deg, rgba(255,255,255,.22) 0 3px, rgba(0,0,0,.06) 3px 6px), linear-gradient(180deg, #a8a8a8 0%, #8f8f8f 45%, #7a7a7a 100%);box-shadow:0 4px 10px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.15);opacity:1;z-index:4;display:block;cursor:pointer;transition:opacity .4s;}
+.tape::after{content:"";top:7px;left:0;right:0;height:6px;background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0));}
+.tpms{width:74px;height:24px;transform:translate(-50%,-50%) rotate(-20deg);}
+.wmar{left:0;right:0;bottom:14px;height:96px;align-items:center;justify-content:center;}
+.wmrk{font-weight:700;text-transform:uppercase;font-size:38px;letter-spacing:4px;margin:0;transform:translateY(-12px);background:linear-gradient(180deg, #5dffa0 0%, #00d4ff 50%, #003b46 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(4px 4px 0 rgba(0,0,0,.25));}
+.ctag{position:absolute;bottom:20px;right:26px;font-size:15px;font-weight:900;letter-spacing:2px;color:#000;z-index:2;pointer-events:none;}
+</style>
+</head>
+<body><div class="owid"><div class="pstr"><input type="checkbox" id="release-screen" class="rtgl"><input type="checkbox" id="release-mouse" class="rtgl"><div class="arar"><div class="flsh"></div><div class="rigg"><div class="rig"><div class="mntr"><div class="vnts"><span></span><span></span><span></span><span></span></div><div class="scrn"><div class="glow"></div><div class="scnl"></div><div class="sctx norm"> CYD@mooncat-pc C:\~<br> ONCHAIN.EXE&nbsp;$<br><span class="bkal">PRESS ENTER</span><span class="curs">_</span></div><div class="sctx alrt"> ALERT /!\ ERROR 404<br> HUMAN DETECTED !!!<br><br><span class="bkal">GO TOUCH GRASS PLEASE</span></div></div><div class="bdg">MODEL 1984</div></div><div class="kbd"><div class="keys"><div class="krow"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="krow"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><div class="krow"><span></span><span></span><span></span><span class="wide"></span><span></span><span></span><span></span></div></div></div><label class="tape tpsc" for="release-screen"></label></div><div class="masm"><div class="cord crdh"></div><div class="cord crdv"></div><div class="mwrp"><div class="mous"></div><label class="tape tpms" for="release-mouse"></label></div></div></div></div><div class="wmar"><h1 class="wmrk">ORDINIAN</h1></div><div class="frbd"></div><div class="ctag">CENTRALIAN 1/10</div></div></div> <script>
+    var screenBox = document.getElementById('release-screen');
+    var mouseBox = document.getElementById('release-mouse');
+    var screenEl = document.querySelector('.scrn');
+    function toggleScreen(){
+      screenBox.checked = !screenBox.checked;
+      screenBox.dispatchEvent(new Event('change'));
+    }
+    screenBox.addEventListener('change', function(){
+      if(!screenBox.checked) mouseBox.checked = false;
+    });
+    screenEl.addEventListener('click', function(){
+      if(screenBox.checked) toggleScreen();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Enter') toggleScreen();
+    });
+</script></body>
+</html>

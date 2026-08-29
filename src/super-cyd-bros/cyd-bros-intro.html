@@ -1,0 +1,20 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<div style="width:470px;text-align:left;font-family:'Courier New',Courier,monospace;background:#000;display:inline-block;vertical-align:top">
+<b style="color:#FFD700;font-size:14px">SUPER CYD BROS / MOONCAT7026 / FULLY ONCHAIN / INTRO</b><br>
+<div style="width:470px;height:240px;overflow:hidden;position:relative;display:inline-block;vertical-align:top">
+<div style="position:absolute;top:0;left:0;width:470px;height:60px;overflow:hidden"><canvas id="ctcyd" width="3840" height="60" style="position:absolute;left:0;top:0;display:block"></canvas></div>
+<div style="position:absolute;top:60px;left:0;width:470px;height:120px;overflow:hidden;background:#050505;border-top:1px solid #222;border-bottom:1px solid #222"><span id="txcyd" style="position:absolute;white-space:nowrap;line-height:120px;color:#fff;font-size:18px;letter-spacing:2px"></span></div>
+<div style="position:absolute;top:180px;left:0;width:470px;height:60px;overflow:hidden"><canvas id="cbcyd" width="3840" height="60" style="position:absolute;left:0;top:0;display:block"></canvas></div>
+</div>
+<script>
+function rle(s){return s.replace(/(\d+)([A-Za-z])/g,function(_,n,c){return c.repeat(+n)});}
+var Wcyd=128,Scyd=15,colorscyd={A:"#FF0000",B:"#FF6600",C:"#FF9900",D:"#FFCC00",E:"#FFFF00",F:"#CCFF00",G:"#99FF00",H:"#66FF00",I:"#00FF00",J:"#00FF66",K:"#00FF99",L:"#00FFCC",M:"#00FFFF",N:"#00CCFF",O:"#0099FF",P:"#0066FF",Q:"#0000FF",R:"#6600FF",S:"#9900FF",T:"#CC00FF",U:"#FF00FF",V:"#FF00CC",W:"#FF0099",X:"#FF0066",Y:"#FFFFFF",Z:"#DDDDDD",a:"#BBBBBB",b:"#888888",c:"#555555",d:"#222222",e:"#8B4513",f:"#000000"};
+function drawBandCyd(cvs,D){var ctx=cvs.getContext('2d');D.split('').forEach(function(v,i){ctx.fillStyle=colorscyd[v]||'#000';var col=(i%Wcyd)*Scyd,row=Math.floor(i/Wcyd)*Scyd;ctx.fillRect(col,row,Scyd,Scyd);ctx.fillRect(Wcyd*Scyd+col,row,Scyd,Scyd);});}
+drawBandCyd(document.getElementById('ctcyd'),rle('16A16B16C16D16E16F16G16H16E16F16G16H16A16B16C16D16D16C16B16A16H16G16F16E16H16G16F16E16D16C16B16A'));
+drawBandCyd(document.getElementById('cbcyd'),rle('16M16N16O16P16Q16R16S16T16Q16R16S16T16M16N16O16P16P16O16N16M16T16S16R16Q16T16S16R16Q16P16O16N16M'));
+document.getElementById('txcyd').textContent='SUPER CYD BROS IS A FULLY ONCHAIN CRYPTOART SERIES OF 9 UNIQUE PIXEL PLATFORM LEVELS, PERMANENTLY STORED ON THE BLOCKCHAIN.    FROM THE SHROOM FIELDS OF WORLD 1 TO LEAK CITY OF WORLD 3, EACH LEVEL EXPRESSES A DISTINCT CHROMATIC VISION AND ATMOSPHERIC IDENTITY.    3 WORLDS x 3 LEVELS EACH. ONE INFINITE SCROLL.    IMMUTABLE, DECENTRALIZED, CODED ARTWORKS MADE BY MOONCAT7026.    SUPER CYD BROS.';
+var offtcyd=0,offbcyd=0,offtxcyd=470,tileWcyd=Wcyd*Scyd,lastTscyd=null;
+function scrollCyd(ts){if(lastTscyd===null)lastTscyd=ts;var dt=ts-lastTscyd;lastTscyd=ts;offtcyd=(offtcyd+60*dt/1000)%tileWcyd;document.getElementById('ctcyd').style.left='-'+Math.floor(offtcyd)+'px';offbcyd=(offbcyd+60*dt/1000)%tileWcyd;document.getElementById('cbcyd').style.left='-'+Math.floor(offbcyd)+'px';offtxcyd-=100*dt/1000;if(offtxcyd<-document.getElementById('txcyd').offsetWidth)offtxcyd=470;document.getElementById('txcyd').style.left=Math.floor(offtxcyd)+'px';requestAnimationFrame(scrollCyd);}
+requestAnimationFrame(scrollCyd);
+</script>
+</div>

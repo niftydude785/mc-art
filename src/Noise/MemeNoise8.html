@@ -1,0 +1,34 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<style>
+#cont{
+  width:470px;
+  height:350px;
+  position:relative;
+  overflow:hidden;
+  image-rendering:pixelated;
+}
+canvas{
+  position:absolute;
+  left:0;
+  top:0;
+  width:470px;
+  height:350px;
+}
+.ttt{
+  width:470px;
+text-align: right;
+font-size: 10px;
+
+}
+#noise{z-index:1;}
+</style>
+
+<div id="cont">
+  <canvas id="tube" width="470" height="350"></canvas>
+  <canvas id="noise" width="470" height="350"></canvas>
+  <img id="source" src="data:image/png;base64,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" hidden>
+</div>
+<div class="ttt">BRUIT 8/20 - AFTER VOSSEN</div>
+<script>
+(()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
+</script>

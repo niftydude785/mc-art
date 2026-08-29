@@ -1,0 +1,57 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<div style="width:470px;text-align:left;font-family:'Courier New', Courier, monospace;background:#fff">
+<b style="color:#111;font-size:14px">SUPER CYD BROS / WORLD 3-2 / LEAK CITY (EUROPE)</b><br>
+
+<div id="wrap" style="width:470px;height:240px;overflow:hidden;position:relative;display:inline-block;vertical-align:top">
+  <canvas id="c" width="3840" height="240"
+    style="position:absolute;left:0;top:0;display:block"></canvas>
+</div>
+
+<script>
+
+function rle(s){return s.replace(/(\d+)([A-Za-z])/g,function(_,n,c){return c.repeat(+n)});}
+
+var Dcyd = rle(
+ '33f4B5f8U52fE10fE9fE37f4d5f12d10fMEMEME2MfEfEf2EfEfEfdM2dfd5f4dfd14f6dfd3fdE5dfd9f3d14fMdM6fdMdMdMdMd4f3dfd4fdBEBEBE3fEfE2fEfE2fd3f3dEd3f2dEMd4f2dEdfd3f3dEdE2f3dMd9f2d4f4UdfUdUfdUdU2fU2f4B5f8Uf3dfdMdf4AfE6d3f8U3fMd4fUdUdUf4dMdMdf4dEdEd8fEdfd4fdfd2f7A4d2f11M2fdMdM7fdMdMf5A5f4U2fdMdMdM3f8d7f5A5f5M5f5U8f2dfd4fdfd2fA5dAdMdM2f2dUdUdUdU2d2f4B7f4U7f3df4d2f6B3fdMdMdMdM3fM4fVfV5fSfS5fPdPdP5fTdTdT3fEfMdMdMfM2f2AdAd2A4U2fV9MV2f4d2fMfM2f4dT5fMdMdMdMdM2f6d3f8U54cAdAdAc4d6cdcd6cMdMd7cdMdM11c4U2cMdMdMd3c8d23cAdA28cAcAcAcdMdM6cdcd6c4B7c4U4cA6c4d2c6B3cdMdMdMdM3cd19c3b5c3M26c4U6cdcdU5c4d7c4d2cAUEUA4cdMdM2c6d3c8U2cAdA3cUcUcU5c4Mc2b13cUcUcUcU3cEcE3cAcAcAc4d6cdc3U4cdMdM7cdMdM3cUEU5c4U2cdMdMdM3c8dc2Yd2Y11c2M20cBcBcBcB2c3A3c6EdMdMB5cd2EU2E2c7Bc4E4U3EUEUE4c4d2c6B3cdMdMdMdM2cAdA3cEdEdE3cdBdB9c2AcAcA3cBdBcdcAdAE3cEAcE4cE4UcAdA2cdEdEdEc8bc11bUEUb2c2bdMdM2cMdMdMd3c8U2c3b3c5b3c4b17c18b4c9b2c6bc4bMbMbc3bAbA5bUbUb2c2b4U2c6B3c2bA2bA2b2cbUb3cbEbEb3cbMbM6c3A2cEdE3cEbEbEbEbE9d4c9d2c6dc8dc15d2c6d2c6d3c8d2c3d3c5d3c4d11cbEb3c18d4c9d2c6dc8dc15d2c6d2c6d3c8d2c3d3c5d3c4d3c3d5cEbE3c9d'
+);
+
+var ccyd = document.getElementById("c");
+var xcyd = ccyd.getContext("2d");
+
+var Wcyd = 128;
+var Scyd = 15;
+
+var colors = {
+  A:"#FF0000", B:"#FF6600", C:"#FF9900", D:"#FFCC00",
+  E:"#FFFF00", F:"#CCFF00", G:"#99FF00", H:"#66FF00",
+  I:"#00FF00", J:"#00FF66", K:"#00FF99", L:"#00FFCC",
+  M:"#00FFFF", N:"#00CCFF", O:"#0099FF", P:"#0066FF",
+  Q:"#0000FF", R:"#6600FF", S:"#9900FF", T:"#CC00FF",
+  U:"#FF00FF", V:"#FF00CC", W:"#FF0099", X:"#FF0066",
+  Y:"#FFFFFF", Z:"#DDDDDD", a:"#BBBBBB", b:"#888888",
+  c:"#555555", d:"#222222", e:"#8B4513", f:"#000000"
+};
+
+Dcyd.split('').forEach(function(v, i) {
+  xcyd.fillStyle = colors[v] || "#000000";
+  var col = (i % Wcyd) * Scyd;
+  var row = Math.floor(i / Wcyd) * Scyd;
+  xcyd.fillRect(col, row, Scyd, Scyd);
+  xcyd.fillRect(Wcyd * Scyd + col, row, Scyd, Scyd);
+});
+
+var offsetcyd = 0;
+var tileWcyd = Wcyd * Scyd;
+var lastTscyd = null;
+
+function scroll(ts) {
+  if (lastTscyd === null) lastTscyd = ts;
+  offsetcyd = (offsetcyd + 60 * (ts - lastTscyd) / 1000) % tileWcyd;
+  lastTscyd = ts;
+  ccyd.style.left = '-' + Math.floor(offsetcyd) + 'px';
+  requestAnimationFrame(scroll);
+}
+
+requestAnimationFrame(scroll);
+</script>
+</div>

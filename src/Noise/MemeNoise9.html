@@ -1,0 +1,34 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<style>
+#cont{
+  width:470px;
+  height:350px;
+  position:relative;
+  overflow:hidden;
+  image-rendering:pixelated;
+}
+canvas{
+  position:absolute;
+  left:0;
+  top:0;
+  width:470px;
+  height:350px;
+}
+.ttt{
+  width:470px;
+text-align: right;
+font-size: 10px;
+
+}
+#noise{z-index:1;}
+</style>
+
+<div id="cont">
+  <canvas id="tube" width="470" height="350"></canvas>
+  <canvas id="noise" width="470" height="350"></canvas>
+  <img id="source" src="data:image/png;base64,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" hidden>
+</div>
+<div class="ttt">BRUIT 9/20 - Cloud BIP-39</div>
+<script>
+(()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
+</script>

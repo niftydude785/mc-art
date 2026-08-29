@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>WHALEIAN</title>
+<style>
+.wwid{--crm:#efe6d2;--crd:#d8cbac;--crk:#c2b391;--ink:#2a2420;--wha:#3b4a5a;--whd:#232e38;--whb:#7c93a3;--wtp:#4a90c2;--wbt:#2f6a99;--etl:#cbd6e0;--etd:#8fa2b3;--skt:#cfe8f5;--skb:#eef7fb;display:inline-block}
+.wwid *{box-sizing:border-box}
+.pstr{width:450px;height:340px;background:radial-gradient(ellipse at 50% 38%,#f7efdc 0%,#ede2ca 55%,#d9caa9 100%);overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.pstr::before{content:"";inset:0;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.035) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(0,0,0,.02) 0 1px,transparent 1px 4px);mix-blend-mode:multiply}
+.frbd{inset:0;border:6px solid var(--ink);box-shadow:inset 0 0 0 3px var(--crm),inset 0 0 0 6px var(--ink)}
+.aare{top:14px;left:14px;right:14px;bottom:110px;overflow:hidden}
+.rtgl{display:none}
+.ocn{inset:0}
+.sky{top:0;left:0;right:0;height:70%;background:linear-gradient(180deg,var(--skt) 0%,var(--skb) 100%);opacity:.55}
+.bub{background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3);z-index:2}
+.eth{width:14px;height:14px;z-index:2;background:linear-gradient(135deg,var(--etl) 50%,var(--etd) 50%);box-shadow:inset 0 0 0 1px var(--ink),0 1px 2px rgba(0,0,0,.3);transform:rotate(45deg)}
+.wwrp{left:50%;top:50%;transform:translate(-50%,-50%);width:320px;z-index:3}
+.wvis{transition:transform 1100ms cubic-bezier(.6,0,.85,.35) 150ms,opacity 400ms ease-in 950ms}
+#release-whale:checked ~ .aare .wshk{animation:wg 500ms ease-in-out 100ms 2}
+@keyframes wg{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-4px) rotate(-2deg)}50%{transform:translateY(2px) rotate(1deg)}75%{transform:translateY(-2px) rotate(-1deg)}}
+.wshk{width:320px;height:154px}
+.spt{top:-34px;left:98px;width:8px;height:36px;background:repeating-linear-gradient(0deg,rgba(255,255,255,.85) 0 4px,transparent 4px 8px);opacity:.9}
+.wbdy{left:0;top:28px;width:238px;height:109px;border-radius:60% 40% 45% 55% / 65% 55% 45% 35%}
+.wbdy::before{content:"";left:16%;right:16%;bottom:0;height:36%;background:var(--whb);border-radius:0 0 55% 55% / 0 0 65% 65%;opacity:.45}
+.weye{top:53px;left:31px;width:13px;height:13px;background:var(--ink);box-shadow:1px -1px 0 rgba(255,255,255,.6) inset;z-index:1}
+.wtl{right:-6px;top:48px;width:92px;height:78px;clip-path:polygon(0% 30%,55% 0%,40% 50%,55% 100%,0% 70%)}
+.tape{left:50%;top:50%;width:340px;height:44px;background:repeating-linear-gradient(45deg,rgba(255,255,255,.22) 0 3px,rgba(0,0,0,.06) 3px 6px),linear-gradient(180deg,#a8a8a8 0%,#8f8f8f 45%,#7a7a7a 100%);box-shadow:0 4px 10px rgba(0,0,0,.35),inset 0 0 0 1px rgba(0,0,0,.15);z-index:4;transition:opacity .4s}
+.tpa{transform:translate(-50%,-50%) rotate(-16deg)}
+.tpb{transform:translate(-50%,-50%) rotate(16deg)}
+.tape::after{content:"";top:6px;left:0;right:0;height:5px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0))}
+#release-whale:checked ~ .aare .tape{opacity:0;pointer-events:none}
+#release-whale:checked ~ .aare .wvis{transform:translateY(150px);opacity:0}
+.rip{bottom:30px;width:18px;height:18px;border:2px solid rgba(255,255,255,.75);opacity:0;z-index:6}
+#release-whale:checked ~ .aare .rip{animation:rp 650ms ease-out var(--d,0ms)}
+@keyframes rp{0%{transform:scale(.3);opacity:.75}100%{transform:scale(2.4);opacity:0}}
+.wtr{left:0;right:0;bottom:0;height:40px;background:linear-gradient(180deg,var(--wtp) 0%,var(--wbt) 100%);box-shadow:inset 0 2px 0 var(--ink);z-index:3}
+.wtr::before{content:"";left:0;right:0;top:-6px;height:12px;background-image:radial-gradient(circle at 10px 10px,transparent 9px,var(--wtp) 10px);background-size:20px 12px;background-repeat:repeat-x;opacity:.9}
+.wris{left:0;right:0;bottom:0;height:40px;background:linear-gradient(180deg,rgba(74,144,194,.75) 0%,rgba(47,106,153,.94) 100%);transition:height 900ms cubic-bezier(.6,0,.85,.35) 300ms;z-index:5}
+#release-whale:checked ~ .aare .wris{height:230px}
+.sswp{inset:0;z-index:7}
+#release-whale:checked ~ .aare .sswp{pointer-events:auto}
+.scol{left:50%;top:50%;width:260px;transform:translate(-50%,-50%);display:flex;flex-direction:column;font-size:15px;font-weight:900;letter-spacing:1px;line-height:1.5;text-align:center;color:#000;text-shadow:0 0 4px rgba(255,255,255,.85),0 0 8px rgba(255,255,255,.6);white-space:normal;opacity:0;transition:opacity .6s ease 1.6s}
+#release-whale:checked ~ .aare .scol{opacity:.7}
+.deg{font-size:14px;color:rgba(255,255,255,.65);text-shadow:0 1px 1px rgba(0,0,0,.35);opacity:0;transition:opacity .5s ease 1.7s}
+#release-whale:checked ~ .aare .deg{opacity:1}
+.noan,.noan *{transition:none !important}
+.wmar{left:0;right:0;bottom:14px;height:96px;display:flex;flex-direction:column}
+.wmrk{text-transform:uppercase;font-size:34px;letter-spacing:3px;margin:0;transform:translateY(-12px);background:linear-gradient(180deg,#8fd3f4 0%,#2f6a99 55%,#0a1a2e 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(4px 4px 0 rgba(0,0,0,.25))}
+.wwid,.wmrk{font-family:Consolas,'Courier New',monospace}
+.pstr,.wvis,.wshk{position:relative}
+.pstr::before,.frbd,.aare,.ocn,.sky,.bub,.eth,.wwrp,.spt,.wbdy,.wbdy::before,.weye,.wtl,.tape,.tape::after,.rip,.wtr,.wtr::before,.wris,.sswp,.scol,.deg,.wmar{position:absolute}
+.pstr::before,.frbd,.rip,.wris,.sswp{pointer-events:none}
+.bub,.weye,.rip{border-radius:50%}
+.wbdy,.wtl{background:var(--wha)}
+.wbdy,.wtl{box-shadow:inset 0 0 0 3px var(--whd),inset 0 0 0 6px var(--ink)}
+.tape,.sswp,.wmrk{cursor:pointer}
+.scol,.wmar{align-items:center}
+.scol,.wmar{justify-content:center}
+.scol,.deg,.wmrk{font-weight:700}
+.ctag{position:absolute;bottom:20px;right:26px;font-size:15px;font-weight:900;letter-spacing:2px;color:#000;z-index:2;pointer-events:none}
+</style>
+</head>
+<body><div class="wwid"><div class="pstr"><input type="checkbox" id="release-whale" class="rtgl"><div class="aare"><div class="ocn"><div class="sky"></div><div class="bub" style="top:18px;left:56px;width:7px;height:7px"></div><div class="bub" style="top:46px;right:64px;width:11px;height:11px"></div><div class="bub" style="top:88px;left:36px;width:5px;height:5px"></div><div class="bub" style="top:26px;right:38px;width:6px;height:6px"></div><div class="bub" style="top:64px;left:206px;width:8px;height:8px"></div><div class="eth" style="top:58px;left:32px"></div><div class="eth" style="top:36px;right:58px;width:11px;height:11px"></div><div class="eth" style="bottom:76px;right:100px;width:12px;height:12px"></div><div class="wwrp"><div class="wvis"><div class="wshk"><div class="spt"></div><div class="wbdy"><div class="weye"></div></div><div class="wtl"></div></div></div><label class="tape tpa" for="release-whale"></label><label class="tape tpb" for="release-whale"></label></div><div class="rip" style="left:44%;--d:480ms"></div><div class="rip" style="left:50%;width:24px;height:24px;--d:560ms"></div><div class="rip" style="left:57%;width:14px;height:14px;--d:640ms"></div><div class="wtr"></div><div class="wris"></div><div class="sswp"><div class="scol">100% OWNERSHIP RATIO<br>ALL UNIQUE HOLDERS<br>SHRIMPS ONLY</div><span class="deg" style="left:4%;top:18px;font-size:10px">&deg;</span><span class="deg" style="left:15%;top:52px;font-size:18px">&deg;</span><span class="deg" style="left:22%;top:96px;font-size:12px">&deg;</span><span class="deg" style="left:33%;top:140px;font-size:9px">&deg;</span><span class="deg" style="left:46%;top:20px;font-size:16px">&deg;</span><span class="deg" style="left:58%;top:64px;font-size:11px">&deg;</span><span class="deg" style="left:64%;top:112px;font-size:13px">&deg;</span><span class="deg" style="left:73%;top:156px;font-size:10px">&deg;</span><span class="deg" style="left:84%;top:36px;font-size:15px">&deg;</span><span class="deg" style="left:92%;top:84px;font-size:9px">&deg;</span><span class="deg" style="left:9%;top:170px;font-size:12px">&deg;</span><span class="deg" style="left:38%;top:186px;font-size:10px">&deg;</span><span class="deg" style="left:62%;top:174px;font-size:14px">&deg;</span><span class="deg" style="left:88%;top:160px;font-size:11px">&deg;</span></div></div></div><div class="wmar"><h1 class="wmrk">WHALEIAN</h1></div><div class="frbd"></div><div class="ctag">CENTRALIAN 5/10</div></div></div><script>
+  var releaseWhale = document.getElementById('release-whale');
+  var poster = document.querySelector('.wwid .pstr');
+  document.addEventListener('keydown', function(e){
+  if(e.key === 'Enter') releaseWhale.checked = !releaseWhale.checked;
+  });
+  function resetInstant(){
+  poster.classList.add('noan');
+  releaseWhale.checked = false;
+  void poster.offsetWidth;
+  poster.classList.remove('noan');
+  }
+  document.querySelector('.sswp').addEventListener('click', resetInstant);
+  document.querySelector('.wmrk').addEventListener('click', resetInstant);
+</script></body>
+</html>

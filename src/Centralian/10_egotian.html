@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>EGOTIAN</title>
+<style>
+.egw,.wdm{font-family:Consolas,'Courier New',monospace}
+.egw{--crm:#efe6d2;--crd:#d8cbac;--crk:#c2b391;--ink:#2a2420;--gld:#c9a24a;--gdl:#eed897;--gdd:#96762c;display:inline-block}
+.egw *{box-sizing:border-box}
+.pst,.mas,.mfr{position:relative}
+.pst,.ara,.mfr,.mgl{overflow:hidden}
+.pst{width:450px;height:340px;background:radial-gradient(ellipse at 50% 38%,#f7efdc 0%,#ede2ca 55%,#d9caa9 100%);box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.pst::before,.frb,.ara,.scn,.flr,.halo,.stg,.mfr::before,.mgl,.mvd,.frw,.mcl,.shd,.crk2,.tape,.tape::after,.wda{position:absolute}
+.pst::before,.frb,.halo,.mfr::before,.frw,.mcl{pointer-events:none}
+.pst::before{content:"";inset:0;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.035) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(0,0,0,.02) 0 1px,transparent 1px 4px);mix-blend-mode:multiply}
+.frb{inset:0;border:6px solid var(--ink);box-shadow:inset 0 0 0 3px var(--crm),inset 0 0 0 6px var(--ink)}
+.ara{top:14px;left:14px;right:14px;bottom:110px}
+.rtg{display:none}
+.scn{inset:0}
+.flr,.stg,.shd{z-index:2}
+.flr{left:0;right:0;bottom:0;height:18px;background:var(--crk);box-shadow:inset 0 2px 0 var(--ink),inset 0 0 0 2px var(--crd)}
+.halo,.mfr,.mgl,.mcl{border-radius:50%}
+.halo{left:50%;top:44%;width:270px;height:270px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,214,140,.55) 0%,rgba(255,190,110,.28) 38%,rgba(255,190,110,0) 72%);z-index:0}
+#release-mirror:checked ~ .ara .halo{opacity:.4;transition:opacity 1.2s ease 1.55s;}
+.stg,.cnd,.mas,.frw,.wda{display:flex}
+.stg,.frw,.wda{justify-content:center}
+.stg{left:0;right:0;bottom:18px;align-items:flex-end;gap:88px}
+.cnd,.mas,.wda{flex-direction:column}
+.cnd,.mas,.frw,.wda{align-items:center}
+.cnd{width:26px}
+.cfl{width:10px;height:16px;margin-bottom:-2px;border-radius:50% 50% 50% 50% / 62% 62% 38% 38%;background:radial-gradient(circle at 50% 30%,#fff6d0 0%,#ffd35c 42%,#ff8a3d 75%,#d4501f 100%);box-shadow:0 0 10px 3px rgba(255,170,60,.55);transform-origin:50% 95%;animation:efk 2.3s ease-in-out infinite}
+.cdr .cfl{animation-duration:2.7s;animation-delay:.6s}
+@keyframes efk{0%,100%{transform:scale(1) rotate(0deg);opacity:1;}25%{transform:scale(1.06,.93) rotate(-4deg);opacity:.9;}50%{transform:scale(.94,1.06) rotate(3deg);opacity:1;}75%{transform:scale(1.02,.97) rotate(-2deg);opacity:.94;}}
+.cbd,.cbs,.ped{box-shadow:inset 0 0 0 2px var(--ink)}
+.cbd{width:10px;height:64px;background:linear-gradient(180deg,#f3ead2 0%,#d9cba0 100%)}
+.cbs,.ped{background:var(--gdd)}
+.cbs{width:26px;height:8px;margin-top:1px;border-radius:2px}
+.mfr{width:128px;height:158px;background:radial-gradient(ellipse at 32% 26%,var(--gdl) 0%,var(--gld) 45%,var(--gdd) 100%);box-shadow:inset 0 0 0 3px #7a5e22,inset 0 0 0 7px var(--gdl),inset 0 0 0 10px var(--gdd),inset 0 0 0 14px var(--ink),0 8px 20px rgba(0,0,0,.4)}
+.mfr::before{content:"";inset:0;background-image:repeating-radial-gradient(circle at 50% 50%,rgba(255,255,255,.3) 0 2px,transparent 2px 10px);mix-blend-mode:overlay;opacity:.55}
+.mgl{top:16px;left:16px;right:16px;bottom:16px}
+.mvd{inset:0;background:radial-gradient(circle at 50% 40%,#201f22 0%,#0a090b 78%);z-index:1}
+.frw,.wdm{font-weight:700}
+.frw,.wdm{letter-spacing:3px}
+.frw{inset:0;font-size:20px;color:#ffe14d;text-shadow:0 0 10px rgba(255,225,77,.7);opacity:0;z-index:5}
+#release-mirror:checked ~ .ara .frw{opacity:1;transition:opacity .6s ease 1.7s;}
+.mcl,.tape,.wdm{cursor:pointer}
+.mcl{inset:0;z-index:6}
+#release-mirror:checked ~ .ara .mcl{pointer-events:auto;}
+.shd{inset:0;background:radial-gradient(ellipse at 50% 32%,#ffffff 0%,#dfe6ef 22%,#aab6c9 50%,#6b7689 78%,#4a5261 100%);transition:transform 850ms cubic-bezier(.55,0,.85,.35),opacity 750ms ease-in}
+.sh1{clip-path:polygon(50% 45%,0% 0%,50% 0%)}
+.sh2{clip-path:polygon(50% 45%,50% 0%,100% 0%)}
+.sh3{clip-path:polygon(50% 45%,100% 0%,100% 100%)}
+.sh4{clip-path:polygon(50% 45%,100% 100%,50% 100%)}
+.sh5{clip-path:polygon(50% 45%,50% 100%,0% 100%)}
+.sh6{clip-path:polygon(50% 45%,0% 100%,0% 0%)}
+#release-mirror:checked ~ .ara .sh1{transform:translate(-72px,-92px) rotate(-38deg);opacity:0;transition-delay:620ms;}
+#release-mirror:checked ~ .ara .sh2{transform:translate(64px,-100px) rotate(30deg);opacity:0;transition-delay:680ms;}
+#release-mirror:checked ~ .ara .sh3{transform:translate(112px,14px) rotate(52deg);opacity:0;transition-delay:560ms;}
+#release-mirror:checked ~ .ara .sh4{transform:translate(24px,112px) rotate(-42deg);opacity:0;transition-delay:700ms;}
+#release-mirror:checked ~ .ara .sh5{transform:translate(-62px,104px) rotate(36deg);opacity:0;transition-delay:640ms;}
+#release-mirror:checked ~ .ara .sh6{transform:translate(-114px,-8px) rotate(-56deg);opacity:0;transition-delay:600ms;}
+.crk2{inset:0;background:var(--ink);opacity:0;z-index:3}
+.cr1{clip-path:polygon(52% 38%,55% 40%,45% 30%,49% 32%,38% 20%,42% 22%,30% 8%,33% 6%,28% 2%,25% 4%,27% 9%,24% 8%,36% 23%,32% 21%,43% 33%,39% 31%,49% 41%)}
+.cr2{clip-path:polygon(54% 42%,58% 44%,50% 55%,54% 57%,46% 68%,50% 70%,44% 82%,48% 84%,42% 96%,38% 95%,44% 83%,40% 81%,46% 69%,42% 67%,50% 56%,46% 54%,55% 43%)}
+.cr3{clip-path:polygon(56% 40%,58% 44%,70% 38%,68% 34%,82% 30%,80% 26%,94% 22%,96% 26%,90% 28%,92% 32%,78% 36%,80% 40%,66% 44%,68% 48%,58% 46%)}
+@keyframes eck{0%{opacity:0;}25%{opacity:.85;}65%{opacity:.85;}100%{opacity:0;}}
+#release-mirror:checked ~ .ara .cr1{animation:eck 700ms ease-out 260ms 1;}
+#release-mirror:checked ~ .ara .cr2{animation:eck 700ms ease-out 320ms 1;}
+#release-mirror:checked ~ .ara .cr3{animation:eck 700ms ease-out 380ms 1;}
+.ped{width:60px;height:20px;margin-top:-2px;clip-path:polygon(25% 0%,75% 0%,100% 100%,0% 100%)}
+.tape{left:50%;top:78px;width:220px;height:26px;transform:translate(-50%,-50%) rotate(-16deg);background:repeating-linear-gradient(45deg,rgba(255,255,255,.22) 0 3px,rgba(0,0,0,.06) 3px 6px),linear-gradient(180deg,#a8a8a8 0%,#8f8f8f 45%,#7a7a7a 100%);box-shadow:0 4px 10px rgba(0,0,0,.35),inset 0 0 0 1px rgba(0,0,0,.15);z-index:4;transition:opacity .4s}
+.tape::after{content:"";top:6px;left:0;right:0;height:5px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0))}
+#release-mirror:checked ~ .ara .tape{opacity:0;pointer-events:none;}
+.wda{left:0;right:0;bottom:14px;height:96px}
+.wdm{text-transform:uppercase;font-size:34px;margin:0;transform:translateY(-12px);background:linear-gradient(180deg,#eed897 0%,#c9a24a 50%,#96762c 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(4px 4px 0 rgba(0,0,0,.25))}
+.ctag{position:absolute;bottom:20px;right:26px;font-size:15px;font-weight:900;letter-spacing:2px;color:#000;z-index:2;pointer-events:none}
+</style>
+</head>
+<body><div class="egw"><div class="pst"><input type="checkbox" id="release-mirror" class="rtg"><div class="ara"><div class="scn"><div class="halo"></div><div class="stg"><div class="cnd cdl"><div class="cfl"></div><div class="cbd"></div><div class="cbs"></div></div><div class="mas"><div class="mfr"><div class="mgl"><div class="mvd"></div><div class="frw">FREE</div><div class="shd sh1"></div><div class="shd sh2"></div><div class="shd sh3"></div><div class="shd sh4"></div><div class="shd sh5"></div><div class="shd sh6"></div><div class="crk2 cr1"></div><div class="crk2 cr2"></div><div class="crk2 cr3"></div><label class="mcl" for="release-mirror"></label></div></div><div class="ped"></div><label class="tape" for="release-mirror"></label></div><div class="cnd cdr"><div class="cfl"></div><div class="cbd"></div><div class="cbs"></div></div></div><div class="flr"></div></div></div><div class="wda"><h1 class="wdm">EGOTIAN</h1></div><div class="frb"></div><div class="ctag">CENTRALIAN 10/10</div></div></div><script>
+var releaseMirror = document.getElementById('release-mirror');
+document.addEventListener('keydown', function(e){
+if(e.key === 'Enter') releaseMirror.checked = !releaseMirror.checked;
+});
+document.querySelector('.wdm').addEventListener('click', function(){
+releaseMirror.checked = !releaseMirror.checked;
+});
+</script></body>
+</html>

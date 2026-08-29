@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MC7026 — Project</title>
+<link rel="stylesheet" href="style.css?v=39">
+</head>
+<body class="project-page">
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <img class="brand-logo" src="src/others/logo.png" alt="MoonCat logo">
+    MC7026 CRYPTOARTIST
+  </a>
+  <span class="header-right">
+    <a class="header-link" href="about.html">About Me</a>
+    <a class="header-link" href="fully-onchain.html">Fully Onchain</a>
+    <a class="back-link" href="index.html">&larr; Index</a>
+  </span>
+</header>
+
+<main class="project-layout" id="layout"></main>
+
+<script src="data.js?v=39"></script>
+<script src="sources.js?v=39"></script>
+<script>
+const params = new URLSearchParams(location.search);
+const slug = params.get("p");
+const order = sortedProjects();
+const project = order.find(x => x.slug === slug) || order[0];
+
+document.title = "MC7026 — " + project.title;
+
+const layout = document.getElementById("layout");
+
+const gifPath = cydGifPath(project);
+const cydCreditHtml = project.cyd ? `
+  <div class="info-credit">
+    <span class="info-credit-label">Minted through Cypherdudes</span>
+    <span class="info-credit-value">CYD #${project.cyd.id} ${project.cyd.name}</span>
+  </div>
+  ${gifPath ? `<img class="info-cyd-gif" src="${gifPath.split("/").map(encodeURIComponent).join("/")}" alt="Cypherdude #${project.cyd.id} ${project.cyd.name}">` : ""}
+` : "";
+
+const infoCol = document.createElement("div");
+infoCol.className = "info-col";
+infoCol.innerHTML = `
+  <h1 class="info-title">${project.title}</h1>
+  <div class="release-badge${project.release.sortValue === Infinity ? " is-upcoming" : ""}">${project.release.label}</div>
+  <div class="info-meta">${project.meta}</div>
+  <button class="info-expand-toggle" aria-expanded="false" aria-label="Show full description">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </button>
+  <div class="info-expand">
+    <div class="info-statement">
+      ${project.statement.map(p => `<p>${p}</p>`).join("")}
+    </div>
+    ${cydCreditHtml}
+    <div class="info-hint">Scroll the pieces on the right. Each frame is a live, interactive page — click into it.</div>
+  </div>
+`;
+
+const infoExpandToggle = infoCol.querySelector(".info-expand-toggle");
+const infoExpand = infoCol.querySelector(".info-expand");
+infoExpandToggle.addEventListener("click", () => {
+  const open = infoExpand.classList.toggle("is-open");
+  infoExpandToggle.classList.toggle("is-open", open);
+  infoExpandToggle.setAttribute("aria-expanded", String(open));
+  infoExpandToggle.setAttribute("aria-label", open ? "Hide full description" : "Show full description");
+});
+
+const carouselCol = document.createElement("div");
+carouselCol.className = "carousel-col";
+
+const size = frameSizeOf(project);
+const cardsHtml = project.pieces.map((piece, i) => `
+  <div class="card">
+    <div class="card-frame">
+      <iframe src="${project.folder}${piece.file}" width="${size.w}" height="${size.h}"
+              scrolling="no" title="${piece.label}"></iframe>
+    </div>
+    <div class="card-footer">
+      <span class="card-label">${piece.label}</span>
+      <span class="card-actions">
+        <button class="icon-btn source-btn" data-index="${i}" aria-label="View source code" title="View source code">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 2v6h6"/>
+          </svg>
+        </button>
+        <button class="icon-btn fs-btn" data-index="${i}" aria-label="View fullscreen" title="View fullscreen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/>
+          </svg>
+        </button>
+        <a class="opensea-link" href="${openseaUrl(piece.token)}" target="_blank" rel="noopener" data-token="${piece.token}">
+          <img src="opensea-icon.png" alt="OpenSea">
+          <span class="opensea-link-text">BUY ON OPENSEA</span>
+        </a>
+      </span>
+    </div>
+    <div class="card-owner" data-token="${piece.token}"></div>
+  </div>
+`).join("");
+
+const chevron = (dir) => `
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="${dir === "left" ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"}"/>
+  </svg>
+`;
+
+carouselCol.innerHTML = `
+  <div class="carousel-viewport">
+    <button class="carousel-nav prev" aria-label="Scroll left">&#8249;</button>
+    <div class="carousel">${cardsHtml}</div>
+    <button class="carousel-nav next" aria-label="Scroll right">&#8250;</button>
+  </div>
+  <div class="carousel-below-nav">
+    <button class="big-nav-btn prev" aria-label="Previous piece">${chevron("left")}</button>
+    <button class="big-nav-btn next" aria-label="Next piece">${chevron("right")}</button>
+  </div>
+`;
+
+layout.appendChild(infoCol);
+layout.appendChild(carouselCol);
+
+const track = carouselCol.querySelector(".carousel");
+function scrollCarousel(dir){
+  const card = track.querySelector(".card");
+  const step = card ? card.getBoundingClientRect().width + 28 : 540;
+  track.scrollBy({left: dir * step, behavior:"smooth"});
+}
+carouselCol.querySelectorAll(".prev").forEach(btn => btn.addEventListener("click", () => scrollCarousel(-1)));
+carouselCol.querySelectorAll(".next").forEach(btn => btn.addEventListener("click", () => scrollCarousel(1)));
+
+/* Cards are sized for desktop (490px wide). On a phone screen that's wider
+   than the viewport, cropping the NFT and hiding the buttons off-screen —
+   so below the 900px breakpoint we shrink each whole card with zoom (which
+   resizes it for layout too, unlike transform) to fit the screen. */
+function scaleCardsForMobile(){
+  const isMobile = window.matchMedia("(max-width: 900px)").matches;
+  const cards = carouselCol.querySelectorAll(".card");
+  if (!isMobile) {
+    cards.forEach(c => { c.style.zoom = ""; });
+    return;
+  }
+  const available = window.innerWidth - 32;
+  const scale = Math.min(1, available / 490);
+  cards.forEach(c => { c.style.zoom = scale; });
+}
+scaleCardsForMobile();
+window.addEventListener("resize", scaleCardsForMobile);
+
+/* Anywhere on this page, scrolling should move the carousel horizontally —
+   over the info column, the gaps, or a piece's own iframe — instead of
+   scrolling the page vertically. */
+function redirectWheelToTrack(e){
+  if (!modal.hidden || !sourceModal.hidden) return; // a modal is open: leave its own scrolling alone
+  track.scrollLeft += (e.deltaY !== 0 ? e.deltaY : e.deltaX);
+  e.preventDefault();
+}
+document.addEventListener("wheel", redirectWheelToTrack, { passive:false });
+
+/* Each card is mostly filled by an iframe (a separate document), so a wheel
+   event over it never reaches the listener above — the browser just chains
+   the scroll to the outer page instead. These are same-origin local files,
+   so we can reach into each iframe and forward its wheel events here too. */
+carouselCol.querySelectorAll(".card-frame iframe").forEach(frame => {
+  const attach = () => {
+    try {
+      frame.contentWindow.addEventListener("wheel", redirectWheelToTrack, { passive:false });
+    } catch (err) { /* cross-origin fallback: leave native scroll behavior */ }
+  };
+  frame.addEventListener("load", attach);
+  if (frame.contentDocument && frame.contentDocument.readyState === "complete") attach();
+});
+
+/* ---------- fullscreen modal ---------- */
+const modal = document.createElement("div");
+modal.className = "fs-modal";
+modal.hidden = true;
+modal.innerHTML = `
+  <div class="fs-modal-frame">
+    <button class="fs-close" aria-label="Close">&times;</button>
+    <iframe scrolling="no"></iframe>
+  </div>
+`;
+document.body.appendChild(modal);
+const modalFrame = modal.querySelector(".fs-modal-frame");
+const modalIframe = modal.querySelector("iframe");
+const FS_ZOOM = 1.5;
+
+function openFullscreen(piece){
+  modalIframe.src = project.folder + piece.file;
+  modalIframe.title = piece.label;
+  modalIframe.style.width = size.w + "px";
+  modalIframe.style.height = size.h + "px";
+  modalFrame.style.width = Math.round(size.w * FS_ZOOM) + "px";
+  modalFrame.style.height = Math.round(size.h * FS_ZOOM) + "px";
+  modal.hidden = false;
+}
+function closeFullscreen(){
+  modal.hidden = true;
+  modalIframe.src = "about:blank";
+}
+
+carouselCol.querySelectorAll(".fs-btn").forEach(btn => {
+  btn.addEventListener("click", () => openFullscreen(project.pieces[+btn.dataset.index]));
+});
+modal.querySelector(".fs-close").addEventListener("click", closeFullscreen);
+modal.addEventListener("click", e => { if (e.target === modal) closeFullscreen(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !modal.hidden) closeFullscreen(); });
+
+/* ---------- source code modal ---------- */
+const sourceModal = document.createElement("div");
+sourceModal.className = "source-modal";
+sourceModal.hidden = true;
+sourceModal.innerHTML = `
+  <div class="source-modal-frame">
+    <div class="source-modal-header">
+      <div class="source-modal-header-left">
+        <span class="source-modal-title"></span>
+        <span class="release-badge is-upcoming">Fully onchain</span>
+        <span class="release-badge is-upcoming">Ethereum</span>
+      </div>
+      <button class="fs-close" aria-label="Close">&times;</button>
+    </div>
+    <pre class="source-modal-code"><code></code></pre>
+  </div>
+`;
+document.body.appendChild(sourceModal);
+const sourceModalTitle = sourceModal.querySelector(".source-modal-title");
+const sourceModalCode = sourceModal.querySelector("code");
+
+function closeSource(){
+  sourceModal.hidden = true;
+}
+
+function openSource(piece){
+  sourceModalTitle.textContent = piece.label;
+  const url = project.folder + piece.file;
+  sourceModalCode.textContent = SOURCE_CODE[url] || "Could not load source for this piece.";
+  sourceModal.hidden = false;
+}
+
+carouselCol.querySelectorAll(".source-btn").forEach(btn => {
+  btn.addEventListener("click", () => openSource(project.pieces[+btn.dataset.index]));
+});
+sourceModal.querySelector(".fs-close").addEventListener("click", closeSource);
+sourceModal.addEventListener("click", e => { if (e.target === sourceModal) closeSource(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !sourceModal.hidden) closeSource(); });
+
+/* ---------- live OpenSea price + owner ---------- */
+function truncateAddress(addr) {
+  return addr.slice(0, 6) + "…" + addr.slice(-4);
+}
+
+async function loadOpenSeaInfoForPieces() {
+  const realPieces = project.pieces.filter(p => p.token && p.token !== "XXX");
+  for (const piece of realPieces) {
+    const link = carouselCol.querySelector(`.opensea-link[data-token="${piece.token}"]`);
+    const ownerEl = carouselCol.querySelector(`.card-owner[data-token="${piece.token}"]`);
+    if (!link) continue;
+
+    const info = await getOpenSeaInfoCached(piece.token);
+
+    const textEl = link.querySelector(".opensea-link-text");
+    if (info.listing) {
+      textEl.textContent = `BUY FOR ${info.listing.amount} ${info.listing.currency}`;
+    } else {
+      textEl.textContent = "MAKE OFFER";
+    }
+
+    if (info.owner && ownerEl) {
+      ownerEl.innerHTML = `OWNED BY <a href="https://opensea.io/${info.owner}" target="_blank" rel="noopener">${truncateAddress(info.owner)}</a>`;
+    }
+
+    await new Promise(r => setTimeout(r, 400)); // stay well under the API rate limit
+  }
+}
+loadOpenSeaInfoForPieces();
+</script>
+</body>
+</html>

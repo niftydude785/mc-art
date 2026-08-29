@@ -1,0 +1,57 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<div style="width:470px;text-align:left;font-family:'Courier New', Courier, monospace;background:#fff">
+<b style="color:#111;font-size:14px">SUPER CYD BROS / WORLD 3-1 / MYSTICAL SOUVENIRS</b><br>
+
+<div id="wrap" style="width:470px;height:240px;overflow:hidden;position:relative;display:inline-block;vertical-align:top">
+  <canvas id="c" width="3840" height="240"
+    style="position:absolute;left:0;top:0;display:block"></canvas>
+</div>
+
+<script>
+
+function rle(s){return s.replace(/(\d+)([A-Za-z])/g,function(_,n,c){return c.repeat(+n)});}
+
+var Dcyd = rle(
+ '27N9A30N9T39NS21NHS2H18N2ZNV16N4H12NV3NZ2NI18NS3H9NI2NH8NA5NH10N5HS2H5NANE6NIN2Z16N3HS4H12NI2N2Z17N8H13NA8NH11N2HA5HV3H4NY5NAY2AY2A13N2HA5HV3H9NTY2TY2T14N2HAHS3HVHSH31N2IA2ISIE2ID3I8N9A11N2IA2ISIE2ID2IS7N9T12N2IA4IE2ID3I8NS2NF2NA5NS9NSJ2IE4IB2ISI11N2Z8NANE4NIJ2IE4IB2IKI10N2Z4NV6NSY2SNSJ2IE4IB2IKI17NA17NeD2eA15N2ZNVI6NY10NeD2eA14N2Z12NZ8NeD2eA39NV2eE16NAY2AY2A15NV2eE13NTY2TY2T8N5H5NV2eE14N2UN2UN2UN2U15N4e15N9A8NMNP3N4e12N9T3NSY2S10N4e8NANE3N2UN2UN2UN2U15N4e15NI2N2Z13NY4N4e17N2Z6NZ12N4e9NY4N2ZN2ZN2ZN2Z15N4e18N2Z18N4e14NV2N2ZI7NSY2S7N4e14N2SN2SN2SN2S15N4e14NAY2AY2A9NSYS5N4e13NTY2TY2T2NV5NZ9N4e12NUY2UY2UY2UY2UYNU12N4e13N9A5NSNSNZNSY2SN4e12N9T6N5H4N2D4eN2De7N17U12N4e3NSY2S9N2Z7NRY3N3HNZ3N4e2NSYS10N2Z9NSY2S5N2DN4eNI2eNSY2S3NZN2ZN2ZN2ZN2Z2NZ12N4e4NZ3N2A6N2Z8NZ5HN5H4e3NZNSYN2V5N2Z10NZ5N2DN2D4e2DN2DNZ7N2ZN2ZN2ZN2Z7N7H6e7HIH6N2Z5N10HI3H6e4HNZ3H5N2Z6N13HI6e7H6N2ZN2ZN2ZN2Z5N9H6e9H6N2Z5N14H6e9H5N2Z7N13H6e7H6N2ZN2ZN2ZN2Z3N4H'
+);
+
+var ccyd = document.getElementById("c");
+var xcyd = ccyd.getContext("2d");
+
+var Wcyd = 128;   
+var Scyd = 15;    
+
+var colors = {
+  A:"#FF0000", B:"#FF6600", C:"#FF9900", D:"#FFCC00",
+  E:"#FFFF00", F:"#CCFF00", G:"#99FF00", H:"#66FF00",
+  I:"#00FF00", J:"#00FF66", K:"#00FF99", L:"#00FFCC",
+  M:"#00FFFF", N:"#00CCFF", O:"#0099FF", P:"#0066FF",
+  Q:"#0000FF", R:"#6600FF", S:"#9900FF", T:"#CC00FF",
+  U:"#FF00FF", V:"#FF00CC", W:"#FF0099", X:"#FF0066",
+  Y:"#FFFFFF", Z:"#DDDDDD", a:"#BBBBBB", b:"#888888",
+  c:"#555555", d:"#222222", e:"#8B4513", f:"#000000"
+};
+
+Dcyd.split('').forEach(function(v, i) {
+  xcyd.fillStyle = colors[v] || "#ffffff";
+  var col = (i % Wcyd) * Scyd;
+  var row = Math.floor(i / Wcyd) * Scyd;
+  xcyd.fillRect(col, row, Scyd, Scyd);
+  xcyd.fillRect(Wcyd * Scyd + col, row, Scyd, Scyd);  
+});
+
+var offsetcyd = 0;
+var tileWcyd = Wcyd * Scyd;
+var lastTscyd = null;
+
+function scroll(ts) {
+  if (lastTscyd === null) lastTscyd = ts;
+  offsetcyd = (offsetcyd + 60 * (ts - lastTscyd) / 1000) % tileWcyd;
+  lastTscyd = ts;
+  ccyd.style.left = '-' + Math.floor(offsetcyd) + 'px';
+  requestAnimationFrame(scroll);
+}
+
+requestAnimationFrame(scroll);
+</script>
+</div>

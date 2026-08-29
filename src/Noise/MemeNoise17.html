@@ -1,0 +1,34 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<style>
+#cont{
+  width:470px;
+  height:350px;
+  position:relative;
+  overflow:hidden;
+  image-rendering:pixelated;
+}
+canvas{
+  position:absolute;
+  left:0;
+  top:0;
+  width:470px;
+  height:350px;
+}
+.ttt{
+  width:470px;
+text-align: right;
+font-size: 10px;
+
+}
+#noise{z-index:1;}
+</style>
+
+<div id="cont">
+  <canvas id="tube" width="470" height="350"></canvas>
+  <canvas id="noise" width="470" height="350"></canvas>
+  <img id="source" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAFeBAMAAADK1yPcAAAAIVBMVEUAAAAAAAAtLzJiYiwLFByLk2+wxFY+YVppX3cUCVltO2SLmnLnAAAAAXRSTlMAQObYZgAAA7VJREFUeNrs3dFtqzAUgOGs4BVYoStkhayQFbJCV+gKd8orWxGnOTIuUVTJod//BMUNfH2yDA2n8ndiPWasx4z1mLEeM9ZhyzOViWIdxMrK+kuxsu6M9ajW6899PBb02P3Y6lKLcWVvrKw/xcrKysrKOur3rEunMJxraTdZe/42LtRxtNTiQOnFyvo9VlZWVlbWeaylU1xq2k2u1q0WQ85ridmrP4NkZS2FlZWVlZV1fmu+1LVLrW3d1tru5jRyvLYWy28lxcp6j5WVlZWV9a2s40I9vicZ08hljbXGynqPlZWVlfUA1rb1VTt1SlcexSww3axkfYyV9R4rKysr6+zWS+38WCyXpYnd2BrtnWRe1uKPWlqsrKysrKysrNNZx09XRaenW2oZ1+lai7udpcXKysrKysrKOqc1duNBra9aYj6lXjql9bvB2hor6z1WVlZWVtZZradagHfMEdOQz1o6GudgZWVlbbGysrK+pTXuCLb2GXJxNI+bao7IysrKysrKyvryHDHOvn8dLY/r/0Z6vouVlZW1xcrKyvrm1tbwyvPP/tVia+kUg8taqFlbrKz3WFlZWVknt15qcc5NV8/QI20+AnarfT52qV3Xvi2/sbKysrKysrJOZ03vzkuQKBl644IUR6MJvhudlZWVlZWVlfVla1xgMqRiFpgMt7V2lJWVlZX1Hisr60Gs6W17e63LsPNazxptv8OYlbUUVlZWVlbWd7Em3OZugoQwttK49IqZtFtarKylsLKysrKyTmtNC2zRy/9KOJwj5s61wsrKysrKyso6nbWVTtdlDku4zcfCbrXY6oFLxMpaCisrKysr69zWuI69K2pjf+/j06v5unNEVlZWVlZWVtbZramEG6t7g8efHFusrKysrKysrG9kHdM3v1Vh2ar3AU3T+45PVlZWVlZWVtbprdfa+EmvqKfJuK3KY6ysrKXFysrK+r+de7mBEIQCKFoDLVjL1DItTAtT9gQz+hJCCAsX8jx35QcMZ0eMkTWBdbxlnP2inZWVlZWVlZX16daJAsLKysq6x8rKyprBOq5Z+SSuPX0PY2VlZWVlZWVdwzreI/ZOQzOesdq7NVZWVlbW/y1WVtYLrG1bbTgjhrQ1X4SxsrKysrKyst7ZGmvr1awyFvM6287KpbGyTsV6xFpKYS2Xxso61bOsy8aaM9acseaMNWesw7612OJ9anEt/ksV1+IohsTcmBGDS6339qz3vLLHysrKysrKyno767Kx5ow1Z6w5Y83Zk6w/Lslft6KBjG0AAAAASUVORK5CYII=" hidden>
+</div>
+<div class="ttt">BRUIT 17/20 - KOOooopssD</div>
+<script>
+(()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
+</script>

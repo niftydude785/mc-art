@@ -1,0 +1,57 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<div style="width:470px;text-align:left;font-family:'Courier New', Courier, monospace;background:#fff">
+<b style="color:#111;font-size:14px">SUPER CYD BROS / WORLD 1-3 / THE ANCIENT FARM</b><br>
+
+<div id="wrap" style="width:470px;height:240px;overflow:hidden;position:relative;display:inline-block;vertical-align:top">
+  <canvas id="c" width="3840" height="240"
+    style="position:absolute;left:0;top:0;display:block"></canvas>
+</div>
+
+<script>
+
+function rle(s){return s.replace(/(\d+)([A-Za-z])/g,function(_,n,c){return c.repeat(+n)});}
+
+var Dcyd = rle(
+ '40G10I10G10I10G10I10G38I2fG2f37GI2fI2f4I10G10I20GI2fI2f32IfIGf18G10I10GRf2Rf5R10G10I21Gf2Gf5G20I10G10R10G10I30G58I2fIf124I2GfG17I12E40I12E4I2fIf57ID2ID2ID2ID4I2fIf34ID2ID2ID2ID5I2GfG57ID2ID2ID2ID4I2GfG34ID2ID2ID2ID55IfIf8ID2ID2ID2ID23IfIf16ID2ID2ID2ID19IfIf32If2Y2f7ID2ID2ID2ID22If3Yf11I4GD2GD2GD2GD6G10I2GfYfYf3G10B10G7I2YfYf2Y2B2I2GD2GD2GD2GD10G9B2I2YfYf2Y2B10I2GD2GD2GDGBD8B7G2B2YfYf2Y29G3Yf3Y6IDIGD2GD2GD2G10B9G3Yf3Y4I10GD2GD2GD2GD10G4B3R3Yf3YR5B10I10G3B2f2R2f3R2I2GD2GD2GD2GD14G7R2f2R2f7R6I29R2f2R2f19R5I64R4I56R3I66R2I180R'
+);
+
+var ccyd = document.getElementById("c");
+var xcyd = ccyd.getContext("2d");
+
+var Wcyd = 128;   
+var Scyd = 15;    
+
+var colors = {
+  A:"#FF0000", B:"#FF6600", C:"#FF9900", D:"#FFCC00",
+  E:"#FFFF00", F:"#CCFF00", G:"#99FF00", H:"#66FF00",
+  I:"#00FF00", J:"#00FF66", K:"#00FF99", L:"#00FFCC",
+  M:"#00FFFF", N:"#00CCFF", O:"#0099FF", P:"#0066FF",
+  Q:"#0000FF", R:"#6600FF", S:"#9900FF", T:"#CC00FF",
+  U:"#FF00FF", V:"#FF00CC", W:"#FF0099", X:"#FF0066",
+  Y:"#FFFFFF", Z:"#DDDDDD", a:"#BBBBBB", b:"#888888",
+  c:"#555555", d:"#222222", e:"#8B4513", f:"#000000"
+};
+
+Dcyd.split('').forEach(function(v, i) {
+  xcyd.fillStyle = colors[v] || "#ffffff";
+  var col = (i % Wcyd) * Scyd;
+  var row = Math.floor(i / Wcyd) * Scyd;
+  xcyd.fillRect(col, row, Scyd, Scyd);
+  xcyd.fillRect(Wcyd * Scyd + col, row, Scyd, Scyd);  
+});
+
+var offsetcyd = 0;
+var tileWcyd = Wcyd * Scyd;
+var lastTscyd = null;
+
+function scroll(ts) {
+  if (lastTscyd === null) lastTscyd = ts;
+  offsetcyd = (offsetcyd + 60 * (ts - lastTscyd) / 1000) % tileWcyd;
+  lastTscyd = ts;
+  ccyd.style.left = '-' + Math.floor(offsetcyd) + 'px';
+  requestAnimationFrame(scroll);
+}
+
+requestAnimationFrame(scroll);
+</script>
+</div>

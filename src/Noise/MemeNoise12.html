@@ -1,0 +1,34 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<style>
+#cont{
+  width:470px;
+  height:350px;
+  position:relative;
+  overflow:hidden;
+  image-rendering:pixelated;
+}
+canvas{
+  position:absolute;
+  left:0;
+  top:0;
+  width:470px;
+  height:350px;
+}
+.ttt{
+  width:470px;
+text-align: right;
+font-size: 10px;
+
+}
+#noise{z-index:1;}
+</style>
+
+<div id="cont">
+  <canvas id="tube" width="470" height="350"></canvas>
+  <canvas id="noise" width="470" height="350"></canvas>
+  <img id="source" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAFeBAMAAADK1yPcAAAAJ1BMVEUAAABQRDOhmIRiWEd3bVvOx7c/NCS2rp2Lgm/Eu5wsIhQbEQbn4NK2rJexAAAAAXRSTlMAQObYZgAABMhJREFUeNrs3dFt4zAQRdG0sC2khbSQFtJCWnALasEtbAvbwha14ANWFxkMDdqObAS478vSUBMefxGWQr2cRrY9ryN8Oo+UKvkYSYPXJjToCrksDV4eFa1atWrVqnUWrVqXkj/8ued95NeeVH/voUCVK9LgbSSDc0j7rqr1f7Rq1apVq1atP8qaSW8jaE4jTJUq1kw/h2mAhiH5lEKGpJXWL9GqVatWrVq1/hRrmX6x5hNWcFg7TdcvDeh3Hrk8v4893TmtWrVq1apVq9anWTPVzopmak047KwsI1etkDI4h3xKtGrVqlWrVq1aH2zlB7ZkaqV6tbVWV6daxp32RK1Vq1atWrVq1foMa9FQJdtIsZaHwd72TK033pOEDvijiVatWrVq1apV69HWpCzxCgRcuXa6RqTAtfdYz3vK721atWrVqlWrVq1HW5lgmVaxVsjsWj6dRt730Dm50dqRAGvVqlWrVq1atR5oZTLbCIeZKnMr8+VaqqSzkqvuSZLpFYWpVatWrVq1atV6jDXTCpNgzbQKGGspdEM4d889SUiXvwStWrVq1apVq9ZjrLn4NEs6lA3NOaQ6zUKDG39W06pVq1atWrVqfbA1f/PPCBtzfu5hb3SGEO5YUuVaGnBYGixM8LKLQ61atWrVqlWr1gdby0Pq03fKFCtMGnRWqldZyXlEq1atWrVq1ar1aVaY20jZ2pypUu2sqRbr3e+UKUPOezhHQatWrVq1atWq9SHWzOiylSezOisP0U+t7HN1lTWBlKbdEK1atWrVqlWr1odYk7c9nZVqZ+WtMZ01wXrj3uhs7wmdaNWqVatWrVq1HmjdRrAuvBIGDVUaoJla0+Xud8oUfzpr1apVq1atWrUeaOVZrrIKLO/iI927+LqFYvdlcWfzbiuLwvMerVq1atWqVavWo60wSdnjk9Udme6NTmjQ7WS1amVRmLBPRLfHp1atWrVq1apV64FWNDyPlaRDzpWp8k10BawMIVdZwSW4OmswWrVq1apVq1atB1oR5jCf0FClUCGAG+v2NTday6PuWrVq1apVq1atz7AyyzKtdKBQMl0jkgyZVlet3ISkgJ8CG65r1apVq1atWrV+uzVtFl4JQ057mEfJ6pC/I62wecC9232huFgjatWqVatWrVq1fru12/18umVC95+FnCOrQ1bXiO8j0/8dJNuIVq1atWrVqlXrgVZw6Tq1ptpB1r4OqutW1rDnEc4lHUarVq1atWrV+q+9O0pBGAaCAHoor9D7n0lYsINxDUEaUXjzF1rCvH4VWjasu63VY220eQ+pq511mHM1ty74U7w7cYaVlZWVlZWVdbe1emTZVY2msx5nOmtlfqZM+q5ah0fEysrKysrKyvoVa8rUcl71rbW7JcvZO+J6uh+6KvlYycrKysrKysq60Vrpqoa+ar2dWTmL77rkOyUrKysrKysr60ZrKhxnuk+Kw+T06VDP8Zay5nFcbc3wz9qZlZWVlZWVlfVy69Gkq9pdreYLG1RuSazbwsrKysrKyvoS1kusKT0/Sm/4l+vtk8gGWQ4bsD7CysrKysrK+lfWJM1jrTRXl2ej/9Q7IisrKysr61NYWZdSZYaZ5/PZ6EnOv/vwFtZHWFlZWVlZWX/fegdbXQ3Nc09/SgAAAABJRU5ErkJggg==" hidden>
+</div>
+<div class="ttt">BRUIT 12/20 - Art Descending</div>
+<script>
+(()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
+</script>

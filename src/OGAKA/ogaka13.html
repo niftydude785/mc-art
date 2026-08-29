@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>html, body { margin: 0; padding: 0; }</style>
+<meta charset="utf-8" />
+<title>Glitchy Crypto Cat on Horse</title>
+<style>
+  .container {
+            display: flex;
+            align-items: flex-start;
+            max-width: 470px;
+            max-height: 350px;
+            margin: 0;
+            padding: 0;
+            background: #000;
+            flex-direction: column;
+            gap: 0;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+        }
+
+  pre {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.05;
+    color: #fff;
+    white-space: pre;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+<pre id="art">
+     ^^          ^^                                    ^^  
+         ^*^                                           ^^  
+                          ^*^       \  '  /        ^^      
+          __  __       ^^             .-.           ^^     
+         _\ \/ /_  __           -=== (010) ===-            
+        /__oOoo__\/ /__               '-'                  
+  ^^      /_/\__\oOo__/    ^  ^     /  .  \      ,~        
+   ^^       || /_/\__\      ^^         |         |\        
+            ||   ||                             /| \       
+ ^~^=^=^~^~~||~^~||^~^^~^~^=^=^~=~=~^=^~^~^~~~~/_|__\~~~^~~
+ ~  ~^= =^ ~|| ~~||  ~^~  ~^= =~^=~^~^= ~^~^~ ~======~~ ~^~
+ ^ ~^~  ~^~ || ^ ||~^ ~^~  ~^==~^==~^~ = ~^=~ ~^  ~^~ ~^~ ~
+  .'.   .'. ||.'.||.'. ____''____ ''.'.'..'.'  .'''..''.'.'
+    ''      ||   || '' [  ]  [  ]   '  _    _ ''     '  1$$
+  .      .  ||   ||    [  ]  [  ]     ( `\/'*)   .   !0$.$.
+    .*.     ||   ||    /||\  /||\ '    \   */'    . 0_$'1_0
+ .  ***  .  ||  '|| . / || \/ || \  .   `\/'    .  $$.$.1$1
+   /\V      || .       /||   /||\     10011110  .'$.0$.'$?0
+     |/\    .         / /    |  | .           _$$10$.$11.$.
+     |   .       '   ``` ` ` `       '     0$1$.$0'$.$0?$.$
+</pre>
+<pre id="art-fix">
+TITLE: THE CRYPTOART SUMMER                       OGA³ 13/20
+</pre>
+</div>
+
+<script>
+(function(){
+  const pre = document.getElementById("art");
+  const original = pre.textContent;
+  const lines = original.split("\n");
+
+  const patterns = ["0","~","^","|",".","*"];
+  const replacements = ["1","_","8","!","$","$"];
+
+  const cryptoWords = ["RECONNECT","PARADISE","TOUCH","RELAX","SELL 1 F3LIX","LOVE","RETIRE EASY","$$$BEACH","LOVE","DOGECOIN"];
+
+  function randToken() {
+    const pools = [cryptoWords, artists, collectors, art];
+    const pool = pools[(Math.random()*pools.length)|0];
+    return pool[(Math.random()*pool.length)|0];
+  }
+
+  function glitchLine(line) {
+    let chars = line.split("");
+    const token = randToken();
+    const tlen = token.length;
+    const start = Math.max(0, Math.min(chars.length - tlen, (Math.random()*chars.length)|0));
+    for (let i=0;i<tlen;i++){
+      chars[start+i] = token[i];
+    }
+    return chars.join("");
+  }
+
+function decalascii() {
+    console.log("decalascii");
+  const minChar = 32;
+  const maxChar = 126;
+
+  let glitched = lines.map(line => {
+    return line.split("").map(char => {
+      if (char === " ") return char;
+      const code = char.charCodeAt(0);
+      if (code < minChar || code > maxChar) return char;
+      const N = Math.floor(Math.random() * 10) + 1;
+      let newCode = code - N;
+      if (newCode < minChar) newCode = maxChar - (minChar - newCode - 1);
+      return String.fromCharCode(newCode);
+    }).join("");
+  });
+  pre.textContent = glitched.join("\n");
+}
+
+function spacebackground() {
+    console.log("spacebackground");
+  const tokens = ["8","4","2","0"];
+  let g = lines.map(line => {
+    let chars = line.split("");
+    let zones = [], start = -1;
+    return chars.map((c, i) => {
+      if (c === " ") {
+        for (const [a,b] of zones) if(i>=a && i<=b) return c;
+        return tokens[(Math.random()*tokens.length)|0];
+      }
+      return c;
+    }).join("");
+  });
+
+  pre.textContent = g.join("\n");
+}
+
+function remplacepattern(patterns, replacements) {
+  console.log("remplacepattern");
+  let g = lines.map(l => l.split(""));
+
+  g = g.map(line => {
+    let str = line.join("");
+    patterns.forEach((p, i) => {
+      let r = (replacements[i] || p).padEnd(p.length, " ").slice(0, p.length);
+      let idx = str.indexOf(p);
+      while (idx !== -1) {
+        for (let j = 0; j < p.length; j++) {
+          line[idx + j] = r[j];
+        }
+        idx = str.indexOf(p, idx + p.length);
+      }
+    });
+    return line;
+  });
+
+  pre.textContent = g.map(l => l.join("")).join("\n");
+}
+
+
+
+let zigzagToggle = true;
+
+function zigzag() {
+  console.log("zigzag");
+  const w = lines[0].length;
+  let g = lines.map(l => l.split(""));
+
+  g.forEach((chars, i) => {
+    const shiftRight = (i % 2 === 0) === zigzagToggle;
+    if (shiftRight) {
+      for (let j = chars.length - 2; j >= 0; j--) {
+        if (chars[j] !== " ") { chars[j + 1] = chars[j]; chars[j] = " "; }
+      }
+    } else {
+      for (let j = 1; j < chars.length; j++) {
+        if (chars[j] !== " ") { chars[j - 1] = chars[j]; chars[j] = " "; }
+      }
+    }
+  });
+
+  pre.textContent = g.map(l => l.join("")).join("\n");
+  zigzagToggle = !zigzagToggle;
+}
+
+
+function remplacecharater() {
+    console.log("remplacecharater");
+  const forbidden = [" ","@", "/","\\","|"];
+  let glitched = lines.map(line => {
+    return line.split("").map((ch, i) => {
+      if (i % 2 === 0 && !forbidden.includes(ch)) return "8";
+      return ch;
+    }).join("");
+  });
+
+  pre.textContent = glitched.join("\n");
+}
+
+
+function remplacespecificlines() {
+    console.log("remplacespecificlines");
+  let g = lines.slice();
+
+  const replacements = {
+
+2:'                        ^  ^                ^            ',
+3:'          __  __         ^                ^               ',
+4:'         _\\ \\/ /_  __                      ^     ,~~~~    ',
+5:'        /__O11O__\\/ /__                          ,~~      ',
+6:'          /_/\\__\\1O1__/      \\  `  /             |        ',
+7:'    ^       || /_/\\__\\         .-.               |\\       ',
+8:'   ^ ^      ||   ||      -=== (010) ===-        /| \\      ',    
+  };
+
+  for (const [i, newLine] of Object.entries(replacements)) {
+    const idx = parseInt(i, 10);
+    if (idx >= 0 && idx < g.length) {
+      g[idx] = newLine;
+    }
+  }
+
+  pre.textContent = g.join("\n");
+}
+
+function typewriter(pre,dir="UP",speed=20,lineDelay=50,done){
+  let L=original.split("\n"),out=Array(L.length).fill("");
+  pre.textContent="";
+  
+  let order = dir==="DOWN" ? [...L.keys()].reverse() : [...L.keys()];
+  
+  (function w(idx=0){
+    if(idx>=order.length){ if(done)done(); return; }
+    let i = order[idx], line=L[i].split(""), j=0;
+    (function c(){
+      if(j<line.length){
+        out[i]+=line[j++];
+        pre.textContent=out.join("\n");
+        setTimeout(c,speed);
+      }else setTimeout(()=>w(idx+1),lineDelay);
+    })();
+  })();
+}
+
+function cryptoRain(intensity = 5) {
+  const g = lines.map(l => l.split(""));
+  const w = g[0].length;
+  const h = g.length;
+
+  for (let n = 0; n < intensity; n++) {
+    const word = cryptoWords[(Math.random() * cryptoWords.length) | 0];
+
+    const row = (Math.random() * (h - 1)) | 0;
+    const col = (Math.random() * (w - word.length)) | 0;
+
+    for (let i = 0; i < word.length; i++) {
+      if (g[row][col + i] === " ") {
+        g[row][col + i] = word[i];
+      }
+    }
+  }
+
+  pre.textContent = g.map(l => l.join("")).join("\n");
+  setTimeout(200); 
+}
+
+
+function scrollTexts(linesMap, speed = 1) {
+  const g = lines.map(l => l.split("")); 
+  const w = g[0].length;
+  const h = g.length;
+
+  linesMap.forEach(({ line, text }) => {
+    if (line < 0 || line >= h) return;
+    let pos = -text.length;
+
+    const step = () => {
+      g[line] = lines[line].split(""); 
+
+      for (let i = 0; i < text.length; i++) {
+        const cPos = pos + i;
+        if (cPos >= 0 && cPos < w) g[line][cPos] = text[i];
+      }
+
+      pre.textContent = g.map(l => l.join("")).join("\n");
+      pos++;
+      if (pos <= w) setTimeout(step, speed);
+    };
+
+    step();
+  });
+}
+
+const effects = [
+  { func: decalascii, prob: 0.03, dur: 100, rafale: 8 },
+  { func: spacebackground, prob: 0.03, dur: 100, rafale: 5 }, 
+  { func: () => remplacepattern(patterns, replacements), prob: 0.03, dur: 2000, rafale: 1 },
+  { func: zigzag, prob: 0.03, dur: 200, rafale: 10 },
+  { func: remplacecharater, prob: 0.03, dur: 100, rafale: 3 },
+  { func: remplacespecificlines, prob: 0.03, dur: 1500, rafale: 1 },
+  { func: cryptoRain, prob: 0.1, dur: 200, rafale: 15 },
+  {  func: () => scrollTexts([
+    { line: 0, text: "  ^ <=NFT> ^   ^   ^ ^  ^   ^^^ ^     ^^  <ART=>^  ^  ^ " },
+    { line: 1, text: " ^  ^ ^^ ^ ^^  ^^^   ^^^  ^   <NFT=>  ^    ^^^    ^ ^^  " },
+    { line: 2, text: "  ^^     ^   ^<ART=> ^ ^ ^   ^   ^^^   ^^^   ^^   ^<=NFT>" },
+  ], 65), prob: 0.02, dur: 10000, rafale: 1 }
+];
+
+
+let loopCount = 0;
+
+function loop() {
+  console.log(`Loop iteration: ${++loopCount}`);
+  let triggered = false;
+  let delay = 450;
+  const available = effects.filter(e => Math.random() < e.prob);
+  if (available.length) {
+    const e = available[(Math.random() * available.length) | 0];
+    triggered = true;
+    delay = e.dur;
+
+    let count = 0;
+    (function runRafale() {
+      e.func();
+      count++;
+      if (count < (e.rafale || 1)) setTimeout(runRafale, 50);
+    })();
+  }
+
+  if (!triggered) pre.textContent = original;
+
+  setTimeout(loop, delay);
+}
+
+  typewriter(pre,"DOWN",2,3,loop);
+
+
+})();
+</script>
+</body>
+</html>

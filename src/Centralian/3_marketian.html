@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>MARKETIAN</title>
+<style>
+  .marketian-widget{
+    --cream:#efe6d2;
+    --cream-dark:#d8cbac;
+    --cream-darker:#c2b391;
+    --ink:#2a2420;
+    --up:#2f9e44;
+    --down:#c0392b;
+    --line:#221d18;
+    display:inline-block;
+    font-family:Consolas,'Courier New',monospace;
+  }
+
+  .marketian-widget *{ box-sizing:border-box; }
+
+  .poster{
+    position:relative;
+    width:450px; height:340px;
+    background:radial-gradient(ellipse at 50% 38%, #f7efdc 0%, #ede2ca 55%, #d9caa9 100%);
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+
+  .poster::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,.035) 0 1px, transparent 1px 4px),
+      repeating-linear-gradient(90deg, rgba(0,0,0,.02) 0 1px, transparent 1px 4px);
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+
+  .frame-border{
+    position:absolute; inset:0;
+    border:6px solid var(--ink);
+    box-shadow:inset 0 0 0 3px var(--cream), inset 0 0 0 6px var(--ink);
+    pointer-events:none;
+  }
+
+  .art-area{ position:absolute; top:14px; left:14px; right:14px; bottom:110px; overflow:hidden; }
+
+  .release-toggle{ display:none; }
+
+  .market-scene{ position:absolute; inset:0; }
+
+  .curve-wrap{
+    position:absolute; left:6px; top:6px; width:416px; height:170px;
+    z-index:1;
+    transition:transform 700ms cubic-bezier(.6,0,.9,.35) 150ms, opacity 500ms ease-in 400ms;
+  }
+  #release-x:checked ~ #release-wide:checked ~ .art-area .curve-wrap{
+    transform:translateY(170px) rotate(-9deg);
+    opacity:0;
+  }
+
+  .curve-svg{ position:absolute; inset:0; overflow:visible; }
+
+  .pk-label, .tr-label{
+    position:absolute;
+    font-size:10px; font-weight:900; letter-spacing:.5px;
+    white-space:nowrap;
+    text-shadow:1px 1px 0 rgba(0,0,0,.15);
+    z-index:6;
+    pointer-events:none;
+  }
+  .pk-label{ color:var(--up); }
+  .tr-label{ color:var(--down); }
+
+  .tape-wide{
+    position:absolute; left:210px; top:95px; width:270px; height:13px;
+    transform:translate(-50%,-50%) rotate(-14deg);
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.22) 0 3px, rgba(0,0,0,.06) 3px 6px),
+      linear-gradient(180deg, #a8a8a8 0%, #8f8f8f 45%, #7a7a7a 100%);
+    box-shadow:0 3px 6px rgba(0,0,0,.3), inset 0 0 0 1px rgba(0,0,0,.15);
+    opacity:.92;
+    z-index:5;
+    cursor:pointer;
+    transition:opacity .35s;
+  }
+  #release-wide:checked ~ .art-area .tape-wide{ opacity:0; pointer-events:none; }
+
+  .tape-strip{
+    position:absolute; left:290px; top:35px; width:46px; height:13px;
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.22) 0 3px, rgba(0,0,0,.06) 3px 6px),
+      linear-gradient(180deg, #a8a8a8 0%, #8f8f8f 45%, #7a7a7a 100%);
+    box-shadow:0 2px 5px rgba(0,0,0,.3), inset 0 0 0 1px rgba(0,0,0,.15);
+    opacity:.85;
+    transition:opacity .4s;
+  }
+  .tape-strip::after{
+    content:"";
+    position:absolute; top:4px; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0));
+  }
+  .tape-strip--a{ transform:translate(-50%,-50%) rotate(-18deg); z-index:7; cursor:pointer; }
+  .tape-strip--b{ transform:translate(-50%,-50%) rotate(24deg); z-index:6; pointer-events:none; }
+
+  #release-x:checked ~ .art-area .tape-strip{ opacity:0; pointer-events:none; }
+
+  .guy{ position:absolute; bottom:0; width:24px; height:44px; z-index:4; }
+  .guy-head{ position:absolute; top:0; left:50%; transform:translateX(-50%); width:14px; height:14px; border-radius:50%; background:var(--ink); }
+  .guy-body{ position:absolute; top:12px; left:50%; transform:translateX(-50%); width:20px; height:32px; border-radius:8px 8px 3px 3px; background:var(--ink); }
+  .guy-arm{ position:absolute; top:15px; width:5px; height:20px; border-radius:3px; background:var(--ink); }
+  .guy-arm--l{ left:-2px; transform:rotate(10deg); }
+  .guy-arm--r{ right:-2px; transform:rotate(-10deg); }
+
+  .bubble{
+    position:absolute; bottom:48px; left:50%; transform:translateX(-50%);
+    padding:4px 6px;
+    background:var(--cream);
+    border-radius:6px;
+    box-shadow:inset 0 0 0 2px var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    font-size:8px; font-weight:900; letter-spacing:.5px; text-transform:uppercase;
+    color:var(--ink);
+    white-space:nowrap;
+    z-index:5;
+  }
+  .bubble::before{ content:""; position:absolute; bottom:-9px; left:16px; border:7px solid transparent; border-top-color:var(--ink); }
+  .bubble::after{ content:""; position:absolute; bottom:-5.5px; left:18px; border:5px solid transparent; border-top-color:var(--cream); }
+
+  .empty-mark{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    font-size:16px; font-weight:900; letter-spacing:2px; color:#000;
+    white-space:nowrap;
+    opacity:0; z-index:5; cursor:pointer;
+    transition:opacity .5s ease 1.4s;
+  }
+  #release-x:checked ~ #release-wide:checked ~ .art-area .empty-mark{ opacity:.6; }
+
+  .no-anim, .no-anim *{ transition:none !important; }
+
+  .corner-tag{
+    position:absolute; bottom:20px; right:26px;
+    font-size:15px; font-weight:900; letter-spacing:2px;
+    color:#000;
+    z-index:2; pointer-events:none;
+  }
+
+  .wordmark-area{
+    position:absolute; left:0; right:0; bottom:14px; height:96px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
+  .wordmark{
+    font-family:Consolas,'Courier New',monospace;
+    font-weight:700; text-transform:uppercase;
+    font-size:30px; letter-spacing:3px; margin:0;
+    transform:translateY(-12px);
+    cursor:pointer;
+    background:linear-gradient(180deg, #2f9e44 0%, #f1c40f 50%, #c0392b 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(4px 4px 0 rgba(0,0,0,.25));
+  }
+</style>
+</head>
+<body>
+
+  <div class="marketian-widget">
+  <div class="poster">
+    <input type="checkbox" id="release-x" class="release-toggle">
+    <input type="checkbox" id="release-wide" class="release-toggle">
+    <div class="art-area">
+      <div class="market-scene">
+
+        <div class="curve-wrap">
+          <svg class="curve-svg" viewBox="0 0 416 170">
+            <polyline points="0,145 40,90 80,150 125,70 165,118 205,55 245,95 290,35 330,75 375,15 416,40"
+              fill="none" stroke="var(--line)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="pk-label" style="left:40px; top:76px; transform:translateX(-50%) rotate(-6deg);">ATH</div>
+          <div class="tr-label" style="left:80px; top:156px; transform:translateX(-50%) rotate(4deg);">CRASH</div>
+          <div class="pk-label" style="left:125px; top:56px; transform:translateX(-50%) rotate(5deg);">GOAT</div>
+          <div class="tr-label" style="left:165px; top:124px; transform:translateX(-50%) rotate(-5deg);">BURN</div>
+          <div class="pk-label" style="left:205px; top:41px; transform:translateX(-50%) rotate(-4deg);">GMI</div>
+          <div class="tr-label" style="left:245px; top:101px; transform:translateX(-50%) rotate(6deg);">HACK</div>
+          <div class="pk-label" style="left:290px; top:21px; transform:translateX(-50%) rotate(7deg);">ATH</div>
+          <div class="tr-label" style="left:330px; top:81px; transform:translateX(-50%) rotate(-6deg);">ATL</div>
+          <div class="pk-label" style="left:375px; top:1px; transform:translateX(-50%) rotate(4deg);">GOAT</div>
+
+          <label class="tape-wide" for="release-wide"></label>
+          <label class="tape-strip tape-strip--a" for="release-x"></label>
+          <div class="tape-strip tape-strip--b"></div>
+        </div>
+
+        <div class="guy" style="left:50px;">
+          <div class="bubble">OMG, WE ARE COOKED :(</div>
+          <div class="guy-head"></div>
+          <div class="guy-body"></div>
+          <div class="guy-arm guy-arm--l"></div>
+          <div class="guy-arm guy-arm--r"></div>
+        </div>
+        <div class="guy" style="left:195px;">
+          <div class="bubble">1929 VIBES</div>
+          <div class="guy-head"></div>
+          <div class="guy-body"></div>
+          <div class="guy-arm guy-arm--l"></div>
+          <div class="guy-arm guy-arm--r"></div>
+        </div>
+        <div class="guy" style="left:340px;">
+          <div class="bubble">SH**ING IN MY PANTS !</div>
+          <div class="guy-head"></div>
+          <div class="guy-body"></div>
+          <div class="guy-arm guy-arm--l"></div>
+          <div class="guy-arm guy-arm--r"></div>
+        </div>
+
+        <div class="empty-mark">PLEASE, BE PATIENT</div>
+      </div>
+    </div>
+
+    <div class="wordmark-area">
+      <h1 class="wordmark">MARKETIAN</h1>
+    </div>
+
+    <div class="frame-border"></div>
+    <div class="corner-tag">CENTRALIAN 3/10</div>
+  </div>
+  </div>
+
+  <script>
+    var releaseX = document.getElementById('release-x');
+    var releaseWide = document.getElementById('release-wide');
+    var poster = document.querySelector('.marketian-widget .poster');
+
+    function resetInstant(){
+      poster.classList.add('no-anim');
+      releaseX.checked = false;
+      releaseWide.checked = false;
+      void poster.offsetWidth;
+      poster.classList.remove('no-anim');
+    }
+
+    function toggleRelease(){
+      if(releaseX.checked && releaseWide.checked){
+        resetInstant();
+      } else {
+        releaseX.checked = true;
+        releaseWide.checked = true;
+      }
+    }
+
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Enter') toggleRelease();
+    });
+
+    document.querySelector('.empty-mark').addEventListener('click', resetInstant);
+    document.querySelector('.wordmark').addEventListener('click', toggleRelease);
+  </script>
+</body>
+</html>

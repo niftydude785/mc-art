@@ -1,0 +1,57 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<div style="width:470px;text-align:left;font-family:'Courier New', Courier, monospace;background:#fff">
+<b style="color:#111;font-size:14px">SUPER CYD BROS / WORLD 1-2 / SHROOM FIELDS FOREVER</b><br>
+
+<div id="wrap" style="width:470px;height:240px;overflow:hidden;position:relative;display:inline-block;vertical-align:top">
+  <canvas id="c" width="3840" height="240"
+    style="position:absolute;left:0;top:0;display:block"></canvas>
+</div>
+
+<script>
+
+function rle(s){return s.replace(/(\d+)([A-Za-z])/g,function(_,n,c){return c.repeat(+n)});}
+
+var Dcyd = rle(
+ '40O10Y45OY15OY27OY5OY12O8Y12O6B2O6Y26OY12OY15OY13OY41O15B5E7B24OY16OY25OY6OU5OU11O24B5E16B2OT21OY4OX4OY12OY4OY11OUEU3OUEU19O15B5E7B10OTET7OY2O3R11OXEX7O3R22OU3EUOU3EU54OT3ET8ORYRYR4OT4OX3EX5ORYRYR22OUEU3OUEU49O3E4OTET9OYOYOY3OTET4OXEX6OYOYOY7O3A3O3A7OU5OU3O3B5O3A3O3A29O6E3OT4O3B3OROYOR2OT3ET4OX7OROYOR3O3IAYAYAIAYAYA6IY5IY2I5B3IAYAYAIAYAYA27I8E2IY3I5B4IY5ITET5IY9IY10IY5IY4IAY2HY5HYH7B4IY5IY2I11HE14I10EIY2I7B3IY2IAY2IT6IY2IAY5IY5I5HY5HY4HYA2HY5HYH7B4HY5HY12H3E11H14E2H7B3HY2HYA2IY2I4HY2HYA5HY5Hfefefefefefefefefefefefefefefefefefefefefefefefe9f5e9f106efefefef7efefefef106e9f5e9f87e10f8e9f5e9f57e128f'
+);
+
+var ccyd = document.getElementById("c");
+var xcyd = ccyd.getContext("2d");
+
+var Wcyd = 128;   
+var Scyd = 15;    
+
+var colors = {
+  A:"#FF0000", B:"#FF6600", C:"#FF9900", D:"#FFCC00",
+  E:"#FFFF00", F:"#CCFF00", G:"#99FF00", H:"#66FF00",
+  I:"#00FF00", J:"#00FF66", K:"#00FF99", L:"#00FFCC",
+  M:"#00FFFF", N:"#00CCFF", O:"#0099FF", P:"#0066FF",
+  Q:"#0000FF", R:"#6600FF", S:"#9900FF", T:"#CC00FF",
+  U:"#FF00FF", V:"#FF00CC", W:"#FF0099", X:"#FF0066",
+  Y:"#FFFFFF", Z:"#DDDDDD", a:"#BBBBBB", b:"#888888",
+  c:"#555555", d:"#222222", e:"#8B4513", f:"#000000"
+};
+
+Dcyd.split('').forEach(function(v, i) {
+  xcyd.fillStyle = colors[v] || "#ffffff";
+  var col = (i % Wcyd) * Scyd;
+  var row = Math.floor(i / Wcyd) * Scyd;
+  xcyd.fillRect(col, row, Scyd, Scyd);
+  xcyd.fillRect(Wcyd * Scyd + col, row, Scyd, Scyd);  
+});
+
+var offsetcyd = 0;
+var tileWcyd = Wcyd * Scyd;
+var lastTscyd = null;
+
+function scroll(ts) {
+  if (lastTscyd === null) lastTscyd = ts;
+  offsetcyd = (offsetcyd + 60 * (ts - lastTscyd) / 1000) % tileWcyd;
+  lastTscyd = ts;
+  ccyd.style.left = '-' + Math.floor(offsetcyd) + 'px';
+  requestAnimationFrame(scroll);
+}
+
+requestAnimationFrame(scroll);
+</script>
+</div>

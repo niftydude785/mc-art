@@ -1,0 +1,34 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<style>
+#cont{
+  width:470px;
+  height:350px;
+  position:relative;
+  overflow:hidden;
+  image-rendering:pixelated;
+}
+canvas{
+  position:absolute;
+  left:0;
+  top:0;
+  width:470px;
+  height:350px;
+}
+.ttt{
+  width:470px;
+text-align: right;
+font-size: 10px;
+
+}
+#noise{z-index:1;}
+</style>
+
+<div id="cont">
+  <canvas id="tube" width="470" height="350"></canvas>
+  <canvas id="noise" width="470" height="350"></canvas>
+  <img id="source" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAFeBAMAAADK1yPcAAAALVBMVEUAAAAAAAAEOQQFIQQaVhia3CPhmxr///+OD9AzdzFbVk4NKy8emNc4CUtLm0nYJhQIAAAAAXRSTlMAQObYZgAAAuhJREFUeNrs3dFtnEAUhlFamBa2BVrYFtxCWnALacEtpIX0lBqS4YFZEEgQG1nzc76XndEFpLOvIBjKfWLNjDUz1sxYM2PNjDUz1sxYM2PNjDUz1sxYM2PNjDUz1tO914a9VtP3ud3jtqblfKxnYmVlZWVlPRbrJxuuiJWVlZWVlXUda4C1i1gzY82MNTPWzFgzY82MNTPWzFgzu6n1o/ayiouVtfdYWXuPlbX3Xqxvy8basOzo/cdnbfeMcm3DMlZWVlZW1nWsrF9jbceMc4/auFE7rnXgtLIVKysrKysrK2s/1vhYM2PNjDUz1sxYM2PNjDUz1sxYM2PNjDUz1sxYM2PN7KbWH8vKsrG2tW2r9fSbGpaxsk6x/vtlZT0QKyvrf1kfteFM7Yy2LUdjZWVlZWVlZe3H+qs2MadVqY1zpf9YWXuPlbX3WFl776b3JONjzYw1M9bMWDNjzYw1M9bMWDNjzezF+qy91R61Ehcra++xsvYeK2vvbb4b/U9trD2WtXeeT6tHbb2dm7ZttTVtF93fzm1NW1tvYmdlZWVlZWVlvdDaalf4TKu/Y3d6dLB1qdZYY2VlZWVlZWW92vpRm5j53zBmDYqVtfdYWXvvptb4WDNjzYw1M9bMWDNjzYw1M9bMWDO7s/V3rWTGmhlrZqyZsWZ2U+vPZbtPtJ/vWRuub/0MPCsrKysr6xzr33bu7gZBGAzDqCu4Aiu4glu7giu4iykXrX4JxBhJ5OU8VzT85fS2FNaNrI/WpTWYo7KRbzSmo1zXqxsNPzg69dY3LrKysrKysrKy/tpqTfIQsWbGmhlrZqyZsWbGmhlrZqyZsWbGmhlrZqyZsWbGmtmL9X1VL3ASWFn3Hivr3mNl3XvVem/dWtfWP33lPrXKK9f/jc7KysrKysrKup213jf15uG5NR/Vs70yLNfV4VLrZxcff26xsrKysrKysn5ptZ+ONTvWzFgzY82MNTPWzFgzY82MNbMjWZ8uXC4yatIoVwAAAABJRU5ErkJggg==" hidden>
+</div>
+<div class="ttt">BRUIT 7/20 - TopFive</div>
+<script>
+(()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
+</script>

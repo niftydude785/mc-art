@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>BANKIAN</title>
+<style>
+.bwid{--crm:#efe6d2;--crd:#d8cbac;--crk:#c2b391;--ink:#2a2420;--stn:#d9c9a3;--std:#b9a677;--vlt:#6b6560;--vld:#443f3a;--gld:#e8c94a;--gdd:#b89a2e;--gd2:#8a7220;--red:#d1503f;--rdd:#a13527;--scr:#12241d;--phs:#5dffa0;display:inline-block;}
+.bwid *{box-sizing:border-box;}
+.pstr{width:450px;height:340px;background:radial-gradient(ellipse at 50% 38%, #f7efdc 0%, #ede2ca 55%, #d9caa9 100%);box-shadow:0 10px 30px rgba(0,0,0,.45);}
+.pstr::before{content:"";inset:0;background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.035) 0 1px, transparent 1px 4px), repeating-linear-gradient(90deg, rgba(0,0,0,.02) 0 1px, transparent 1px 4px);mix-blend-mode:multiply;}
+.frbd{inset:0;border:6px solid var(--ink);box-shadow:inset 0 0 0 3px var(--crm), inset 0 0 0 6px var(--ink);}
+.aare{top:14px;left:14px;right:14px;bottom:110px;}
+.rtgl{display:none;}
+.scn{inset:0;}
+.grnd{left:0;right:0;bottom:0;height:48px;background:var(--crk);box-shadow:inset 0 2px 0 var(--ink), inset 0 0 0 2px var(--crd);z-index:3;}
+.grnd::before{content:"$ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $";left:0;right:0;top:9px;letter-spacing:4px;color:#ffd400;text-shadow:0 1px 0 rgba(0,0,0,.3);white-space:nowrap;opacity:.9;font-size:24px;}
+.atm{bottom:48px;width:40px;height:104px;z-index:2;}
+.atbd{bottom:0;left:0;right:0;height:104px;}
+.atbd::after{content:"";left:0;right:0;bottom:-4px;height:4px;opacity:.7;}
+.atsc{top:12px;left:6px;right:6px;height:24px;background:var(--scr);box-shadow:inset 0 0 0 2px #0a1712;}
+.atsc span{color:var(--phs);font-size:9px;letter-spacing:1px;text-shadow:0 0 4px rgba(93,255,160,.8);}
+.atlb{position:absolute;top:40px;left:0;right:0;text-align:center;font-size:9px;font-weight:700;letter-spacing:1px;line-height:1.05;color:var(--ink);}
+.mbld{bottom:48px;width:190px;z-index:2;}
+.roof{width:230px;height:32px;margin:0 -20px 2px;}
+.roof span{font-size:11px;letter-spacing:1px;color:var(--ink);}
+.fcde{width:190px;height:120px;background:var(--stn);box-shadow:inset 0 0 0 4px var(--std), inset 0 0 0 8px var(--ink);}
+.fcde::before{content:"";inset:0;background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.15) 0 2px, transparent 2px 20px), repeating-linear-gradient(90deg, rgba(0,0,0,.1) 0 2px, transparent 2px 18px);mix-blend-mode:multiply;}
+.col{top:10px;bottom:10px;width:16px;background:var(--crm);box-shadow:inset 0 0 0 2px var(--ink);}
+.vfrm{bottom:14px;width:78px;height:78px;z-index:2;}
+.vky{inset:0;text-align:center;line-height:1.25;font-size:9px;letter-spacing:.5px;color:var(--gld);z-index:1;}
+.vdor{inset:0;background:radial-gradient(circle at 35% 30%, #9a948d 0%, var(--vlt) 55%, var(--vld) 100%);box-shadow:inset 0 0 0 4px var(--vld), inset 0 0 0 8px var(--ink);transform-origin:left center;transition:transform 650ms cubic-bezier(.7,0,.3,1) 100ms;z-index:3;}
+.dial{top:50%;width:30px;height:30px;transform:translate(-50%,-50%);background:var(--vld);}
+.spk{top:50%;width:26px;height:2px;opacity:.75;transform-origin:center;}
+#release-vault:checked ~ .aare .vdor{ transform:scaleX(.08); }
+.coin{top:50%;width:14px;height:14px;background:radial-gradient(circle at 35% 30%, #fff6c8 0%, var(--gld) 55%, var(--gdd) 100%);box-shadow:inset 0 0 0 2px var(--gd2), 0 2px 4px rgba(0,0,0,.35);opacity:0;transform:translate(-50%,-50%) scale(.3);z-index:5;}
+@keyframes banquian-coin{ 0%{ opacity:0; transform:translate(-50%,-50%) scale(.4) rotate(0deg); } 14%{ opacity:1; transform:translate(calc(-50% + var(--x1)), calc(-50% + var(--y1))) scale(1) rotate(var(--r1)); } 55%{ opacity:1; transform:translate(calc(-50% + var(--x2)), calc(-50% + var(--y2))) scale(1) rotate(var(--r2)); } 100%{ opacity:0; transform:translate(calc(-50% + var(--x3)), calc(-50% + var(--y3))) scale(.85) rotate(var(--r3)); } }
+#release-vault:checked ~ .aare .coin{ animation:banquian-coin 1280ms ease-out var(--dl) forwards; }
+#release-vault:checked ~ .aare .tape{ opacity:0; pointer-events:none; }
+.tape{top:101px;width:130px;height:15px;background:repeating-linear-gradient(45deg, rgba(255,255,255,.22) 0 3px, rgba(0,0,0,.06) 3px 6px), linear-gradient(180deg, #a8a8a8 0%, #8f8f8f 45%, #7a7a7a 100%);box-shadow:0 4px 10px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.15);z-index:6;transition:opacity .4s;}
+.tape::after{content:"";top:6px;left:0;right:0;height:5px;background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0));}
+.bclk{inset:0;z-index:4;}
+#release-vault:checked ~ .aare .bclk{ pointer-events:auto; }
+.emk{bottom:52px;font-size:13px;letter-spacing:2px;color:var(--ink);white-space:nowrap;opacity:0;z-index:5;transition:opacity .5s ease 2.1s;}
+#release-vault:checked ~ .aare .emk{ opacity:.6; }
+.noan, .noan *{transition:none !important;animation:none !important;}
+.wmar{left:0;right:0;bottom:14px;height:96px;flex-direction:column;}
+.wmrk{text-transform:uppercase;font-size:34px;letter-spacing:3px;margin:0;transform:translateY(-12px);background:linear-gradient(180deg, #fff6c8 0%, #e8c94a 50%, #8a7220 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(2px 0 0 var(--ink)) drop-shadow(0 2px 0 var(--ink)) drop-shadow(4px 4px 0 rgba(0,0,0,.25));}
+.bwid,.wmrk{font-family:Consolas,'Courier New',monospace;}
+.pstr,.roof,.fcde{position:relative;}
+.pstr,.aare,.grnd{overflow:hidden;}
+.pstr::before,.frbd,.aare,.scn,.grnd,.grnd::before,.atm,.atbd,.atbd::after,.atsc,.mbld,.fcde::before,.col,.vfrm,.vky,.vdor,.dial,.spk,.coin,.tape,.tape::after,.bclk,.emk,.wmar{position:absolute;}
+.pstr::before,.frbd,.fcde::before,.coin,.bclk{pointer-events:none;}
+.grnd::before,.atsc span,.roof span,.vky,.emk,.wmrk{font-weight:700;}
+.atbd,.roof{background:var(--std);}
+.atbd,.roof,.dial{box-shadow:inset 0 0 0 3px var(--ink);}
+.atbd::after,.vfrm,.spk{background:var(--ink);}
+.atsc,.roof,.vky,.wmar{display:flex;align-items:center;justify-content:center;}
+.mbld,.vfrm,.dial,.spk,.coin,.tape,.emk{left:50%;}
+.mbld,.vfrm,.emk{transform:translateX(-50%);}
+.vfrm,.vdor,.dial,.coin{border-radius:50%;}
+.tape,.bclk,.emk,.wmrk{cursor:pointer;}
+.ctag{position:absolute;bottom:20px;right:26px;font-size:15px;font-weight:900;letter-spacing:2px;color:#000;z-index:2;pointer-events:none;}
+</style>
+</head>
+<body><div class="bwid"><div class="pstr"><input type="checkbox" id="release-vault" class="rtgl"><div class="aare"><div class="scn"><div class="atm" style="left:15px"><div class="atbd"><div class="atsc"><span>$</span></div></div><div class="atlb">A<br>T<br>M</div></div><div class="atm" style="right:15px"><div class="atbd"><div class="atsc"><span>$</span></div></div><div class="atlb">A<br>T<br>M</div></div><div class="mbld"><div class="roof"><span>CRYPTOMAN BROTHERS</span></div><div class="fcde"><div class="col" style="left:10px"></div><div class="col" style="left:34px"></div><div class="col" style="right:34px"></div><div class="col" style="right:10px"></div><div class="vfrm"><div class="vky">NOT YOUR<br>KEYS</div><div class="coin" style="--x1:-12px;--y1:-42px;--r1:70deg;--x2:-58px;--y2:-120px;--r2:210deg;--x3:-74px;--y3:-96px;--r3:300deg;--dl:150ms"></div><div class="coin" style="--x1:14px;--y1:-38px;--r1:-60deg;--x2:62px;--y2:-108px;--r2:-190deg;--x3:78px;--y3:-86px;--r3:-280deg;--dl:220ms"></div><div class="coin" style="--x1:-4px;--y1:-50px;--r1:40deg;--x2:-18px;--y2:-138px;--r2:160deg;--x3:-24px;--y3:-112px;--r3:240deg;--dl:100ms"></div><div class="coin" style="--x1:-30px;--y1:-30px;--r1:-50deg;--x2:-90px;--y2:-88px;--r2:-170deg;--x3:-108px;--y3:-68px;--r3:-250deg;--dl:300ms"></div><div class="vdor"><div class="dial"><span class="spk" style="transform:translate(-50%,-50%) rotate(0deg)"></span><span class="spk" style="transform:translate(-50%,-50%) rotate(90deg)"></span></div></div></div></div><label class="tape" for="release-vault" style="transform:translate(-58%,-46%) rotate(-32deg)"></label><label class="tape" for="release-vault" style="transform:translate(-46%,-58%) rotate(-8deg)"></label><label class="tape" for="release-vault" style="transform:translate(-50%,-50%) rotate(14deg)"></label><label class="tape" for="release-vault" style="transform:translate(-40%,-44%) rotate(38deg)"></label><label class="bclk" for="release-vault"></label></div><div class="grnd"></div></div></div><div class="wmar"><h1 class="wmrk">BANKIAN</h1></div><div class="frbd"></div><div class="ctag">CENTRALIAN 8/10</div></div></div><script>
+    var releaseVault = document.getElementById('release-vault');
+    var poster = document.querySelector('.bwid .pstr');
+    document.addEventListener('keydown', function(e){ if(e.key === 'Enter') releaseVault.checked = !releaseVault.checked; });
+    function resetInstant(){
+      poster.classList.add('noan');
+      releaseVault.checked = false;
+      void poster.offsetWidth;
+      poster.classList.remove('noan');
+    }
+    document.querySelector('.emk').addEventListener('click', resetInstant);
+    document.querySelector('.wmrk').addEventListener('click', resetInstant);
+  </script></body>
+</html>

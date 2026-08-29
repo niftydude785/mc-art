@@ -1,0 +1,34 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<style>
+#cont{
+  width:470px;
+  height:350px;
+  position:relative;
+  overflow:hidden;
+  image-rendering:pixelated;
+}
+canvas{
+  position:absolute;
+  left:0;
+  top:0;
+  width:470px;
+  height:350px;
+}
+.ttt{
+  width:470px;
+text-align: right;
+font-size: 10px;
+
+}
+#noise{z-index:1;}
+</style>
+
+<div id="cont">
+  <canvas id="tube" width="470" height="350"></canvas>
+  <canvas id="noise" width="470" height="350"></canvas>
+  <img id="source" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAFeCAMAAAAPJ87dAAAAM1BMVEWQJ8kAAAAVIlZADO8qJaMpNkUfUrVMXWl3ZTZEbaNcg5WsczsaoIJnpnCXmpcH+T7///8dMgW8AAAAAXRSTlMAQObYZgAABddJREFUeNrt3cFu4zgMANDuLnaKadFi//9r9xZdCJYcMYqbPh4tS7L0nAtBKy9/bcRLENUeM60z886sbWf/xkc+yzqNfoJ1muHIC4MVK1asWLFixYoVK1asWLFixXp51nzB/97iNY1oca/FeEkj7/HajqjvzDOvVqxYsWLFihUrVqxYsWLFihUr1p/CWk3sLdbPNFaPz42INmt6tpmR130fQWDFihUrVqxYsWLFihUrVqxYsT43a78EbLG+3eL3LfK03+92TI+Xz1F9gmrftUNYsWLFihUrVqxYsWLFihUrVqzPyLrzeeFi7W/Mr1v8046XozHzBGsPsGLFihUrVqxYsWLFihUrVqxYn4e1illl3UmrnUgjrpeoOgpWrFixYsWKFStWrFixYsWKFSvWR7Lm2xZtzK80Vo/oWjRHPt6jEo9YsWLFihUrVqxYsWLFihUrVqzPw9rHzFmrmNXIMR+PVH2JDicPsWLFihUrVqxYsWLFihUrVqxYH1bLtPVOtBNnO1v0fVjza9PHbW39RrFixYoVK1asWLFixYoVK1asWB+WMoxGyY/b2om3YkQ9dkbJnyW/FrVGwFixYsWKFStWrFixYsWKFStWrD+ZNWqNWKubNQO8M8rMvH308WQuVqxYsWLFihUrVqxYsWLFihXrU7OeAI7uy4+an05aVp8v+hByCBgrVqxYsWLFihUrVqxYsWLFivWirNXpqiVq0wnANe9HGtWRX28xXcqWs/Z3PLoPK1asWLFixYoVK1asWLFixYr1Wqz9IqoZ1mpKLmr9L4h+ynD1/bzFdBK0eqh7vvdYsWLFihUrVqxYsWLFihUrVqw/mXUGuF96tpDy1vy+mbK6/l8H5iNjxYoVK1asWLFixYoVK1asWLE+jvWLi0XMneRhFbi/gX/fYqfvzij52vqs/YQiVqxYsWLFihUrVqxYsWLFihXrGdYvSp0OsO4cWHUi7ndE2AxrOY+IFStWrFixYsWKFStWrFixYsV6mPV+ycP7ff64Wu9XXDbzStwveYgVK1asWLFixYoVK1asWLFixfo41mrzDmsO1wdeB66vazufMPaTc9ET9FOfOx9CllOLWLFixYoVK1asWLFixYoVK1asF2DtDxgdgLXDuvMnfTvFZf0Xqz8bVqxYsWLFihUrVqxYsWLFihXr87DOFEf1WU8ct9VPI97vUPfqOrBixYoVK1asWLFixYoVK1asWL87a7VLXsZ1ljWarVo+Vo3q3xP215bv+BY/VqxYsWLFihUrVqxYsWLFihXrYdZ+l+ow+YeQO8DVjY7i4xbTqcBp1p2SQaxYsWLFihUrVqxYsWLFihUr1u/Jmg84wzqTCpxmrX6AGfWIjr2fTuZixYoVK1asWLFixYoVK1asWLF+d9aZvw6cYX2/Rb9vnqrsHwc2zZr3xYoVK1asWLFixYoVK1asWLFiPc26k7bKWe93tNZOsVqff31iuZMyjFjz31kVEytWrFixYsWKFStWrFixYsWK9XGs/cTUDutMOdp02dp7EFEpW8Q6kzzs/wq/UMCKFStWrFixYsWKFStWrFixYr0U607BVPW4rZcDESFFmFFaMjokvr+iHdZ+GSFWrFixYsWKFStWrFixYsWKFetzs05z9UvU3tPow+0ARx9C5lHWwooVK1asWLFixYoVK1asWLFivShrP71VTaHtlHv1WfO1zZSeVddWZf0DI6xYsWLFihUrVqxYsWLFihUr1suz9jG/T7wdiH7K8EjyECtWrFixYsWKFStWrFixYsWK9QKs69pK5+2k1a7EcL+owmHFihUrVqxYsWLFihUrVqxYsV6fdacQamfiPAV5v3ln1jsT/ZX378OKFStWrFixYsWKFStWrFixYj3DOrO9Q4muICkY/V3faxB5IjO6Lx856pvH6rGzVzNpRKxYsWLFihUrVqxYsWLFihUr1sexnk3nzbxEEeF0uVc0R791Z4f+oBUrVqxYsWLFihUrVqxYsWK9MOv/MRY5KrO3CgoAAAAASUVORK5CYII=" hidden>
+</div>
+<div class="ttt">BRUIT 20/20 - No More Please</div>
+<script>
+(()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
+</script>

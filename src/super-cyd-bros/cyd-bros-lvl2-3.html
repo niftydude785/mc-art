@@ -1,0 +1,57 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<div style="width:470px;text-align:left;font-family:'Courier New', Courier, monospace;background:#fff">
+<b style="color:#111;font-size:14px">SUPER CYD BROS / WORLD 2-3 / THE ROYAL ICE CAKE</b><br>
+
+<div id="wrap" style="width:470px;height:240px;overflow:hidden;position:relative;display:inline-block;vertical-align:top">
+  <canvas id="c" width="3840" height="240"
+    style="position:absolute;left:0;top:0;display:block"></canvas>
+</div>
+
+<script>
+
+function rle(s){return s.replace(/(\d+)([A-Za-z])/g,function(_,n,c){return c.repeat(+n)});}
+
+var Dcyd = rle(
+ '30YE14YD14Y10Z10Y10Z5YE4Y10Z47Y3E10YD2YD2YD3Y23ZE18Z3E15Z3YE6Y10Z10Y10Z6YE9Y3D2YD2Y3D23Y3E18YE18Y3E7Y8Z5Y3N4ZDZDZD3Y3NY8Z4YD2YDYDYD2YD10Y3C11YE3Y3N14ZDZDZD3Z3N8ZE4Z8Y8Z2YN5Y5D3ZYN17Y5D6Y3N3Y2CYC16YN15Y5D4YN13Y3N11YE4YM7YN6YM7Y3C6YN2YN2YN6YN5Y3C16YM4Y4C9YN6YM14YN23YN3YN12YCYC6Y2N3Y2N6YM5Y2C9Y4C9YC2YC7YN3YN19YM21YN7YN10YCYC5YN7YN12YC9YC2YC9YCY2C5YN7YN39YN2YNfN2YN10Y3C5YNYfNfNfYN12Y4C6Y4C10Y3C5YN2YNfN2YN3Y4C31Y11N10YC5Y4NfNf4N11YC10Y2C11Y2C5Y11N3YCY2C6YW21Y15N8YC4Y14N3Y7C2ZW2ZW2ZWZCZW2ZW3Z3Y3C4Y10Z5YC2YCY5ZW2ZWZW9Y9Z11N6Z7C3Y10N6Y2C4Y11NCN2C10N2C12N3Z3Y4C4Y2W3YWYWY14Z16T8ZCZ5Y2T4N6Z5C2Y6MY3M2N3C7MYf2M5CMY10M6Y6C9YWY9Z17TZ10C3Z7T2NTY8CYTW2T7N4C6N4W7N5C6N8TC10W4TW37TC28TW3TW2T13WTW7T6C7T5C12W62TW4TW2T21WTW25T10W4TWT'
+);
+
+var ccyd = document.getElementById("c");
+var xcyd = ccyd.getContext("2d");
+
+var Wcyd = 128;   
+var Scyd = 15;    
+
+var colors = {
+  A:"#FF0000", B:"#FF6600", C:"#FF9900", D:"#FFCC00",
+  E:"#FFFF00", F:"#CCFF00", G:"#99FF00", H:"#66FF00",
+  I:"#00FF00", J:"#00FF66", K:"#00FF99", L:"#00FFCC",
+  M:"#00FFFF", N:"#00CCFF", O:"#0099FF", P:"#0066FF",
+  Q:"#0000FF", R:"#6600FF", S:"#9900FF", T:"#CC00FF",
+  U:"#FF00FF", V:"#FF00CC", W:"#FF0099", X:"#FF0066",
+  Y:"#FFFFFF", Z:"#DDDDDD", a:"#BBBBBB", b:"#888888",
+  c:"#555555", d:"#222222", e:"#8B4513", f:"#000000"
+};
+
+Dcyd.split('').forEach(function(v, i) {
+  xcyd.fillStyle = colors[v] || "#ffffff";
+  var col = (i % Wcyd) * Scyd;
+  var row = Math.floor(i / Wcyd) * Scyd;
+  xcyd.fillRect(col, row, Scyd, Scyd);
+  xcyd.fillRect(Wcyd * Scyd + col, row, Scyd, Scyd);  
+});
+
+var offsetcyd = 0;
+var tileWcyd = Wcyd * Scyd;
+var lastTscyd = null;
+
+function scroll(ts) {
+  if (lastTscyd === null) lastTscyd = ts;
+  offsetcyd = (offsetcyd + 60 * (ts - lastTscyd) / 1000) % tileWcyd;
+  lastTscyd = ts;
+  ccyd.style.left = '-' + Math.floor(offsetcyd) + 'px';
+  requestAnimationFrame(scroll);
+}
+
+requestAnimationFrame(scroll);
+</script>
+</div>

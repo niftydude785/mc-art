@@ -1,0 +1,73 @@
+<style>html, body { margin: 0; padding: 0; }</style>
+<style>
+#cont{
+  width:470px;
+  height:350px;
+  border: 2px solid black;
+  position:relative;
+  overflow:hidden;
+  image-rendering:pixelated;
+}
+canvas{
+  position:absolute;
+  left:0;
+  top:0;
+  width:470px;
+  height:350px;
+}
+#tube{z-index:0;}
+#image{z-index:1;}
+</style>
+
+<div id="cont">
+  <canvas id="tube" width="470" height="350"></canvas>
+  <canvas id="image" width="470" height="350"></canvas>
+  <img id="source" src="data:image/png;base64,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" hidden>
+</div>
+
+<script>
+(() => {
+  // ===== CONSTANTES =====
+  const widthVal = 470;
+  const heightVal = 350;
+
+  const tube = document.getElementById('tube');
+  const image = document.getElementById('image');
+  const source = document.getElementById('source');
+
+  const tubeCtx  = tube.getContext('2d');
+  const imageCtx = image.getContext('2d');
+
+  // ===== BRUIT TV =====
+  function tvStatic() {
+    const frameData = tubeCtx.createImageData(widthVal, heightVal);
+    const pixArr = frameData.data;
+
+    for (let i = 0; i < pixArr.length; i += 4) {
+      const grain = 15 + (Math.random() * 220 | 0);
+      pixArr[i] = pixArr[i+1] = pixArr[i+2] = grain;
+      pixArr[i+3] = 255;
+    }
+
+    tubeCtx.putImageData(frameData, 0, 0);
+    tubeCtx.globalAlpha = 0.08;
+    tubeCtx.fillRect(0, 0, widthVal, heightVal);
+    tubeCtx.globalAlpha = 1;
+
+    requestAnimationFrame(tvStatic);
+  }
+  tvStatic();
+
+  // ===== IMAGE BASE64 PAR-DESSUS =====
+  source.onload = () => {
+    imageCtx.clearRect(0, 0, widthVal, heightVal);
+    imageCtx.drawImage(source, 0, 0, widthVal, heightVal);
+  };
+
+  // Si l'image est déjà chargée (cache), forcer le rendu
+  if (source.complete && source.naturalWidth !== 0) {
+    source.onload();
+  }
+
+})();
+</script>
