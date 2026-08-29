@@ -37,9 +37,12 @@ const PROJECTS = [
     folder: "src/OGAKA/",
     cyd: { id: "1909", name: "GADGET" },
     statement: [
-      "A series of onchain cypherdudes rendered as raw ASCII — glitch relics pulled from a crypto bank heist that never quite ends.",
-      "Each frame is pure text: no images, no vectors, just characters holding a picture together.",
-      "20 unique scenes, one recurring cast, permanently inscribed on Ethereum."
+      "Onchain: permanently inscribed on Ethereum, no images, no vectors.",
+      "Glitch: relics pulled from a crypto bank heist that never quite ends.",
+      "Ascii: pure text, just characters holding a picture together.",
+      "Art: cryptoart stripped to its rawest form.",
+      "Archives: CYD coded.",
+      "OGA³ makes a true banger MC7026 drop, that's it !"
     ],
     cover: { file: "ogaka1.html", label: "OGA³ #1", token: "XXX" },
     pieces: [
@@ -74,8 +77,8 @@ const PROJECTS = [
     folder: "src/Centralian/",
     cyd: { id: "1986", name: "ANNOUNCE" },
     statement: [
-      "Ten posters about money.",
-      "Retro computer prints, styled like old software boxes. Peel the tape to see what's underneath."
+      "Experience it yourself by removing the tape. Do it now!",
+      "A Maurizio Cattelan-inspired parody of a cryptoartist."
     ],
     cover: { file: "1_ordinian.html", label: "CENTRALIAN #1 — ORDINIAN", token: "233" },
     pieces: [
@@ -101,8 +104,9 @@ const PROJECTS = [
     frameSize: { w: 470, h: 270 },
     cyd: { id: "1886", name: "DISPLAY" },
     statement: [
-      "A platformer told in stills. Nine levels, three worlds.",
-      "Each world has its own colors and mood. Every pixel is coded by hand, no sprite sheets."
+      "A gaming platform canvas with nine levels, spread into three worlds.",
+      "Each world has its own colors and mood. Every pixel is coded by AI, no hands, no sprite sheets.",
+      "Maximum compression capabilities used to render fully onchain."
     ],
     cover: { file: "cyd-bros-lvl1-1.html", label: "CYD BROS — W1 / L1", token: "221" },
     pieces: [
@@ -126,9 +130,9 @@ const PROJECTS = [
     folder: "src/Noise/",
     cyd: { id: "622", name: "AXIS" },
     statement: [
-      "Twenty studies in interference.",
-      "A single source image is broken down, averaged into a coarse grid, then set trembling under live analog static rendered frame by frame in canvas.",
-      "What you see is never fixed — the noise regenerates every time the page loads."
+      "Twenty noise studies in interference.",
+      "A parcour of deciphering through cypherdudes experiences, art and memes.",
+      "What you see and hear is never fixed 📡"
     ],
     cover: { file: "MemeNoise1.html", label: "BRUIT #1", token: "194" },
     pieces: [
@@ -163,8 +167,8 @@ const PROJECTS = [
     folder: "src/eggs/",
     cyd: { id: "399", name: "EGG" },
     statement: [
-      "Fifteen small eggs, each one a portrait of a dude.",
-      "Ranked from common to legendary, like specimens in a collection."
+      "Fifteen eggs, spreading the dudes art and aesthetic.",
+      "Ranked from common to legendary, like specimens."
     ],
     cover: { file: "eggs_mini_id1.html", label: "EGGS #1", token: "172" },
     pieces: [
