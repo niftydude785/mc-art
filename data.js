@@ -33,7 +33,7 @@ const PROJECTS = [
     slug: "ogaka",
     title: "OGA³",
     release: { label: "MINTING SOON", sortValue: Infinity },
-    meta: "ASCII / HTML — ETHEREUM — 20 PIECES",
+    meta: "Onchain glitch ascii art archives — 20 Artworks",
     folder: "src/OGAKA/",
     cyd: { id: "1909", name: "GADGET" },
     statement: [
@@ -70,7 +70,7 @@ const PROJECTS = [
     slug: "centralian",
     title: "CENTRALIAN",
     release: { label: "JULY 2026", sortValue: 202607 },
-    meta: "CSS / HTML POSTER — ETHEREUM — 10 PIECES",
+    meta: "Comedian Tape Cryptoartist — 10 Artworks",
     folder: "src/Centralian/",
     cyd: { id: "1986", name: "ANNOUNCE" },
     statement: [
@@ -96,7 +96,7 @@ const PROJECTS = [
     slug: "cydbros",
     title: "SUPER CYD BROS",
     release: { label: "APRIL 2026", sortValue: 202604 },
-    meta: "PIXEL / HTML — ETHEREUM — 9 PIECES",
+    meta: "Pixel platform levels — 9 Artworks",
     folder: "src/super-cyd-bros/",
     frameSize: { w: 470, h: 270 },
     cyd: { id: "1886", name: "DISPLAY" },
@@ -122,7 +122,7 @@ const PROJECTS = [
     slug: "noise",
     title: "BRUIT",
     release: { label: "FEBRUARY 2026", sortValue: 202602 },
-    meta: "GENERATIVE CANVAS — ETHEREUM — 20 PIECES",
+    meta: "Decipher digital entities — 20 Artworks",
     folder: "src/Noise/",
     cyd: { id: "622", name: "AXIS" },
     statement: [
@@ -159,7 +159,7 @@ const PROJECTS = [
     slug: "eggs",
     title: "EGGS",
     release: { label: "NOVEMBER 2025", sortValue: 202511 },
-    meta: "PIXEL / HTML — ETHEREUM — 15 PIECES",
+    meta: "Cosmic Eggs spreading CYD traits in space — 15 Artworks",
     folder: "src/eggs/",
     cyd: { id: "399", name: "EGG" },
     statement: [
@@ -190,7 +190,7 @@ const PROJECTS = [
     slug: "dgl",
     title: "DGL (FEAT. VIDOPLYASOV)",
     release: { label: "JULY 2024", sortValue: 202407 },
-    meta: "ARCHIVE / HTML — ETHEREUM — 10 PIECES",
+    meta: "Dude's Grail Library ~ Perfect library as gaming characters — 10 Artworks",
     folder: "src/dude-grail-library/",
     frameSize: { w: 360, h: 320 },
     cyd: { id: "1436", name: "LIBRARY" },
