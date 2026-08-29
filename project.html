@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — Project</title>
-<link rel="stylesheet" href="style.css?v=41">
+<link rel="stylesheet" href="style.css?v=45">
 </head>
 <body class="project-page">
 
@@ -22,8 +22,8 @@
 
 <main class="project-layout" id="layout"></main>
 
-<script src="data.js?v=41"></script>
-<script src="sources.js?v=41"></script>
+<script src="data.js?v=45"></script>
+<script src="sources.js?v=45"></script>
 <script>
 const params = new URLSearchParams(location.search);
 const slug = params.get("p");
@@ -46,30 +46,37 @@ const cydCreditHtml = project.cyd ? `
 const infoCol = document.createElement("div");
 infoCol.className = "info-col";
 infoCol.innerHTML = `
-  <h1 class="info-title">${project.title}</h1>
-  <div class="release-badge${project.release.sortValue === Infinity ? " is-upcoming" : ""}">${project.release.label}</div>
+  <div class="info-title-row">
+    <h1 class="info-title">${project.title}</h1>
+    <div class="release-badge${project.release.sortValue === Infinity ? " is-upcoming" : ""}">${project.release.label}</div>
+  </div>
   <div class="info-meta">${project.meta}</div>
-  <button class="info-expand-toggle" aria-expanded="false" aria-label="Show full description">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M6 9l6 6 6-6"/>
-    </svg>
-  </button>
+  <p class="info-preview">${project.statement[0]}</p>
   <div class="info-expand">
     <div class="info-statement">
-      ${project.statement.map(p => `<p>${p}</p>`).join("")}
+      ${project.statement.slice(1).map(p => `<p>${p}</p>`).join("")}
     </div>
     ${cydCreditHtml}
     <div class="info-hint">Scroll the pieces on the right. Each frame is a live, interactive page — click into it.</div>
   </div>
+  <button class="info-expand-toggle" aria-expanded="false" aria-label="Show full description">
+    <span class="info-expand-label">+ Info</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </button>
 `;
 
 const infoExpandToggle = infoCol.querySelector(".info-expand-toggle");
+const infoExpandLabel = infoCol.querySelector(".info-expand-label");
 const infoExpand = infoCol.querySelector(".info-expand");
 infoExpandToggle.addEventListener("click", () => {
   const open = infoExpand.classList.toggle("is-open");
   infoExpandToggle.classList.toggle("is-open", open);
+  infoCol.classList.toggle("is-expanded", open);
   infoExpandToggle.setAttribute("aria-expanded", String(open));
   infoExpandToggle.setAttribute("aria-label", open ? "Hide full description" : "Show full description");
+  infoExpandLabel.textContent = open ? "- Info" : "+ Info";
 });
 
 const carouselCol = document.createElement("div");
