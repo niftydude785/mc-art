@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — My Collection</title>
-<link rel="stylesheet" href="style.css?v=69">
+<link rel="stylesheet" href="style.css?v=70">
 </head>
 <body>
 
@@ -41,8 +41,8 @@
   </span>
 </footer>
 
-<script src="data.js?v=69"></script>
-<script src="wallet.js?v=69"></script>
+<script src="data.js?v=70"></script>
+<script src="wallet.js?v=70"></script>
 <script>
 const root = document.getElementById("collectionRoot");
 
@@ -59,6 +59,7 @@ function renderPrompt() {
   root.innerHTML = `
     <div class="collection-prompt">
       <p>Connect your wallet to see which MC7026 pieces you own.</p>
+      <p class="collection-prompt-note">Read only, all safe :)</p>
       <button id="collectionConnectBtn" class="connect-btn connect-btn--big">CONNECT</button>
     </div>
   `;
