@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MC7026 — My Collection</title>
+<link rel="stylesheet" href="style.css?v=55">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <img class="brand-logo" src="src/others/logo.png" alt="MoonCat logo">
+    MC7026 CRYPTOART GALLERY
+  </a>
+  <span class="header-right">
+    <a class="header-link" href="about.html">About</a>
+    <a class="header-link" href="fully-onchain.html">Fully Onchain</a>
+    <a class="header-link" href="my-collection.html">My Collection</a>
+    <a class="back-link" href="index.html">&larr; Index</a>
+    <button id="connectWalletBtn" class="connect-btn">CONNECT</button>
+  </span>
+</header>
+
+<main class="about-page">
+  <article class="about-content">
+    <h1 class="about-title">My Collection</h1>
+    <div id="collectionRoot"></div>
+  </article>
+</main>
+
+<footer class="site-footer">Fully onchain — Ethereum — (C) MC7026</footer>
+
+<script src="data.js?v=55"></script>
+<script src="wallet.js?v=55"></script>
+<script>
+const root = document.getElementById("collectionRoot");
+
+function renderChecking() {
+  root.innerHTML = `<p class="wallet-loading">Checking your wallet…</p>`;
+}
+
+function renderPrompt() {
+  root.innerHTML = `
+    <div class="collection-prompt">
+      <p>Connect your wallet to see which pieces of this collection you own.</p>
+      <button id="collectionConnectBtn" class="connect-btn connect-btn--big">CONNECT</button>
+    </div>
+  `;
+  document.getElementById("collectionConnectBtn").addEventListener("click", () => window.MCWallet.connect());
+}
+
+async function renderConnected(address) {
+  root.innerHTML = `
+    <div class="collection-connected">
+      <div class="wallet-modal-titlebar">
+        <div class="wallet-modal-address">${address}</div>
+        <button id="collectionDisconnectBtn" class="disconnect-btn">Disconnect</button>
+      </div>
+      <div id="collectionBody" class="wallet-loading">Checking your wallet…</div>
+    </div>
+  `;
+  document.getElementById("collectionDisconnectBtn").addEventListener("click", () => window.MCWallet.disconnect());
+  const owned = await window.MCWallet.fetchOwnedPieces(address);
+  window.MCWallet.renderOwnedInto(document.getElementById("collectionBody"), owned);
+}
+
+function refresh() {
+  const address = window.MCWallet.getAddress();
+  if (address) renderConnected(address);
+  else renderPrompt();
+}
+
+renderChecking();
+window.addEventListener("mc-wallet-change", refresh);
+window.MCWallet.ready.then(refresh); // covers the initial check, in case it resolved before the listener above was attached
+</script>
+</body>
+</html>

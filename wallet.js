@@ -2,11 +2,13 @@
    Connects to MetaMask (window.ethereum) to get the visitor's address, then
    asks OpenSea (via the /api/opensea proxy, same one used for price/owner
    lookups) which NFTs that address currently owns on this contract, and
-   matches the token ids back to our own project/piece data. */
+   matches the token ids back to our own project/piece data.
+
+   Exposes window.MCWallet so other pages (my-collection.html) can reuse the
+   same connect/disconnect state and rendering instead of duplicating it. */
 
 (function () {
-  const btn = document.getElementById("connectWalletBtn");
-  if (!btn) return;
+  const DISCONNECT_FLAG = "mc7026_wallet_disconnected";
 
   function shortenAddress(addr) {
     return addr.slice(0, 6) + "…" + addr.slice(-4);
@@ -17,11 +19,23 @@
     PROJECTS.forEach((p) => {
       p.pieces.forEach((piece) => {
         if (piece.token && piece.token !== "XXX") {
-          map[String(piece.token)] = { title: p.title, label: piece.label };
+          map[String(piece.token)] = { project: p, piece };
         }
       });
     });
     return map;
+  }
+
+  /* Consistent "PROJECT #n/total" label for the collection views — some
+     projects only carry the project name on their very first piece in the
+     carousel data, so it's re-applied here for every piece. Super Cyd Bros
+     pieces are named by world/level instead of a number, and intros aren't
+     numbered editions, so both are left as-is. */
+  function collectionLabel(project, piece) {
+    if (project.slug === "cydbros" || /intro/i.test(piece.label)) return piece.label;
+    const supply = project.pieces.length - 1;
+    const m = piece.label.match(/#(\d+)/);
+    return m ? `${project.title} #${m[1]}/${supply}` : piece.label;
   }
 
   /* One paginated pass over everything this address owns on OpenSea (across
@@ -57,14 +71,111 @@
     return owned;
   }
 
-  /* ---------- panel ---------- */
+  function renderOwnedInto(container, owned) {
+    if (!owned.length) {
+      container.innerHTML = `<p class="wallet-empty">(no cryptoart collected yet)</p>`;
+      return;
+    }
+    const byProject = {};
+    owned.forEach(({ project, piece }) => {
+      (byProject[project.title] = byProject[project.title] || []).push({ project, piece });
+    });
+    container.innerHTML = `
+      <p class="wallet-count">${owned.length} piece${owned.length > 1 ? "s" : ""} owned</p>
+      ${Object.keys(byProject).map((title) => `
+        <div class="wallet-group">
+          <div class="wallet-group-title">${title}</div>
+          <ul class="wallet-group-list">
+            ${byProject[title].map(({ project, piece }) => `
+              <li><a class="wallet-piece-link" href="project.html?p=${project.slug}&open=${piece.token}">${collectionLabel(project, piece)}</a></li>
+            `).join("")}
+          </ul>
+        </div>
+      `).join("")}
+    `;
+  }
+
+  /* ---------- shared connect state ---------- */
+  let connectedAddress = null;
+
+  function notify() {
+    window.dispatchEvent(new CustomEvent("mc-wallet-change", { detail: { address: connectedAddress } }));
+  }
+
+  function setConnected(address) {
+    connectedAddress = address;
+    try { localStorage.removeItem(DISCONNECT_FLAG); } catch (err) {}
+    notify();
+  }
+  function setDisconnected() {
+    connectedAddress = null;
+    notify();
+  }
+  function disconnect() {
+    connectedAddress = null;
+    try { localStorage.setItem(DISCONNECT_FLAG, "1"); } catch (err) {}
+    notify();
+  }
+
+  async function connect() {
+    if (!window.ethereum) {
+      alert("MetaMask not detected. Install the MetaMask browser extension to connect your wallet.");
+      return null;
+    }
+    try {
+      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+      if (accounts && accounts[0]) {
+        setConnected(accounts[0]);
+        return accounts[0];
+      }
+    } catch (err) {
+      /* user rejected the request, or MetaMask is locked — nothing to do */
+    }
+    return null;
+  }
+
+  if (window.ethereum) {
+    window.ethereum.on("accountsChanged", (accounts) => {
+      if (accounts && accounts[0]) setConnected(accounts[0]);
+      else setDisconnected();
+    });
+  }
+
+  let wasDisconnected = false;
+  try { wasDisconnected = localStorage.getItem(DISCONNECT_FLAG) === "1"; } catch (err) {}
+
+  const restorePromise = (window.ethereum && !wasDisconnected)
+    ? window.ethereum.request({ method: "eth_accounts" }).then((accounts) => {
+        if (accounts && accounts[0]) connectedAddress = accounts[0];
+        notify();
+      }).catch(() => { notify(); })
+    : Promise.resolve().then(notify);
+
+  window.MCWallet = {
+    connect,
+    disconnect,
+    getAddress: () => connectedAddress,
+    ready: restorePromise,
+    fetchOwnedPieces,
+    collectionLabel,
+    renderOwnedInto,
+    shortenAddress,
+  };
+
+  /* ---------- header CONNECT button (present on every page) ---------- */
+  const btn = document.getElementById("connectWalletBtn");
+  if (!btn) return;
+
   const panel = document.createElement("div");
   panel.className = "wallet-modal";
   panel.hidden = true;
   panel.innerHTML = `
     <div class="wallet-modal-frame">
       <button class="fs-close" aria-label="Close">&times;</button>
-      <h2 class="wallet-modal-title">Your MC7026 collection</h2>
+      <div class="wallet-modal-titlebar">
+        <h2 class="wallet-modal-title">Your MC7026 collection</h2>
+        <button class="disconnect-btn">Disconnect</button>
+      </div>
       <div class="wallet-modal-address"></div>
       <div class="wallet-modal-body"></div>
     </div>
@@ -73,91 +184,39 @@
   const panelAddress = panel.querySelector(".wallet-modal-address");
   const panelBody = panel.querySelector(".wallet-modal-body");
   panel.querySelector(".fs-close").addEventListener("click", () => { panel.hidden = true; });
+  panel.querySelector(".disconnect-btn").addEventListener("click", () => { disconnect(); panel.hidden = true; });
   panel.addEventListener("click", (e) => { if (e.target === panel) panel.hidden = true; });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden) panel.hidden = true; });
-
-  function renderOwned(owned) {
-    if (!owned.length) {
-      panelBody.innerHTML = `<p class="wallet-empty">(no cryptoart collected yet)</p>`;
-      return;
-    }
-    const byProject = {};
-    owned.forEach((piece) => {
-      (byProject[piece.title] = byProject[piece.title] || []).push(piece.label);
-    });
-    panelBody.innerHTML = `
-      <p class="wallet-count">${owned.length} piece${owned.length > 1 ? "s" : ""} owned</p>
-      ${Object.keys(byProject).map((title) => `
-        <div class="wallet-group">
-          <div class="wallet-group-title">${title}</div>
-          <ul class="wallet-group-list">
-            ${byProject[title].map((label) => `<li>${label}</li>`).join("")}
-          </ul>
-        </div>
-      `).join("")}
-    `;
-  }
 
   async function openPanel(address) {
     panelAddress.textContent = address;
     panelBody.innerHTML = `<p class="wallet-loading">Checking your wallet…</p>`;
     panel.hidden = false;
     const owned = await fetchOwnedPieces(address);
-    renderOwned(owned);
+    renderOwnedInto(panelBody, owned);
   }
 
-  /* ---------- connect button ---------- */
-  function setConnected(address) {
-    btn.textContent = shortenAddress(address);
-    btn.classList.add("is-connected");
-    btn.dataset.address = address;
-  }
-  function setDisconnected() {
-    btn.textContent = "CONNECT";
-    btn.classList.remove("is-connected");
-    delete btn.dataset.address;
-  }
-
-  async function connect() {
-    if (!window.ethereum) {
-      alert("MetaMask not detected. Install the MetaMask browser extension to connect your wallet.");
-      return;
-    }
-    const original = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = "CONNECTING…";
-    try {
-      const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-      if (accounts && accounts[0]) {
-        setConnected(accounts[0]);
-        openPanel(accounts[0]);
-      } else {
-        btn.textContent = original;
-      }
-    } catch (err) {
-      btn.textContent = original;
-    } finally {
-      btn.disabled = false;
-    }
-  }
-
-  btn.addEventListener("click", () => {
-    if (btn.dataset.address) {
-      openPanel(btn.dataset.address);
+  btn.addEventListener("click", async () => {
+    if (connectedAddress) {
+      openPanel(connectedAddress);
     } else {
-      connect();
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = "CONNECTING…";
+      const address = await connect();
+      btn.disabled = false;
+      if (!address) btn.textContent = original;
     }
   });
 
-  if (window.ethereum) {
-    // Silently restore an already-authorized connection (no MetaMask popup)
-    // so the header stays in the connected state across pages.
-    window.ethereum.request({ method: "eth_accounts" }).then((accounts) => {
-      if (accounts && accounts[0]) setConnected(accounts[0]);
-    }).catch(() => {});
-    window.ethereum.on("accountsChanged", (accounts) => {
-      if (accounts && accounts[0]) setConnected(accounts[0]);
-      else setDisconnected();
-    });
-  }
+  window.addEventListener("mc-wallet-change", (e) => {
+    if (e.detail.address) {
+      btn.textContent = shortenAddress(e.detail.address);
+      btn.classList.add("is-connected");
+    } else {
+      btn.textContent = "CONNECT";
+      btn.classList.remove("is-connected");
+      panel.hidden = true;
+    }
+  });
 })();
