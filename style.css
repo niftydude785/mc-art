@@ -235,6 +235,7 @@ footer.site-footer{
 .footer-icon-link svg{width:16px;height:16px;fill:currentColor;}
 .footer-icon-link img{width:16px;height:16px;}
 .footer-icon-link:hover{color:var(--accent);}
+.footer-mooncat-btn{background:none;border:0;padding:0;cursor:pointer;}
 
 /* ---------- project page ---------- */
 .project-layout{

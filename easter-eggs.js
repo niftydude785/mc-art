@@ -16,11 +16,11 @@
 `);
 })();
 
-/* ---------- click the header logo 5 times: spin + a rain of MoonCats ---------- */
+/* ---------- click the MoonCat icon in the footer: spin + a rain of MoonCats ---------- */
 (function () {
-  const brandLink = document.querySelector(".brand");
   const brandLogo = document.querySelector(".brand-logo");
-  if (!brandLink || !brandLogo) return;
+  const footerTrigger = document.querySelector(".footer-mooncat-btn");
+  if (!brandLogo || !footerTrigger) return;
 
   function spawnMoonCatRain() {
     brandLogo.classList.remove("mc-spin");
@@ -53,23 +53,7 @@
     }
   }
 
-  let count = 0;
-  let resetTimer = null;
-  brandLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    count++;
-    clearTimeout(resetTimer);
-    if (count >= 5) {
-      count = 0;
-      spawnMoonCatRain();
-      return;
-    }
-    // give a short window for more clicks before treating this as a real nav click
-    resetTimer = setTimeout(() => {
-      count = 0;
-      window.location.href = brandLink.href;
-    }, 400);
-  });
+  footerTrigger.addEventListener("click", spawnMoonCatRain);
 })();
 
 /* ---------- click the phoenix emoji in About: a burst of flames ---------- */
