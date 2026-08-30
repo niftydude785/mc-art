@@ -793,6 +793,12 @@ footer.site-footer{
   letter-spacing:1px;
   color:var(--dim);
 }
+.about-figure figcaption a{
+  color:var(--accent);
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.about-figure figcaption a:hover{color:#fff;}
 .about-media-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
