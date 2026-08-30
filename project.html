@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — Project</title>
-<link rel="stylesheet" href="style.css?v=74">
+<link rel="stylesheet" href="style.css?v=75">
 </head>
 <body class="project-page">
 
@@ -24,8 +24,8 @@
 
 <main class="project-layout" id="layout"></main>
 
-<script src="data.js?v=74"></script>
-<script src="sources.js?v=74"></script>
+<script src="data.js?v=75"></script>
+<script src="sources.js?v=75"></script>
 <script>
 const params = new URLSearchParams(location.search);
 const slug = params.get("p");
@@ -90,9 +90,7 @@ function cardLabel(piece){
   if (project.slug === "cydbros") return piece.label;
   return piece.label.replace(/#(\d+)/, (m, n) => `#${n}/${supply}`);
 }
-const cardsHtml = project.pieces.map((piece, i) => {
-  const isLastPiece = i === project.pieces.length - 1;
-  return `
+const cardsHtml = project.pieces.map((piece, i) => `
   <div class="card">
     <div class="card-frame">
       <iframe src="${project.folder}${piece.file}" width="${size.w}" height="${size.h}"
@@ -123,11 +121,10 @@ const cardsHtml = project.pieces.map((piece, i) => {
         </a>
       </span>
     </div>
-    ${isLastPiece ? '<div class="card-easter-egg"></div>' : ""}
+    <div class="card-easter-egg"></div>
     <div class="card-owner" data-token="${piece.token}"></div>
   </div>
-`;
-}).join("");
+`).join("");
 
 const chevron = (dir) => `
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -436,7 +433,7 @@ if (openToken) {
   }
 }
 </script>
-<script src="wallet.js?v=74"></script>
-<script src="easter-eggs.js?v=74"></script>
+<script src="wallet.js?v=75"></script>
+<script src="easter-eggs.js?v=75"></script>
 </body>
 </html>
