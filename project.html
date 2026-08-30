@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — Project</title>
-<link rel="stylesheet" href="style.css?v=65">
+<link rel="stylesheet" href="style.css?v=68">
 </head>
 <body class="project-page">
 
@@ -24,8 +24,8 @@
 
 <main class="project-layout" id="layout"></main>
 
-<script src="data.js?v=65"></script>
-<script src="sources.js?v=65"></script>
+<script src="data.js?v=68"></script>
+<script src="sources.js?v=68"></script>
 <script>
 const params = new URLSearchParams(location.search);
 const slug = params.get("p");
@@ -99,6 +99,11 @@ const cardsHtml = project.pieces.map((piece, i) => `
     <div class="card-footer">
       <span class="card-label">${cardLabel(piece)}</span>
       <span class="card-actions">
+        <button class="icon-btn like-btn" data-like-key="${project.slug}-${piece.file}" aria-label="Like this piece" title="Like">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </button>
         <button class="icon-btn source-btn" data-index="${i}" aria-label="View source code" title="View source code">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -282,6 +287,70 @@ sourceModal.querySelector(".fs-close").addEventListener("click", closeSource);
 sourceModal.addEventListener("click", e => { if (e.target === sourceModal) closeSource(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !sourceModal.hidden) closeSource(); });
 
+/* ---------- likes (stored in a cookie, so they persist across visits) ---------- */
+function getLikedKeys(){
+  const match = document.cookie.match(/(?:^|; )mc7026_likes=([^;]*)/);
+  const raw = match ? decodeURIComponent(match[1]) : "";
+  return new Set(raw ? raw.split(",") : []);
+}
+function saveLikedKeys(keys){
+  const oneYear = 60 * 60 * 24 * 365;
+  document.cookie = `mc7026_likes=${encodeURIComponent(Array.from(keys).join(","))}; path=/; max-age=${oneYear}`;
+}
+
+/* A burst of filled hearts twirls from the like button out around the
+   center of the piece it just liked, staying solid almost the whole way
+   before fading right at the end. Purely decorative, removed once done. */
+function flyHeartToCard(btn){
+  const frame = btn.closest(".card").querySelector(".card-frame");
+  const from = btn.getBoundingClientRect();
+  const to = frame.getBoundingClientRect();
+  const fromX = from.left + from.width / 2;
+  const fromY = from.top + from.height / 2;
+  const centerX = to.left + to.width / 2;
+  const centerY = to.top + to.height / 2;
+
+  const HEART_COUNT = 7;
+  for (let i = 0; i < HEART_COUNT; i++) {
+    const heart = document.createElement("div");
+    heart.className = "flying-heart";
+    heart.innerHTML = `<svg viewBox="0 0 24 24" fill="#ff4d6d"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+    heart.style.left = fromX + "px";
+    heart.style.top = fromY + "px";
+    document.body.appendChild(heart);
+
+    const angle = (i / HEART_COUNT) * Math.PI * 2 + Math.random() * 0.8;
+    const radius = Math.min(to.width, to.height) * (0.18 + Math.random() * 0.22);
+    const dx = (centerX + Math.cos(angle) * radius) - fromX;
+    const dy = (centerY + Math.sin(angle) * radius) - fromY;
+    const spin = (Math.random() < 0.5 ? -1 : 1) * (360 + Math.random() * 360);
+    const scale = 2.6 + Math.random() * 1.6;
+
+    const anim = heart.animate([
+      { transform: "translate(-50%, -50%) translate(0, 0) scale(0.8) rotate(0deg)", opacity: 1, offset: 0 },
+      { transform: `translate(-50%, -50%) translate(${dx}px, ${dy}px) scale(${scale}) rotate(${spin}deg)`, opacity: 1, offset: 0.65 },
+      { transform: `translate(-50%, -50%) translate(${dx}px, ${dy}px) scale(${scale * 1.15}) rotate(${spin}deg)`, opacity: 0, offset: 1 }
+    ], { duration: 750 + Math.random() * 250, delay: i * 35, easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" });
+    anim.onfinish = () => heart.remove();
+  }
+}
+
+const likedKeys = getLikedKeys();
+carouselCol.querySelectorAll(".like-btn").forEach(btn => {
+  const key = btn.dataset.likeKey;
+  if (likedKeys.has(key)) btn.classList.add("is-liked");
+  btn.addEventListener("click", () => {
+    const nowLiked = btn.classList.toggle("is-liked");
+    if (nowLiked) {
+      likedKeys.add(key);
+      flyHeartToCard(btn);
+    } else {
+      likedKeys.delete(key);
+    }
+    saveLikedKeys(likedKeys);
+  });
+});
+
 /* ---------- live OpenSea price + owner ---------- */
 function truncateAddress(addr) {
   return addr.slice(0, 6) + "…" + addr.slice(-4);
@@ -324,6 +393,6 @@ if (openToken) {
   }
 }
 </script>
-<script src="wallet.js?v=65"></script>
+<script src="wallet.js?v=68"></script>
 </body>
 </html>
