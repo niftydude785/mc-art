@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — Project</title>
-<link rel="stylesheet" href="style.css?v=71">
+<link rel="stylesheet" href="style.css?v=74">
 </head>
 <body class="project-page">
 
@@ -24,8 +24,8 @@
 
 <main class="project-layout" id="layout"></main>
 
-<script src="data.js?v=71"></script>
-<script src="sources.js?v=71"></script>
+<script src="data.js?v=74"></script>
+<script src="sources.js?v=74"></script>
 <script>
 const params = new URLSearchParams(location.search);
 const slug = params.get("p");
@@ -90,7 +90,9 @@ function cardLabel(piece){
   if (project.slug === "cydbros") return piece.label;
   return piece.label.replace(/#(\d+)/, (m, n) => `#${n}/${supply}`);
 }
-const cardsHtml = project.pieces.map((piece, i) => `
+const cardsHtml = project.pieces.map((piece, i) => {
+  const isLastPiece = i === project.pieces.length - 1;
+  return `
   <div class="card">
     <div class="card-frame">
       <iframe src="${project.folder}${piece.file}" width="${size.w}" height="${size.h}"
@@ -99,7 +101,7 @@ const cardsHtml = project.pieces.map((piece, i) => `
     <div class="card-footer">
       <span class="card-label">${cardLabel(piece)}</span>
       <span class="card-actions">
-        <button class="icon-btn like-btn" data-like-key="${project.slug}-${piece.file}" aria-label="Like this piece" title="Like">
+        <button class="icon-btn like-btn" data-like-key="${project.slug}-${piece.file}" data-piece-index="${i}" aria-label="Like this piece" title="Like">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
@@ -121,9 +123,11 @@ const cardsHtml = project.pieces.map((piece, i) => `
         </a>
       </span>
     </div>
+    ${isLastPiece ? '<div class="card-easter-egg"></div>' : ""}
     <div class="card-owner" data-token="${piece.token}"></div>
   </div>
-`).join("");
+`;
+}).join("");
 
 const chevron = (dir) => `
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -335,15 +339,54 @@ function flyHeartToCard(btn){
   }
 }
 
+/* Easter egg: liking the very last piece of a project reveals a hidden
+   line under its title (and, for BRUIT, a little retro beep). */
+const LAST_PIECE_EASTER_EGGS = {
+  eggs: "WE LIKE EGGS! 🥚",
+  dgl: "MADE WITH REAL LOVE! ❤️",
+  noise: "GG DAN POLKO! TURN SOUNDS ON 🔊",
+  cydbros: "You drink a Phoenix Down (HP+MP MAX) => YOU WIN !!!",
+  centralian: "YOU SEE YOURSELF SEE YOU",
+  ogaka: "PRIVATE ARCHIVES CAN REVEAL SECRETS",
+};
+function playRetroBeep(){
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "square";
+    osc.frequency.value = 880;
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.18);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.18);
+  } catch (err) {}
+}
+function revealLastPieceEasterEgg(btn, playSound){
+  if (Number(btn.dataset.pieceIndex) !== project.pieces.length - 1) return;
+  const message = LAST_PIECE_EASTER_EGGS[project.slug];
+  const eggEl = btn.closest(".card").querySelector(".card-easter-egg");
+  if (!message || !eggEl) return;
+  eggEl.textContent = message;
+  eggEl.classList.add("is-visible");
+  if (playSound && project.slug === "noise") playRetroBeep();
+}
+
 const likedKeys = getLikedKeys();
 carouselCol.querySelectorAll(".like-btn").forEach(btn => {
   const key = btn.dataset.likeKey;
-  if (likedKeys.has(key)) btn.classList.add("is-liked");
+  if (likedKeys.has(key)) {
+    btn.classList.add("is-liked");
+    revealLastPieceEasterEgg(btn, false);
+  }
   btn.addEventListener("click", () => {
     const nowLiked = btn.classList.toggle("is-liked");
     if (nowLiked) {
       likedKeys.add(key);
       flyHeartToCard(btn);
+      revealLastPieceEasterEgg(btn, true);
     } else {
       likedKeys.delete(key);
     }
@@ -393,6 +436,7 @@ if (openToken) {
   }
 }
 </script>
-<script src="wallet.js?v=71"></script>
+<script src="wallet.js?v=74"></script>
+<script src="easter-eggs.js?v=74"></script>
 </body>
 </html>

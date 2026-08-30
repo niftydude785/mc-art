@@ -383,6 +383,16 @@ footer.site-footer{
   justify-content:space-between;
   gap:10px;
 }
+.card-easter-egg{
+  min-height:14px;
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:1px;
+  color:var(--accent);
+  text-transform:uppercase;
+  visibility:hidden;
+}
+.card-easter-egg.is-visible{visibility:visible;}
 .card-owner{
   min-height:12px;
   font-family:var(--mono);
@@ -426,6 +436,22 @@ footer.site-footer{
 .like-btn:hover{color:#ff4d6d;border-color:#ff4d6d;}
 .like-btn.is-liked{color:#ff4d6d;border-color:#ff4d6d;}
 .like-btn.is-liked svg{fill:currentColor;}
+.mc-spin{animation:mc-logo-spin .9s linear;}
+@keyframes mc-logo-spin{to{transform:rotate(1080deg);}}
+.mooncat-rain-drop{
+  position:fixed;
+  top:0;
+  z-index:600;
+  pointer-events:none;
+  image-rendering:pixelated;
+}
+.phoenix-trigger{cursor:pointer;}
+.phoenix-flame{
+  position:fixed;
+  z-index:600;
+  pointer-events:none;
+  font-size:24px;
+}
 .flying-heart{
   position:fixed;
   top:0;
