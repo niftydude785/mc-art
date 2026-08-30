@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — My Collection</title>
-<link rel="stylesheet" href="style.css?v=62">
+<link rel="stylesheet" href="style.css?v=63">
 </head>
 <body>
 
@@ -41,13 +41,18 @@
   </span>
 </footer>
 
-<script src="data.js?v=62"></script>
-<script src="wallet.js?v=62"></script>
+<script src="data.js?v=63"></script>
+<script src="wallet.js?v=63"></script>
 <script>
 const root = document.getElementById("collectionRoot");
 
+const LOADING_HTML = `
+  <p class="wallet-loading">Checking your wallet…</p>
+  <img class="wallet-spinner" src="src/others/logo.png" alt="Loading">
+`;
+
 function renderChecking() {
-  root.innerHTML = `<p class="wallet-loading">Checking your wallet…</p>`;
+  root.innerHTML = LOADING_HTML;
 }
 
 function renderPrompt() {
@@ -67,7 +72,7 @@ async function renderConnected(address) {
         <div class="wallet-modal-address">${address}</div>
         <button id="collectionDisconnectBtn" class="disconnect-btn">Disconnect</button>
       </div>
-      <div id="collectionBody" class="wallet-loading">Checking your wallet…</div>
+      <div id="collectionBody">${LOADING_HTML}</div>
     </div>
   `;
   document.getElementById("collectionDisconnectBtn").addEventListener("click", () => window.MCWallet.disconnect());
