@@ -168,7 +168,8 @@ const PROJECTS = [
     cyd: { id: "399", name: "EGG" },
     statement: [
       "Fifteen eggs, spreading the dudes art and aesthetic.",
-      "Ranked from common to legendary, like specimens."
+      "Ranked from common to legendary, like specimens.",
+      "The onchain Fabergé EGGS ready to be collected"
     ],
     cover: { file: "eggs_mini_id1.html", label: "EGGS #1", token: "172" },
     pieces: [

@@ -836,8 +836,8 @@ footer.site-footer{
 }
 
 @media (max-width: 900px){
-  .site-header{padding:22px 24px;}
-  .header-right{flex-wrap:wrap;justify-content:flex-end;row-gap:10px;}
+  .site-header{padding:22px 24px;position:static;}
+  .header-right{flex-wrap:wrap;justify-content:center;row-gap:10px;}
   .connect-btn{flex-basis:100%;text-align:center;}
   .project-row{grid-template-columns:1fr;gap:14px;padding:28px 24px;}
   footer.site-footer{padding:28px 24px;}
