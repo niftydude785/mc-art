@@ -4,26 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — Project</title>
-<link rel="stylesheet" href="style.css?v=45">
+<link rel="stylesheet" href="style.css?v=54">
 </head>
 <body class="project-page">
 
 <header class="site-header">
   <a class="brand" href="index.html">
     <img class="brand-logo" src="src/others/logo.png" alt="MoonCat logo">
-    MC7026 CRYPTOARTIST
+    MC7026 CRYPTOART GALLERY
   </a>
   <span class="header-right">
     <a class="header-link" href="about.html">About</a>
     <a class="header-link" href="fully-onchain.html">Fully Onchain</a>
     <a class="back-link" href="index.html">&larr; Index</a>
+    <button id="connectWalletBtn" class="connect-btn">CONNECT</button>
   </span>
 </header>
 
 <main class="project-layout" id="layout"></main>
 
-<script src="data.js?v=45"></script>
-<script src="sources.js?v=45"></script>
+<script src="data.js?v=54"></script>
+<script src="sources.js?v=54"></script>
 <script>
 const params = new URLSearchParams(location.search);
 const slug = params.get("p");
@@ -83,6 +84,11 @@ const carouselCol = document.createElement("div");
 carouselCol.className = "carousel-col";
 
 const size = frameSizeOf(project);
+const supply = project.pieces.length - 1; // pieces[0] is always the intro, not a numbered edition
+function cardLabel(piece){
+  if (project.slug === "cydbros") return piece.label;
+  return piece.label.replace(/#(\d+)/, (m, n) => `#${n}/${supply}`);
+}
 const cardsHtml = project.pieces.map((piece, i) => `
   <div class="card">
     <div class="card-frame">
@@ -90,7 +96,7 @@ const cardsHtml = project.pieces.map((piece, i) => `
               scrolling="no" title="${piece.label}"></iframe>
     </div>
     <div class="card-footer">
-      <span class="card-label">${piece.label}</span>
+      <span class="card-label">${cardLabel(piece)}</span>
       <span class="card-actions">
         <button class="icon-btn source-btn" data-index="${i}" aria-label="View source code" title="View source code">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -205,8 +211,23 @@ function openFullscreen(piece){
   modalIframe.title = piece.label;
   modalIframe.style.width = size.w + "px";
   modalIframe.style.height = size.h + "px";
-  modalFrame.style.width = Math.round(size.w * FS_ZOOM) + "px";
-  modalFrame.style.height = Math.round(size.h * FS_ZOOM) + "px";
+
+  const isMobile = window.matchMedia("(max-width: 900px)").matches;
+  if (isMobile) {
+    // On phones the piece must always fit fully on screen, so we scale it
+    // down (or up) with zoom — which shrinks the layout box too, unlike
+    // transform — to whatever fits, instead of the fixed desktop zoom-in.
+    const zoom = Math.min((window.innerWidth * 0.92) / size.w, (window.innerHeight * 0.88) / size.h);
+    modalIframe.style.transform = "none";
+    modalIframe.style.zoom = zoom;
+    modalFrame.style.width = Math.round(size.w * zoom) + "px";
+    modalFrame.style.height = Math.round(size.h * zoom) + "px";
+  } else {
+    modalIframe.style.transform = "";
+    modalIframe.style.zoom = "";
+    modalFrame.style.width = Math.round(size.w * FS_ZOOM) + "px";
+    modalFrame.style.height = Math.round(size.h * FS_ZOOM) + "px";
+  }
   modal.hidden = false;
 }
 function closeFullscreen(){
@@ -290,5 +311,6 @@ async function loadOpenSeaInfoForPieces() {
 }
 loadOpenSeaInfoForPieces();
 </script>
+<script src="wallet.js?v=54"></script>
 </body>
 </html>

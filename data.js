@@ -83,16 +83,16 @@ const PROJECTS = [
     cover: { file: "1_ordinian.html", label: "CENTRALIAN #1 — ORDINIAN", token: "233" },
     pieces: [
       { file: "_intro.html",          label: "CENTRALIAN — INTRO", token: "232" },
-      { file: "1_ordinian.html",      label: "CENTRALIAN #1 — ORDINIAN", token: "233" },
-      { file: "2_socialian.html",     label: "#2 — SOCIALIAN",     token: "234" },
-      { file: "3_marketian.html",     label: "#3 — MARKETIAN",     token: "235" },
-      { file: "4_gasian.html",        label: "#4 — GASIAN",        token: "236" },
-      { file: "5_whaleian.html",      label: "#5 — WHALEIAN",      token: "237" },
-      { file: "6_physicalian.html",   label: "#6 — PHYSICALIAN",   token: "238" },
-      { file: "7_museian.html",       label: "#7 — MUSEIAN",       token: "239" },
-      { file: "8_bankian.html",       label: "#8 — BANKIAN",       token: "240" },
-      { file: "9_critician.html",     label: "#9 — CRITICIAN",     token: "241" },
-      { file: "10_egotian.html",      label: "#10 — EGOTIAN",      token: "242" }
+      { file: "1_ordinian.html",      label: "CENTRALIAN #1", token: "233" },
+      { file: "2_socialian.html",     label: "#2",     token: "234" },
+      { file: "3_marketian.html",     label: "#3",     token: "235" },
+      { file: "4_gasian.html",        label: "#4",     token: "236" },
+      { file: "5_whaleian.html",      label: "#5",     token: "237" },
+      { file: "6_physicalian.html",   label: "#6",     token: "238" },
+      { file: "7_museian.html",       label: "#7",     token: "239" },
+      { file: "8_bankian.html",       label: "#8",     token: "240" },
+      { file: "9_critician.html",     label: "#9",     token: "241" },
+      { file: "10_egotian.html",      label: "#10",    token: "242" }
     ]
   },
   {
@@ -200,7 +200,8 @@ const PROJECTS = [
     cyd: { id: "1436", name: "LIBRARY" },
     statement: [
       "Ten archives from a library that shouldn't exist.",
-      "Each one recommends a book and hides a small relic. Vidoplyasov keeps watch."
+      "Each one recommends a book and hides a small relic. Vidoplyasov keeps watch.",
+      "Made in collaboration with <a href=\"https://x.com/vidoplyasovna\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--accent)\">Vidoplyasov</a>."
     ],
     cover: { file: "dgl1.html", label: "DGL #1", token: "13" },
     pieces: [

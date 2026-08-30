@@ -4,18 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — Onchain Art</title>
-<link rel="stylesheet" href="style.css?v=45">
+<link rel="stylesheet" href="style.css?v=54">
 </head>
 <body>
 
 <header class="site-header">
   <a class="brand" href="index.html">
     <img class="brand-logo" src="src/others/logo.png" alt="MoonCat logo">
-    MC7026 CRYPTOARTIST
+    MC7026 CRYPTOART GALLERY
   </a>
   <span class="header-right">
     <a class="header-link" href="about.html">About</a>
     <a class="header-link" href="fully-onchain.html">Fully Onchain</a>
+    <button id="connectWalletBtn" class="connect-btn">CONNECT</button>
   </span>
 </header>
 
@@ -23,7 +24,7 @@
 
 <footer class="site-footer">Fully onchain — Ethereum — (C) MC7026</footer>
 
-<script src="data.js?v=45"></script>
+<script src="data.js?v=54"></script>
 <script>
 const list = document.getElementById("project-list");
 
@@ -38,9 +39,10 @@ sortedProjects().forEach((p, i) => {
   const scale = boxW / size.w;
   const { main, suffix } = splitTitle(p.title);
 
-  const row = document.createElement("a");
-  row.className = "project-row";
-  row.href = "project.html?p=" + p.slug;
+  const isLocked = p.slug === "ogaka"; // keep this project unlinked from the home page for now
+  const row = document.createElement(isLocked ? "div" : "a");
+  row.className = "project-row" + (isLocked ? " is-locked" : "");
+  if (!isLocked) row.href = "project.html?p=" + p.slug;
 
   row.innerHTML = `
     <span class="row-index">${String(i + 1).padStart(2, "0")}</span>
@@ -61,5 +63,6 @@ sortedProjects().forEach((p, i) => {
   list.appendChild(row);
 });
 </script>
+<script src="wallet.js?v=54"></script>
 </body>
 </html>
