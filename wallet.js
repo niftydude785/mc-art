@@ -166,47 +166,17 @@
   const btn = document.getElementById("connectWalletBtn");
   if (!btn) return;
 
-  const panel = document.createElement("div");
-  panel.className = "wallet-modal";
-  panel.hidden = true;
-  panel.innerHTML = `
-    <div class="wallet-modal-frame">
-      <button class="fs-close" aria-label="Close">&times;</button>
-      <div class="wallet-modal-titlebar">
-        <h2 class="wallet-modal-title">Your MC7026 collection</h2>
-        <button class="disconnect-btn">Disconnect</button>
-      </div>
-      <div class="wallet-modal-address"></div>
-      <div class="wallet-modal-body"></div>
-    </div>
-  `;
-  document.body.appendChild(panel);
-  const panelAddress = panel.querySelector(".wallet-modal-address");
-  const panelBody = panel.querySelector(".wallet-modal-body");
-  panel.querySelector(".fs-close").addEventListener("click", () => { panel.hidden = true; });
-  panel.querySelector(".disconnect-btn").addEventListener("click", () => { disconnect(); panel.hidden = true; });
-  panel.addEventListener("click", (e) => { if (e.target === panel) panel.hidden = true; });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden) panel.hidden = true; });
-
-  async function openPanel(address) {
-    panelAddress.textContent = address;
-    panelBody.innerHTML = `<p class="wallet-loading">Checking your wallet…</p>`;
-    panel.hidden = false;
-    const owned = await fetchOwnedPieces(address);
-    renderOwnedInto(panelBody, owned);
-  }
-
   btn.addEventListener("click", async () => {
     if (connectedAddress) {
-      openPanel(connectedAddress);
-    } else {
-      const original = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = "CONNECTING…";
-      const address = await connect();
-      btn.disabled = false;
-      if (!address) btn.textContent = original;
+      window.location.href = "my-collection.html";
+      return;
     }
+    const original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "CONNECTING…";
+    const address = await connect();
+    btn.disabled = false;
+    if (!address) btn.textContent = original;
   });
 
   window.addEventListener("mc-wallet-change", (e) => {
@@ -216,7 +186,6 @@
     } else {
       btn.textContent = "CONNECT";
       btn.classList.remove("is-connected");
-      panel.hidden = true;
     }
   });
 })();

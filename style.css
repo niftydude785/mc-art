@@ -201,6 +201,11 @@ a{color:inherit;text-decoration:none;}
 }
 
 footer.site-footer{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
   padding:28px 72px;
   font-family:var(--mono);
   font-size:11px;
@@ -209,6 +214,11 @@ footer.site-footer{
   text-transform:uppercase;
   text-align:center;
 }
+.footer-links{display:inline-flex;align-items:center;gap:16px;}
+.footer-icon-link{display:inline-flex;align-items:center;color:var(--dim);transition:color .15s;}
+.footer-icon-link svg{width:16px;height:16px;fill:currentColor;}
+.footer-icon-link img{width:16px;height:16px;}
+.footer-icon-link:hover{color:var(--accent);}
 
 /* ---------- project page ---------- */
 .project-layout{
@@ -462,27 +472,6 @@ footer.site-footer{
 }
 .fs-close:hover{color:var(--accent);border-color:var(--accent);}
 
-.wallet-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.92);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:200;
-  padding:24px;
-}
-.wallet-modal[hidden]{display:none;}
-.wallet-modal-frame{
-  position:relative;
-  background:#050505;
-  border:1px solid var(--line);
-  padding:32px;
-  width:100%;
-  max-width:480px;
-  max-height:80vh;
-  overflow-y:auto;
-}
 .wallet-modal-titlebar{
   display:flex;
   align-items:center;
@@ -490,12 +479,6 @@ footer.site-footer{
   flex-wrap:wrap;
   gap:12px;
   margin:0 0 6px;
-}
-.wallet-modal-title{
-  margin:0;
-  font-size:20px;
-  text-transform:uppercase;
-  letter-spacing:-.5px;
 }
 .disconnect-btn{
   font-family:var(--mono);

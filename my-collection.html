@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — My Collection</title>
-<link rel="stylesheet" href="style.css?v=55">
+<link rel="stylesheet" href="style.css?v=58">
 </head>
 <body>
 
@@ -16,7 +16,7 @@
   <span class="header-right">
     <a class="header-link" href="about.html">About</a>
     <a class="header-link" href="fully-onchain.html">Fully Onchain</a>
-    <a class="header-link" href="my-collection.html">My Collection</a>
+    <a class="header-link" href="my-collection.html">My MC7026 Collection</a>
     <a class="back-link" href="index.html">&larr; Index</a>
     <button id="connectWalletBtn" class="connect-btn">CONNECT</button>
   </span>
@@ -24,15 +24,25 @@
 
 <main class="about-page">
   <article class="about-content">
-    <h1 class="about-title">My Collection</h1>
+    <h1 class="about-title">My MC7026 Collection</h1>
     <div id="collectionRoot"></div>
   </article>
 </main>
 
-<footer class="site-footer">Fully onchain — Ethereum — (C) MC7026</footer>
+<footer class="site-footer">
+  <span class="footer-text">Fully onchain — Ethereum — MC7026</span>
+  <span class="footer-links">
+    <a class="footer-icon-link" href="https://x.com/mooncat7026" target="_blank" rel="noopener" aria-label="X (Twitter)">
+      <svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-6.9l-5.4-6.6L4.8 22H1.7l8.1-9.3L1 2h7.1l4.9 6.1L18.9 2zm-1.2 18h1.9L7.4 4H5.4l12.3 16z"/></svg>
+    </a>
+    <a class="footer-icon-link" href="https://opensea.io/collection/cypherdudesarchives" target="_blank" rel="noopener" aria-label="OpenSea">
+      <img src="opensea-icon.png" alt="OpenSea">
+    </a>
+  </span>
+</footer>
 
-<script src="data.js?v=55"></script>
-<script src="wallet.js?v=55"></script>
+<script src="data.js?v=58"></script>
+<script src="wallet.js?v=58"></script>
 <script>
 const root = document.getElementById("collectionRoot");
 
@@ -43,7 +53,7 @@ function renderChecking() {
 function renderPrompt() {
   root.innerHTML = `
     <div class="collection-prompt">
-      <p>Connect your wallet to see which pieces of this collection you own.</p>
+      <p>Connect your wallet to see which MC7026 pieces you own.</p>
       <button id="collectionConnectBtn" class="connect-btn connect-btn--big">CONNECT</button>
     </div>
   `;
