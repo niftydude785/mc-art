@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — Onchain Art</title>
-<link rel="stylesheet" href="style.css?v=63">
+<link rel="stylesheet" href="style.css?v=65">
 </head>
-<body>
+<body class="home-page">
 
 <header class="site-header">
   <a class="brand" href="index.html">
@@ -36,7 +36,7 @@
   </span>
 </footer>
 
-<script src="data.js?v=63"></script>
+<script src="data.js?v=65"></script>
 <script>
 const list = document.getElementById("project-list");
 
@@ -45,11 +45,17 @@ function splitTitle(title) {
   return m ? { main: m[1], suffix: m[2] } : { main: title, suffix: "" };
 }
 
+function splitMeta(meta) {
+  const m = meta.match(/^(.*)\s—\s(\d+)\sArtworks$/);
+  return m ? { tagline: m[1], supply: m[2] } : { tagline: meta, supply: null };
+}
+
 sortedProjects().forEach((p, i) => {
   const size = frameSizeOf(p);
   const boxW = 320, boxH = 220;
   const scale = boxW / size.w;
   const { main, suffix } = splitTitle(p.title);
+  const { tagline, supply } = splitMeta(p.meta.replace("ETHEREUM — ", ""));
 
   const isLocked = p.slug === "ogaka"; // keep this project unlinked from the home page for now
   const row = document.createElement(isLocked ? "div" : "a");
@@ -63,7 +69,8 @@ sortedProjects().forEach((p, i) => {
         <span class="row-title">${main}${suffix ? ` <span class="row-title-suffix">${suffix}</span>` : ""}</span>
         <span class="release-badge${p.release.sortValue === Infinity ? " is-upcoming" : ""}">${p.release.label}</span>
       </span>
-      <span class="row-meta">${p.meta.replace("ETHEREUM — ", "")}</span>
+      <span class="row-meta">${tagline}</span>
+      ${supply ? `<span class="row-supply">Supply: ${supply}</span>` : ""}
     </span>
     <span class="row-preview" style="height:${Math.round(size.h*scale)}px">
       <span class="scaler" style="transform:scale(${scale})">
@@ -75,6 +82,6 @@ sortedProjects().forEach((p, i) => {
   list.appendChild(row);
 });
 </script>
-<script src="wallet.js?v=63"></script>
+<script src="wallet.js?v=65"></script>
 </body>
 </html>
