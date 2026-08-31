@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — Project</title>
-<link rel="stylesheet" href="style.css?v=80">
+<link rel="stylesheet" href="style.css?v=81">
 </head>
 <body class="project-page">
 
@@ -34,8 +34,8 @@
 
 <main class="project-layout" id="layout"></main>
 
-<script src="data.js?v=80"></script>
-<script src="sources.js?v=80"></script>
+<script src="data.js?v=81"></script>
+<script src="sources.js?v=81"></script>
 <script>
 const params = new URLSearchParams(location.search);
 const slug = params.get("p");
@@ -60,7 +60,7 @@ infoCol.className = "info-col";
 infoCol.innerHTML = `
   <div class="info-title-row">
     <h1 class="info-title">${project.title}</h1>
-    <div class="release-badge${project.release.sortValue === Infinity ? " is-upcoming" : ""}">${project.release.label}</div>
+    <div class="release-badge${project.release.sortValue === Infinity ? " is-upcoming" : project.release.label === "JUST MINTED" ? " is-minted" : ""}">${project.release.label}</div>
   </div>
   <div class="info-meta">${project.meta}</div>
   <p class="info-preview">${project.statement[0]}</p>
@@ -445,8 +445,8 @@ if (openFile) {
   }
 }
 </script>
-<script src="wallet.js?v=80"></script>
-<script src="easter-eggs.js?v=80"></script>
-<script src="search.js?v=80"></script>
+<script src="wallet.js?v=81"></script>
+<script src="easter-eggs.js?v=81"></script>
+<script src="search.js?v=81"></script>
 </body>
 </html>

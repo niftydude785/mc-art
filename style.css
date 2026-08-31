@@ -217,9 +217,6 @@ a{color:inherit;text-decoration:none;}
   transition:color .2s, transform .2s;
 }
 .project-row:hover .row-title{color:var(--accent);transform:translateX(6px);}
-.project-row.is-locked{cursor:default;}
-.project-row.is-locked:hover{background:transparent;}
-.project-row.is-locked:hover .row-title{color:inherit;transform:none;}
 .row-title-suffix{
   font-size:0.32em;
   letter-spacing:0;
@@ -261,6 +258,10 @@ a{color:inherit;text-decoration:none;}
   background:var(--accent);
   border-color:var(--accent);
   font-weight:700;
+}
+.release-badge.is-minted{
+  color:var(--accent);
+  border-color:var(--accent);
 }
 .row-preview{
   width:320px;
