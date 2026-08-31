@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — Project</title>
-<link rel="stylesheet" href="style.css?v=76">
+<link rel="stylesheet" href="style.css?v=77">
 </head>
 <body class="project-page">
 
@@ -18,14 +18,24 @@
     <a class="header-link" href="index.html">Gallery</a>
     <a class="header-link" href="fully-onchain.html">Fully Onchain</a>
     <a class="header-link" href="my-collection.html">My Collection</a>
+    <button class="search-toggle-btn" type="button" aria-label="Search a piece" title="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="M21 21l-4.3-4.3"/>
+      </svg>
+    </button>
+    <div class="search-panel" hidden>
+      <input type="text" class="search-input" placeholder="Search a piece… (e.g. Ordinian, Quill)" autocomplete="off">
+      <div class="search-results" hidden></div>
+    </div>
     <button id="connectWalletBtn" class="connect-btn">CONNECT</button>
   </span>
 </header>
 
 <main class="project-layout" id="layout"></main>
 
-<script src="data.js?v=76"></script>
-<script src="sources.js?v=76"></script>
+<script src="data.js?v=77"></script>
+<script src="sources.js?v=77"></script>
 <script>
 const params = new URLSearchParams(location.search);
 const slug = params.get("p");
@@ -421,11 +431,13 @@ async function loadOpenSeaInfoForPieces() {
 }
 loadOpenSeaInfoForPieces();
 
-/* Deep link from the "My Collection" page/panel: ?open=<token> jumps
-   straight to that piece's fullscreen view. */
-const openToken = params.get("open");
-if (openToken) {
-  const openIndex = project.pieces.findIndex(p => String(p.token) === String(openToken));
+/* Deep link from the "My Collection" page/panel or the header search:
+   ?open=<file> jumps straight to that piece's fullscreen view. Matched by
+   file name rather than token since not-yet-minted pieces (OGA³) all share
+   the placeholder token "XXX" and wouldn't resolve to a unique piece. */
+const openFile = params.get("open");
+if (openFile) {
+  const openIndex = project.pieces.findIndex(p => p.file === openFile);
   if (openIndex !== -1) {
     const openCard = track.querySelectorAll(".card")[openIndex];
     if (openCard) openCard.scrollIntoView({ inline: "center", block: "nearest" });
@@ -433,7 +445,8 @@ if (openToken) {
   }
 }
 </script>
-<script src="wallet.js?v=76"></script>
-<script src="easter-eggs.js?v=76"></script>
+<script src="wallet.js?v=77"></script>
+<script src="easter-eggs.js?v=77"></script>
+<script src="search.js?v=77"></script>
 </body>
 </html>

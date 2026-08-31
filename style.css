@@ -88,6 +88,73 @@ a{color:inherit;text-decoration:none;}
   transition:color .15s;
 }
 .header-link:hover{color:var(--accent);}
+.search-toggle-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:none;
+  color:var(--dim);
+  cursor:pointer;
+  flex-shrink:0;
+  transition:color .15s, border-color .15s;
+}
+.search-toggle-btn svg{width:15px;height:15px;}
+.search-toggle-btn:hover, .search-toggle-btn.is-active{color:var(--accent);border-color:var(--accent);}
+.search-panel{position:relative;display:flex;align-items:center;}
+.search-panel[hidden]{display:none;}
+.search-input{
+  width:220px;
+  max-width:60vw;
+  padding:8px 14px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#0a0a0a;
+  color:var(--fg);
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.5px;
+}
+.search-input:focus{outline:none;border-color:var(--accent);}
+.search-results{
+  position:absolute;
+  top:calc(100% + 10px);
+  left:0;
+  right:0;
+  max-height:340px;
+  overflow-y:auto;
+  background:#050505;
+  border:1px solid var(--line);
+  z-index:80;
+}
+.search-results[hidden]{display:none;}
+.search-empty{
+  padding:14px 16px;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--dim);
+}
+.search-result{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  padding:10px 16px;
+  border-bottom:1px solid var(--line);
+  transition:background .15s;
+}
+.search-result:last-child{border-bottom:0;}
+.search-result:hover{background:#111;}
+.search-result-project{
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:1.5px;
+  color:var(--accent);
+  text-transform:uppercase;
+}
+.search-result-piece{font-size:13px;color:var(--fg);}
 .connect-btn{
   font-family:var(--mono);
   font-size:11px;
@@ -920,6 +987,8 @@ footer.site-footer{
   .site-header{padding:22px 24px;position:static;}
   .header-right{flex-wrap:wrap;justify-content:center;row-gap:10px;}
   .connect-btn{flex-basis:100%;text-align:center;}
+  .search-panel{flex-basis:100%;justify-content:center;}
+  .search-input{width:100%;max-width:none;}
   .project-row{grid-template-columns:1fr;gap:14px;padding:28px 24px;}
   footer.site-footer{padding:28px 24px;}
   .row-preview{width:100%;height:180px;}

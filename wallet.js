@@ -87,7 +87,7 @@
           <div class="wallet-group-title">${title}</div>
           <ul class="wallet-group-list">
             ${byProject[title].map(({ project, piece }) => `
-              <li><a class="wallet-piece-link" href="project.html?p=${project.slug}&open=${piece.token}">${collectionLabel(project, piece)}</a></li>
+              <li><a class="wallet-piece-link" href="project.html?p=${project.slug}&open=${encodeURIComponent(piece.file)}">${collectionLabel(project, piece)}</a></li>
             `).join("")}
           </ul>
         </div>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MC7026 — About</title>
-<link rel="stylesheet" href="style.css?v=76">
+<link rel="stylesheet" href="style.css?v=77">
 </head>
 <body>
 
@@ -18,6 +18,16 @@
     <a class="header-link" href="index.html">Gallery</a>
     <a class="header-link" href="fully-onchain.html">Fully Onchain</a>
     <a class="header-link" href="my-collection.html">My Collection</a>
+    <button class="search-toggle-btn" type="button" aria-label="Search a piece" title="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="M21 21l-4.3-4.3"/>
+      </svg>
+    </button>
+    <div class="search-panel" hidden>
+      <input type="text" class="search-input" placeholder="Search a piece… (e.g. Ordinian, Quill)" autocomplete="off">
+      <div class="search-results" hidden></div>
+    </div>
     <button id="connectWalletBtn" class="connect-btn">CONNECT</button>
   </span>
 </header>
@@ -117,8 +127,10 @@
   </span>
 </footer>
 
-<script src="data.js?v=76"></script>
-<script src="wallet.js?v=76"></script>
-<script src="easter-eggs.js?v=76"></script>
+<script src="data.js?v=77"></script>
+<script src="sources.js?v=77"></script>
+<script src="wallet.js?v=77"></script>
+<script src="easter-eggs.js?v=77"></script>
+<script src="search.js?v=77"></script>
 </body>
 </html>
