@@ -15,25 +15,20 @@ canvas{
   height:350px;
 }
 .ttt{
-  position:absolute;
-  right:6px;
-  bottom:4px;
-  font-family:monospace;
-  font-size:10px;
-  color:#fff;
-  text-shadow:0 0 3px #000, 0 0 3px #000, 0 0 3px #000;
-  z-index:2;
-  pointer-events:none;
+  width:470px;
+text-align: right;
+font-size: 10px;
+
 }
 #noise{z-index:1;}
 </style>
 
 <div id="cont">
-  <div class="ttt">BRUIT 15/20 - Corrupted WL</div>
   <canvas id="tube" width="470" height="350"></canvas>
   <canvas id="noise" width="470" height="350"></canvas>
   <img id="source" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAFeBAMAAADK1yPcAAAAGFBMVEUAAABDRk2CiIM/QD5oXVRVYWtaREGVgGSd2wsJAAAAAXRSTlMAQObYZgAABG1JREFUeNrs3cFR5DAQBdBJgRQ2BVIghU1hUtj0t6wDn+pqCRuVh8v7JwvJjR9cuoah5/F25ONIuUoenylH1qlF+91+WTaeR058y/cj0w1WVlZWVlZW1i3rnyajfvnasP490t0xNj4+M62SAtMEN32gZJx7/z6srKysrKysrPvWaUdVurZh7ZY5dz0plavyBFl2VyN5DFZWVlZWVlbWG63pwdK/lc6w9IjjKhvrXjJX3R0pVZbPI7k3pUoLmiUrKysrKysr693WNGKP75NzV3f7I9PGM73f9XRFWVlZWVlZWVn3rWnOShe4Tm0AT2Z5uPovFR0ZpLLLysrKysrKyrpvzUa13pGUP2tdH66aZVhZWVlZWVlZ960bWXd3+1UuNZSsrKysrKysrHdbUzBXWba7Sb/RlzqxMXL9J5aX+HJb2WVlZWVlZWVl3bdeb/HO/u9g7jg7kmpkXWV97yB197KysrKysrKy7lvbQVQbGd+z9pf9kT4Bp8DOhKoRVlZWVlZWVtZ969s060nn9yazqqa7rKysrKxfwsrK+gpr6dq6ZbeRq39HuqZwnbSlKVBmo2eCVvd8rKysrKysrKwvtk4+Jy8Zu/0fITOOM8vtSVbTYehZrj9yr1uysrKysrKysm5b62z0CLsJ5tOvpePrzmX30syFlDo7qyq/i+JgZWVlZWVlZd23jnXbFP5S0uJtzFeoYWVdhJWVlZWV9bI1jeLj19NZ82isrKys58LKysp6l7V8QkxZJuUltCzrVZLDG7PR489VwsrKysrKysr6OmsqnH2YS+e2y69fb2NlZWVlZWVlvdua93J1TeHGSKr5IPV0i+vZ6OtSBcLKysrKysrKerd1OogqVbPRXU2XSVdlXWpkXSphZWVlZWVlZX2Jdd0App3rNn443SrLUj4pPeK0cinKysrKysrKynqj9exk8szV7D7IL3ck0ylY044vu6m3nlX1PFIOd+dYWVlZWVlZWfet3Zvec3X2b425IwVONJ5d+YBzR3mjftkorWX3VKysrKysrKys+9bk5pEJzyPZnd+7m1TJkpWVlZWVlZV137pu+7K7nqXwuJzU2/nXxDzBtBVkZWVlZWVl/d/eHdwoDANRAK1ha6GWbWFb2PYRHPiS5bFsRiCE3j9hORi/cBklyoQ1aVnPEtypoV9kts8nKysrKysrK2vD+vIt9K3n/0AW+JDTzcrKysrKyvod1t2rZ+XEPRn+35KlZqtkuGEtD74ch5WVlZWVlZW1ZS1bUpVbSNbtp46aplfL1xOsrKysrKysrG+2li2pUpfttqQqZ7PU+tcy/Lslhxw9Ozhr787KysrKysrK2rf+bCa1X1mwrRc4qi+HLlPrzLYxzLKysrKysrKytq312/Huw93ibF0ZHvVVz8W08unF815VrKysrKysrKx96+5NyKiTuuf5JOVxs288WXNeqrCysrKysrKy9q0ptX4fGQq74RZlhsOnJFXbRgOsJBM5MbOO7ZmYbYiVlZWVlZWV9SXWK67u9sv/hJt9AAAAAElFTkSuQmCC" hidden>
 </div>
+<div class="ttt">BRUIT 15/20 - Corrupted WL</div>
 <script>
 (()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
 </script>

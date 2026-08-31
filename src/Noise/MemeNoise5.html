@@ -15,25 +15,20 @@ canvas{
   height:350px;
 }
 .ttt{
-  position:absolute;
-  right:6px;
-  bottom:4px;
-  font-family:monospace;
-  font-size:10px;
-  color:#fff;
-  text-shadow:0 0 3px #000, 0 0 3px #000, 0 0 3px #000;
-  z-index:2;
-  pointer-events:none;
+  width:470px;
+text-align: right;
+font-size: 10px;
+
 }
 #noise{z-index:1;}
 </style>
 
 <div id="cont">
-  <div class="ttt">BRUIT 5/20 - IRL-DRAW</div>
   <canvas id="tube" width="470" height="350"></canvas>
   <canvas id="noise" width="470" height="350"></canvas>
   <img id="source" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAFeBAMAAADK1yPcAAAALVBMVEUAAADPxLK+pXuhf1OfoKFSWF6IYjk2or0tKy0WI4UAAAAkKWDLzc45TrcgZ4h2zUiGAAAAAXRSTlMAQObYZgAABClJREFUeNrs3V1tG0EUBWBTMIVQCIVSCIVSKIVQKIVSCIVQCIVgaOdK9ZGu7ZFX9q5t6TtPsz/ZmW+frq7Hzu5lQfYjL08bVlbW5wkrK+vzJNbN8uOQnHsdmd1yfVhXCisr61VhXSmsrFtY94fsRvaLc8EDyvA1UqM69z7yNlKHvw65Zl5WVlZWVlZW1hWtu3WTdZQr4NeRAteozpX1c2S3JKysPaysrKysrKtYU2WtnNL8Hgm4rKkWyxowKysr61FYWVlZt7W+/k+sW4BTKAZch39GToFZWVlZWVlZWR/KutsyvVCsUVkD/h4pa93MysrKehRWVlbWBdanrBGTVih+jMRah63LxsrKynoUVlZW1gXWp6wRs6widfAhKRQrrKysrEdhZWVlfS7r2yHzW8522Rr4faSBUyiysrKysrKysq5lXb+3VmvLHq1TzPzmwvKPKFuXjZWVlZWVlZX1vtbFwG6tVbafn6p8jmSr+9kFBjzvstV9rKysrKysrKx3s+6nmTObIZVclpWXkHPzLxVW0mWrUdvaxcrKysrKysr6eNambsvPhWSumReKAc+7bKysrKysrKysD2rNs5KUbg3ScJ8j3yM15fx1tP1dNTq7tYuVlZWVlZWVdRNrUs+fd9TahVgzZxvlvgbpxOlHlA3cumysrKysrKysrBtbF7XVklYjfo0Us5baRpOtWJd9RHl2axcrKysrKysr65rWn/8S63JmrG26HGaUsm9iXdBlq3lbl42VlZWVlZWV9QGsDZxz2QOf5lxLFt2aeNeC+9YuVlZWVlZWVtZHsdacSf7zS7sa19shEdZfZMoLrPMuWysUWVlZWVlZWVkfwFrT1VJjrVFvoU3TrMncmi8VzvfFs7KysrKysrLe15qZMqrn5+qpd5LX0R5QmX4/sefSLlvdwsrKysrKysp6c2sytwZ3qjxsS40rV9vhosQf8AX74llZWVlZWVlZb25NjTi3xlCPbuVh8nFIsy5nzhc0/zEGVlZWVlZWVtb7WlMjxlqJK/Xb10heUSq+jCrXgLOgSuuysbKysrKysrLe3FpXlmzj6tbUjc3a2mqr5NTe+xqxsrKysrKysv5t545OGAahAIrOkBW6gvuv1BlK/HkgkUYUy0vP/QuC5PglRrLceneu7ptf7RHfZzeO1RauRIBZWVlZWVlZWbdZ+7vFqDvarM6xq2prrIWVlZWV9ejFyso6ZK3Pd7dpzYfJOD2rxZ2qYM7sEWNg3BqxsrKysrKysq60HqP1f63Q3K46dhWrw8rKysrKehEr65y1vcs1XOD6A1t7nbGysrKysl7EyrrsvOkhsbJmj5U1e6ys2ftjawWy5o+VNXusrNljjbO1h9TFsKaOtRTW3LGWwpo71rOwDjS3OgNTzU0fj6ysrKysrKysP7NGC63Tk36Z/gOX0ysF0+Wu5AAAAABJRU5ErkJggg==" hidden>
 </div>
+<div class="ttt">BRUIT 5/20 - IRL-DRAW</div>
 <script>
 (()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
 </script>

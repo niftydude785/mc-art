@@ -15,25 +15,20 @@ canvas{
   height:350px;
 }
 .ttt{
-  position:absolute;
-  right:6px;
-  bottom:4px;
-  font-family:monospace;
-  font-size:10px;
-  color:#fff;
-  text-shadow:0 0 3px #000, 0 0 3px #000, 0 0 3px #000;
-  z-index:2;
-  pointer-events:none;
+  width:470px;
+text-align: right;
+font-size: 10px;
+
 }
 #noise{z-index:1;}
 </style>
 
 <div id="cont">
-  <div class="ttt">BRUIT 16/20 - NoiSyphus the 13th</div>
   <canvas id="tube" width="470" height="350"></canvas>
   <canvas id="noise" width="470" height="350"></canvas>
   <img id="source" src="data:image/png;base64,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" hidden>
 </div>
+<div class="ttt">BRUIT 16/20 - NoiSyphus the 13th</div>
 <script>
 (()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
 </script>
