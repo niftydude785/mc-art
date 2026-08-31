@@ -15,20 +15,25 @@ canvas{
   height:350px;
 }
 .ttt{
-  width:470px;
-text-align: right;
-font-size: 10px;
-
+  position:absolute;
+  right:6px;
+  bottom:4px;
+  font-family:monospace;
+  font-size:10px;
+  color:#fff;
+  text-shadow:0 0 3px #000, 0 0 3px #000, 0 0 3px #000;
+  z-index:2;
+  pointer-events:none;
 }
 #noise{z-index:1;}
 </style>
 
 <div id="cont">
+  <div class="ttt">BRUIT 4/20 - DIY Gallery</div>
   <canvas id="tube" width="470" height="350"></canvas>
   <canvas id="noise" width="470" height="350"></canvas>
   <img id="source" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAFeBAMAAADK1yPcAAAALVBMVEUAAABJRk7XxKa+pYE0LiwZFhaiiWhsZl9KQ0CxrKGOjIp1W0HKys3az5L///+7XZe9AAAAAXRSTlMAQObYZgAABDVJREFUeNrs3cFt20AQQFG3oFvObiEtpAW1oBZ4zi0tqAW1wBbcQlpwDcEMEH5wwF0z5kpygP9PXGpN79NpQcn0y/fodSmHU3RaukXTumv0Fr0vMe9t3W0jLpBxqevS68f96naJAGrVqlWrVq1atQ6yUs4puL3WreXvsBLMHf2ImtY50qpVq1atWrVqHWR93Shfnpfa1m7sFhGeI6zElL3WnFesOeRojnKeVq1atWrVqlXrcWu6mjfYmmDW9r5UFn2K8hw/kUvYYc0+ac14ISdr1apVq1atWrUet4Ir1kuElUXnZbboeWk+z2RIfMaJkD0n9a0sEtIcbam1atWqVatWrVrHW2EuAeZzynOEpmzJmhs2fiKPIDEszL3WeV2eO0datWrVqlWrVq2PszIs1gI5U+vV8p7Ue3Awd3aLsFJenrUkQatWrVq1atWqdaC1hpX2WpnS9JdbcmOs7E21atWqVatWrVqHW4H0rZzbIjVdzcnTUg6PWFNYmHSNtGrVqlWrVq1an2Zl0WOst6W91inqL+MS5WStWrVq1apVq9Z7WwETF9z6JdPRxlh5A7Vq1apVq1atWu9jzZOHrS+f69+t/bt7fGksF65Vq1atWrVq1foQK8NpXfkrwsdaYW5ZOcq0atWqVatWrVqPW9H0rRxhpQQ/zMrDrnCVtGrVqlWrVq1ah1vp/7ESTwotQq1atWrVqlWr1pFWhE0rzC0rzKb1vO6ItfyNIcvlCVV0ihhq1apVq1atWrUOt2YwCXX5OLJaYXbba712Y3tYmpa0atWqVatWrVrvY2WIkHjhFrFlbFmrq2+9dWMZQE4RN9OoPMRKq1atWrVq1ar1PtbyP4y5PlaCftRaN545nNaxKuYVZuJO67Rq1apVq1atWu9jBYcGNUelMdbsG5JW/YeJ5hTeE61atWrVqlWr1uNW6t9bQ1i+wTUvFSvrKNbUNK3UFxLCYuXOm1atWrVq1apV69Os/CYuPR2sWvtCcASuTNGqVatWrVq1ah1upUu3spifp7sGuGltfrVLq1atWv+mVatWrY+0zhHWJ9S0lnNatWrV2kmrVq1ah1h/R1/Yym6xidOqVavWj9KqVavWA1bCmsMvZwVc1Fq1atWqtZlWrX/au5sbBEIgAKM1bAu2YE+2YHHWYi8GDktCmDir+8PhfUdOvBuBZGA90FrrrMGkqOtq1hYrKysraxgrK+ue1uygz1dpEmurU7OysrKmYmVlZT3MWtfmtI7ULVZW1mVDrKysrKxDa695r1VwaK0t19SscaysrKypWFlZWX+zjh4mw7/4rj8jJsCsrKysqVhZWVm/W7vt1xLW6cAJNSsrK2sqVlZW1sj6Ko00t1JzdczWudZGYmVlZWVlHcTKeqT1WQqttemsNVZWVlZW1g2xsu5733SPCq2PteXMYhcrKysraxgrK+vf1g/yEl5MD7H9+QAAAABJRU5ErkJggg==" hidden>
 </div>
-<div class="ttt">BRUIT 4/20 - DIY Gallery</div>
 <script>
 (()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
 </script>

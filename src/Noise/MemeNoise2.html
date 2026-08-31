@@ -15,20 +15,25 @@ canvas{
   height:350px;
 }
 .ttt{
-  width:470px;
-text-align: right;
-font-size: 10px;
-
+  position:absolute;
+  right:6px;
+  bottom:4px;
+  font-family:monospace;
+  font-size:10px;
+  color:#fff;
+  text-shadow:0 0 3px #000, 0 0 3px #000, 0 0 3px #000;
+  z-index:2;
+  pointer-events:none;
 }
 #noise{z-index:1;}
 </style>
 
 <div id="cont">
+  <div class="ttt">BRUIT 2/20 - Ad Crush</div>
   <canvas id="tube" width="470" height="350"></canvas>
   <canvas id="noise" width="470" height="350"></canvas>
   <img id="source" src="data:image/png;base64,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" hidden>
 </div>
-<div class="ttt">BRUIT 2/20 - Ad Crush</div>
 <script>
 (()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
 </script>

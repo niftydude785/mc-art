@@ -15,20 +15,25 @@ canvas{
   height:350px;
 }
 .ttt{
-  width:470px;
-text-align: right;
-font-size: 10px;
-
+  position:absolute;
+  right:6px;
+  bottom:4px;
+  font-family:monospace;
+  font-size:10px;
+  color:#fff;
+  text-shadow:0 0 3px #000, 0 0 3px #000, 0 0 3px #000;
+  z-index:2;
+  pointer-events:none;
 }
 #noise{z-index:1;}
 </style>
 
 <div id="cont">
+  <div class="ttt">BRUIT 11/20 - 1$ MERCH</div>
   <canvas id="tube" width="470" height="350"></canvas>
   <canvas id="noise" width="470" height="350"></canvas>
   <img id="source" src="data:image/png;base64,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" hidden>
 </div>
-<div class="ttt">BRUIT 11/20 - 1$ MERCH</div>
 <script>
 (()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
 </script>

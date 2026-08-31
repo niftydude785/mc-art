@@ -15,20 +15,25 @@ canvas{
   height:350px;
 }
 .ttt{
-  width:470px;
-text-align: right;
-font-size: 10px;
-
+  position:absolute;
+  right:6px;
+  bottom:4px;
+  font-family:monospace;
+  font-size:10px;
+  color:#fff;
+  text-shadow:0 0 3px #000, 0 0 3px #000, 0 0 3px #000;
+  z-index:2;
+  pointer-events:none;
 }
 #noise{z-index:1;}
 </style>
 
 <div id="cont">
+  <div class="ttt">BRUIT 19/20 - Raster EGG</div>
   <canvas id="tube" width="470" height="350"></canvas>
   <canvas id="noise" width="470" height="350"></canvas>
   <img id="source" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdYAAAFeBAMAAADK1yPcAAAAD1BMVEUAAAAfIR8tMmRKIThSVFGh5LpsAAAAAXRSTlMAQObYZgAAAy1JREFUeNrs3cFxwjAUBFC34BbcAi3Qf03Jv6AJUZA1qyRm5u0NEq31OGlsIbYTuVW2Tu6VbSZ7ZQuSFLCysrKysrKy5tZG2h+Zv/peCeYbkEZj9worKysrKysra26dz1uuDDthZWVlZWVlfYNcyvq0zkuWX3vLuOr1DNYUsLKysrKysrJGBQtzwjU9hbxgrxwVVlZWVlZWVtbc2t68ygO937gkKyvrc1hZWVlZV1rHOSq9ql5foBkUsLKysrKysrLG1jxx/+z9tn5ej+0VsLKysrKysrKG1py0fmz4gLRfwMrKysrKysr6H9bB8itozjfgjwvae6ysrKysrKysiXV++XWp3Von6C2srJ9hZWVlZWVdYU1O9lx03MIjCwtYWVlZWVlZWZcV5Or1K8OjsqaAlXXbWFlZWVlZF1v3Srzf/eo33VhZWVlZWVlZ84L2P8njvnRsPr8WVlZWVlZWVtbEmueonIAcld4Ej8r+yJTwaezZz52VlZWVlZWVNbFG9jda51VYO2FlZWVl/RZW1r+dwvzYWyWeOCsrKysrKyvr31mPStLQZh5sos9zr7CysrKysn4PK+uENc5rQ4QbryDnf+CvvWRlZWVlZWVlza3t9TW/GLhX4muwsrKysrKysl5gx9aX1gtuuGoFrKysrKysrKxJ1WBP1b0SHK2wcOb5IVusrKysrKysrIE1fxw5huTHN0RzZmVlZWVlZWW93K2wbArjP3T3aI0/6FvleqdZsLKysrL+EFbWN7Omt8byDWLzFzq75mRlZWVlZWX9aOcOchgEgSiA9gpcgfsfsmFDUtMWx28ii/e3ovJYTSYAa2Q9+8EDuH6Gb4NuFysrKyvra/ewsm5tXUwhqBb7yI2dtwTIysrKysrKyppa8z5V/qDNlKrUkp+VlZWVlZWVNbLeXY3F8whqzsWEWFlZWVlZWVn7yAanCNtIWjfm7/7fK8/KysrKysrKmliDwi4wBMsbrAkrKysrKysra2QNhEF/rHrdwnocK+vXsLKysrKyxtb66Daz022afeTsOFZWVtYfYWVlZS2Oy3fNt888f3n54R+srKysrKwzrKwXrG/h0fgy47nGvAAAAABJRU5ErkJggg==" hidden>
 </div>
-<div class="ttt">BRUIT 19/20 - Raster EGG</div>
 <script>
 (()=>{const t=470,e=350,a=10,n=document.getElementById("tube"),o=document.getElementById("noise"),l=document.getElementById("source"),c=n.getContext("2d"),d=o.getContext("2d");!function a(){const n=c.createImageData(t,e),o=n.data;for(let t=0;t<o.length;t+=4){const e=15+(220*Math.random()|0);o[t]=o[t+1]=o[t+2]=e,o[t+3]=255}c.putImageData(n,0,0),c.globalAlpha=.08,c.fillRect(0,0,t,e),c.globalAlpha=1,requestAnimationFrame(a)}(),l.onload=()=>{const n=document.createElement("canvas");n.width=t,n.height=e;const o=n.getContext("2d");o.drawImage(l,0,0,t,e);const c=o.getImageData(0,0,t,e).data;for(let n=0;n<e;n+=a)for(let o=0;o<t;o+=a){let l=0,m=0,g=0,r=0,s=0;for(let d=0;d<a;d++)for(let u=0;u<a;u++){const a=o+u,h=n+d;if(a>=t||h>=e)continue;const i=4*(h*t+a);l+=c[i],m+=c[i+1],g+=c[i+2],r+=c[i+3],s++}if(!s||r/s<50)continue;const u=l/s,h=m/s,i=g/s,f=d.createImageData(a,a),I=f.data;for(let t=0;t<I.length;t+=4)I[t]=u+40*(Math.random()-.5),I[t+1]=h+40*(Math.random()-.5),I[t+2]=i+40*(Math.random()-.5),I[t+3]=r/s;d.putImageData(f,o,n)}},l.complete&&0!==l.naturalWidth&&l.onload()})();
 </script>
