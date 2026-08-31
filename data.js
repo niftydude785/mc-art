@@ -83,16 +83,16 @@ const PROJECTS = [
     cover: { file: "1_ordinian.html", label: "CENTRALIAN #1 — ORDINIAN", token: "233" },
     pieces: [
       { file: "_intro.html",          label: "CENTRALIAN — INTRO", token: "232" },
-      { file: "1_ordinian.html",      label: "CENTRALIAN #1", token: "233" },
-      { file: "2_socialian.html",     label: "#2",     token: "234" },
-      { file: "3_marketian.html",     label: "#3",     token: "235" },
-      { file: "4_gasian.html",        label: "#4",     token: "236" },
-      { file: "5_whaleian.html",      label: "#5",     token: "237" },
-      { file: "6_physicalian.html",   label: "#6",     token: "238" },
-      { file: "7_museian.html",       label: "#7",     token: "239" },
-      { file: "8_bankian.html",       label: "#8",     token: "240" },
-      { file: "9_critician.html",     label: "#9",     token: "241" },
-      { file: "10_egotian.html",      label: "#10",    token: "242" }
+      { file: "1_ordinian.html",      label: "CENTRALIAN #1 - ORDINIAN", token: "233" },
+      { file: "2_socialian.html",     label: "CENTRALIAN #2 - SOCIALIAN",     token: "234" },
+      { file: "3_marketian.html",     label: "CENTRALIAN #3 - MARKETIAN",     token: "235" },
+      { file: "4_gasian.html",        label: "CENTRALIAN #4 - GASIAN",     token: "236" },
+      { file: "5_whaleian.html",      label: "CENTRALIAN #5 - WHALEIAN",     token: "237" },
+      { file: "6_physicalian.html",   label: "CENTRALIAN #6 - PHYSICALIAN",     token: "238" },
+      { file: "7_museian.html",       label: "CENTRALIAN #7 - MUSEIAN",     token: "239" },
+      { file: "8_bankian.html",       label: "CENTRALIAN #8 - BANKIAN",     token: "240" },
+      { file: "9_critician.html",     label: "CENTRALIAN #9 - CRITICIAN",     token: "241" },
+      { file: "10_egotian.html",      label: "CENTRALIAN #10 - EGOTIAN",    token: "242" }
     ]
   },
   {
@@ -111,15 +111,15 @@ const PROJECTS = [
     cover: { file: "cyd-bros-lvl1-1.html", label: "CYD BROS — W1 / L1", token: "221" },
     pieces: [
       { file: "cyd-bros-intro.html",     label: "CYD BROS — INTRO",  token: "220" },
-      { file: "cyd-bros-lvl1-1.html",    label: "WORLD 1 / LEVEL 1",     token: "221" },
-      { file: "cyd-bros-lvl1-2.html",    label: "WORLD 1 / LEVEL 2",     token: "222" },
-      { file: "cyd-bros-lvl1-3.html",    label: "WORLD 1 / LEVEL 3",     token: "223" },
-      { file: "cyd-bros-lvl2-1.html",    label: "WORLD 2 / LEVEL 1",     token: "224" },
-      { file: "cyd-bros-lvl2-2.html",    label: "WORLD 2 / LEVEL 2",     token: "225" },
-      { file: "cyd-bros-lvl2-3.html",    label: "WORLD 2 / LEVEL 3",     token: "226" },
-      { file: "cyd-bros-lvl3-1.html",    label: "WORLD 3 / LEVEL 1",     token: "227" },
-      { file: "cyd-bros-lvl3-2.html",    label: "WORLD 3 / LEVEL 2",     token: "228" },
-      { file: "cyd-bros-lvl3-3.html",    label: "WORLD 3 / LEVEL 3",     token: "229" }
+      { file: "cyd-bros-lvl1-1.html",    label: "WORLD 1-1 - THE ONCHAIN HOME",     token: "221" },
+      { file: "cyd-bros-lvl1-2.html",    label: "WORLD 1-2 - SHROOM FIELDS FOREVER",     token: "222" },
+      { file: "cyd-bros-lvl1-3.html",    label: "WORLD 1-3 - THE ANCIENT FARM",     token: "223" },
+      { file: "cyd-bros-lvl2-1.html",    label: "WORLD 2-1 - MOEBIUS DESERT B",     token: "224" },
+      { file: "cyd-bros-lvl2-2.html",    label: "WORLD 2-2 - THE VOLCANIC ISLAND",     token: "225" },
+      { file: "cyd-bros-lvl2-3.html",    label: "WORLD 2-3 - THE ROYAL ICE CAKE",     token: "226" },
+      { file: "cyd-bros-lvl3-1.html",    label: "WORLD 3-1 - MYSTICAL SOUVENIRS",     token: "227" },
+      { file: "cyd-bros-lvl3-2.html",    label: "WORLD 3-2 - LEAK CITY (EUROPE)",     token: "228" },
+      { file: "cyd-bros-lvl3-3.html",    label: "WORLD 3-3 - THE FINAL BOSS",     token: "229" }
     ]
   },
   {
@@ -174,21 +174,21 @@ const PROJECTS = [
     cover: { file: "eggs_mini_id1.html", label: "EGGS #1", token: "172" },
     pieces: [
       { file: "intro.html",              label: "EGGS — INTRO", token: "171" },
-      { file: "eggs_mini_id1.html",      label: "EGGS #1",  token: "172" },
-      { file: "eggs_mini_id2.html",      label: "EGGS #2",  token: "173" },
-      { file: "eggs_mini_id3.html",      label: "EGGS #3",  token: "174" },
-      { file: "eggs_mini_id4.html",      label: "EGGS #4",  token: "175" },
-      { file: "eggs_mini_id5.html",      label: "EGGS #5",  token: "176" },
-      { file: "eggs_mini_id6.html",      label: "EGGS #6",  token: "177" },
-      { file: "eggs_mini_id7.html",      label: "EGGS #7",  token: "178" },
-      { file: "eggs_mini_id8.html",      label: "EGGS #8",  token: "179" },
-      { file: "eggs_mini_id9.html",      label: "EGGS #9",  token: "180" },
-      { file: "eggs_mini_id10.html",     label: "EGGS #10", token: "181" },
-      { file: "eggs_mini_id11.html",     label: "EGGS #11", token: "182" },
-      { file: "eggs_mini_id12.html",     label: "EGGS #12", token: "183" },
-      { file: "eggs_mini_id13.html",     label: "EGGS #13", token: "184" },
-      { file: "eggs_mini_id14.html",     label: "EGGS #14", token: "185" },
-      { file: "eggs_mini_id15.html",     label: "EGGS #15", token: "187" }
+      { file: "eggs_mini_id1.html",      label: "EGGS #1 - Genesis",  token: "172" },
+      { file: "eggs_mini_id2.html",      label: "EGGS #2 - Multi Punk spores",  token: "173" },
+      { file: "eggs_mini_id3.html",      label: "EGGS #3 - Overdoomed Pain",  token: "174" },
+      { file: "eggs_mini_id4.html",      label: "EGGS #4 - META CHAIN",  token: "175" },
+      { file: "eggs_mini_id5.html",      label: "EGGS #5 - TRAAASH !!!",  token: "176" },
+      { file: "eggs_mini_id6.html",      label: "EGGS #6 - COINED",  token: "177" },
+      { file: "eggs_mini_id7.html",      label: "EGGS #7 - heist-proof Moma",  token: "178" },
+      { file: "eggs_mini_id8.html",      label: "EGGS #8 - UP AND DOWN ONLY",  token: "179" },
+      { file: "eggs_mini_id9.html",      label: "EGGS #9 - OMELETTE PEPE",  token: "180" },
+      { file: "eggs_mini_id10.html",     label: "EGGS #10 - HIS LEDGER", token: "181" },
+      { file: "eggs_mini_id11.html",     label: "EGGS #11 - TRY AGAIN", token: "182" },
+      { file: "eggs_mini_id12.html",     label: "EGGS #12 - MY PROMISED", token: "183" },
+      { file: "eggs_mini_id13.html",     label: "EGGS #13 - MINT x2048", token: "184" },
+      { file: "eggs_mini_id14.html",     label: "EGGS #14 - eternal return", token: "185" },
+      { file: "eggs_mini_id15.html",     label: "EGGS #15 - PACMOON", token: "187" }
     ]
   },
   {
