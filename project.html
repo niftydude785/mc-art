@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MC7026 — Project</title>
+<title>MC7026 - Cryptoart</title>
 <meta name="description" content="Browse MC7026's fully onchain cryptoart projects — every piece is a live, interactive page stored entirely on Ethereum.">
 <link rel="icon" type="image/png" href="src/others/logo.png">
 <meta property="og:type" content="website">
@@ -54,8 +54,6 @@ const params = new URLSearchParams(location.search);
 const slug = params.get("p");
 const order = sortedProjects();
 const project = order.find(x => x.slug === slug) || order[0];
-
-document.title = "MC7026 — " + project.title;
 
 const layout = document.getElementById("layout");
 
